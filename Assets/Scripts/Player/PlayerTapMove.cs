@@ -26,52 +26,65 @@ public class PlayerTapMove : MonoBehaviour
 
     void Update()
     {
-        if (_isDoubleTapStart)
+        if (!PanelManager._isPaused)
         {
-            _doubTapTime += Time.deltaTime;
-            if (_doubTapTime <= 0.2f)
+            if (_isDoubleTapStart)
             {
-                if (Input.GetMouseButtonDown(0))
+                _doubTapTime += Time.deltaTime;
+                if (_doubTapTime <= 0.2f)
                 {
-                    //  ダブルタップした時の処理を書く
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        //  ダブルタップした時の処理を書く
+                        Move();
+                        _isTapMode = 2;
+                        _isDoubleTapStart = false;
+                        _doubTapTime = 0;
+                        
+                    }
+                }
+                else
+                {
+                    //  シングルタップした時の処理を書く
                     Move();
-                    _isTapMode = 2;
+                    _isTapMode = 1;
                     _isDoubleTapStart = false;
                     _doubTapTime = 0;
                 }
             }
             else
             {
-                //  シングルタップした時の処理を書く
-                Move();
-                _isTapMode = 1;
-                _isDoubleTapStart = false;
-                _doubTapTime = 0;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _isDoubleTapStart = true;
+                }
             }
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
+            if (_isMoving)
             {
-                _isDoubleTapStart = true;
+                if (_isTapMode == 2)
+                    DashMovePos();
+                else
+                    MovePos();
             }
         }
-        if (_isMoving)
-        {
-            if (_isTapMode == 2)
-                DashMovePos();
-            else
-                MovePos();
-        }
+        
     }
     
 
     private void Move()
     {
-        _tapPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        _tapPos.z = 0;
+        if (!PanelManager._isPaused)
+        {
+            Debug.Log("動いている");
+             _tapPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _tapPos.z = 0;
+            _isMoving = true;
+        }
+        else
+        {
+            _isMoving = false;
+        }
        
-        _isMoving = true;
     }
 
     private void MovePos()
