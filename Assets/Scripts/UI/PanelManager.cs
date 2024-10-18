@@ -27,6 +27,7 @@ public class PanelManager : MonoBehaviour
         else
         {
             Pause();
+            
         }
     }
 
@@ -36,25 +37,35 @@ public class PanelManager : MonoBehaviour
     public void Resume()
     {
         //操作受け付ける
-        _playerTapMove.enabled = true;
+        //_playerTapMove.enabled = true;
         
         //パネルを消す
         _pauseMenuUI.SetActive(false);
         //ゲーム内の時間を等速にする
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
+
+        StartCoroutine("PauseEach");
+
+    }
+
+    IEnumerator PauseEach()
+    {
+        //待機してから次の処理へ
+        yield return new WaitForSeconds(0.5f);
+
         _isPaused = false;
-        
     }
 
     public void Pause()
     {
+        _isPaused = true;
         //プレイヤーの操作を受け付けない
-        _playerTapMove.enabled = false;
+        //_playerTapMove.enabled = false;
         //パネルの表示
         _pauseMenuUI.SetActive(true);
         //ゲーム内の時間を止める
-        Time.timeScale = 0f;
-        _isPaused = true;
+        //Time.timeScale = 0f;
+        
         
     }
 }
