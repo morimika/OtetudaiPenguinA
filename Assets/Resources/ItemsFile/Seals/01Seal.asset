@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63878e24d5bc0154d82c5b11bde0a52c, type: 3}
   m_Name: 01Seal
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  itemType: 0
-  itemName: 
-  description: 
+  icon: {fileID: 21300000, guid: e7136680d68312d48b5447b037ab9857, type: 3}
+  itemType: 1
+  itemName: "\u308A\u3093\u3054\u30B7\u30FC\u30EB"
+  itemId: 1
+  description: "\u308A\u3093\u3054\u7D75\u306E\u30B7\u30FC\u30EB\u3001\u30EA\u30F3\u30B4\u3092\u53D6\u308B\u304A\u3064\u304B\u3044\u9054\u6210\u3067\u53D6\u5F97"

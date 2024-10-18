@@ -16,6 +16,7 @@ public class ItemData : ScriptableObject
     public Sprite icon;        // アイテムのアイコン画像
     public ItemType itemType;  // アイテムの種類
     public string itemName;    // アイテムの名前
+    public int itemId;    // アイテムの名前
     [TextArea]
     public string description; // アイテムの説明
 }
