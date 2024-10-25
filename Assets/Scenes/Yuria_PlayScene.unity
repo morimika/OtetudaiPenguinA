@@ -935,6 +935,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5147807386662665990, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
+      propertyPath: _playSceneDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
     - target: {fileID: 5248206278227442170, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.8499756
@@ -992,6 +996,10 @@ PrefabInstance:
       propertyPath: _playerTapMove
       value: 
       objectReference: {fileID: 372738665}
+    - target: {fileID: 113984207961212132, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
+      propertyPath: _playSceneDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
     - target: {fileID: 366139660300161857, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

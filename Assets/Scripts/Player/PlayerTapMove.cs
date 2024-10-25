@@ -9,6 +9,9 @@ public class PlayerTapMove : MonoBehaviour
     //ダブルタップした間隔時間
     [SerializeField,Header("ダブルタップの間隔")] private float _doubTapTime = 0.2f;
 
+    [SerializeField, Header(("現在がなんのタイプなのか"))]
+    private PlaySceneDatas _playSceneDatas;
+
     //タップした場所
     private Vector3 _tapPos;
     //移動中判定
@@ -20,11 +23,21 @@ public class PlayerTapMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //初期はPlayerに設定しておく
+        _playSceneDatas.TapType = PlaySceneTapType.Player;
     }
     
 
     void Update()
+    {
+       MovePlayer();
+       
+    }
+
+    /// <summary>
+    /// タップ移動
+    /// </summary>
+    private void MovePlayer()
     {
         if (!PanelManager._isPaused)
         {
@@ -67,10 +80,11 @@ public class PlayerTapMove : MonoBehaviour
                     MovePos();
             }
         }
-        
     }
     
-
+/// <summary>
+/// マウスのポジションの初期設定
+/// </summary>
     private void Move()
     {
         if (!PanelManager._isPaused)
@@ -87,8 +101,29 @@ public class PlayerTapMove : MonoBehaviour
        
     }
 
+/// <summary>
+/// プレイヤーがどっち向いているかどうか
+/// </summary>
+    private void SetPlayerDirection()
+    {
+        if (Mathf.Abs(_tapPos.x) > Mathf.Abs(_tapPos.y))
+        {
+            if(_tapPos.x > 0) Debug.Log("Right");
+            else Debug.Log("Left");
+        }
+        else
+        {
+            if(_tapPos.y > 0) Debug.Log("Up");
+            else Debug.Log("Down");
+        }
+    }
+    
+    /// <summary>
+    /// 移動処理
+    /// </summary>
     private void MovePos()
     {
+        SetPlayerDirection();
         transform.position = Vector2.MoveTowards(transform.position, _tapPos, _moveSpeed * Time.deltaTime);
         if (transform.position == _tapPos)
         {
@@ -96,12 +131,25 @@ public class PlayerTapMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ダッシュ移動処理
+    /// </summary>
     private void DashMovePos()
     {
+        SetPlayerDirection();
         transform.position = Vector2.MoveTowards(transform.position, _tapPos, _dashSpeed * Time.deltaTime);
         if (transform.position == _tapPos)
         {
             _isMoving = false;
         }
+    }
+
+    /// <summary>
+    /// プレイヤーが移動していいかどうかの判定
+    /// </summary>
+    /// <returns>モードがプレイヤーなら</returns>
+    private bool IsTapEnable()
+    {
+        return _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player);
     }
 }
