@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //Mori Script
+
 /// <summary>
 /// シールやアイテムを並べて表示するスクリプト
 /// </summary>

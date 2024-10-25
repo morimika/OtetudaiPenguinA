@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,11 +21,20 @@ public class SceneController : MonoBehaviour
         Mori_PictureBook
     }
 
+    private GameObject _player;
+
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     /// <summary>
     /// 自由帳へ遷移
     /// </summary>
     public void ChangeFreeBook()
     {
+        //プレイヤーの位置情報を保存する
+        PlayerSetPos.PlayerPos = _player.transform.position;
         SceneManager.LoadScene(nameof(Scenes.Mori_FreeBook));
     }
 
@@ -33,8 +43,9 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void ChangePictureBook()
     {
+        //プレイヤーの位置情報を保存する
+        PlayerSetPos.PlayerPos=_player.transform.position;
         SceneManager.LoadScene(nameof(Scenes.Mori_PictureBook));
-
     }
 
     /// <summary>

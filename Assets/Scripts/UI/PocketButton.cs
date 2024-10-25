@@ -18,7 +18,12 @@ public class PocketButton : MonoBehaviour
     [SerializeField, Label("ポケット閉じ不可視ボタン")]
     private GameObject _closeButton;
 
-    [ReadOnly]
+    [SerializeField, Label("ポケットボタン表示bool")]
+    public bool IsHiddenButton = false;
+    [SerializeField, Label("ポケット表示ボタン")]
+    private GameObject _pocketButton;
+
+    [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
 
     // Start is called before the first frame update
@@ -26,6 +31,19 @@ public class PocketButton : MonoBehaviour
     {
         _isPocketOpen = false;
         _closeButton.SetActive(false);
+        IsHiddenButton = false;
+    }
+
+    private void Update()
+    {
+        if (IsHiddenButton)
+        {
+            _pocketButton.SetActive(false);
+        }
+        else
+        {
+            _pocketButton.SetActive(true);
+        }
     }
 
     public void OpenPocket()
