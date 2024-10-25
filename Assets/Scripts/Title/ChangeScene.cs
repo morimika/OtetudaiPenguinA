@@ -11,15 +11,6 @@ public class ChangeScene : MonoBehaviour
     [SerializeField] private FadeAnimation _fadeAnimation;
     public static bool _isTap;
 
-   
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
-
 
     public void OnStartTap()
     {
