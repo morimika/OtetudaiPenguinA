@@ -2,20 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Mori Script
+
+/// <summary>
+/// オブジェクトをドラッグでつかめるスクリプト
+/// </summary>
 public class ObjDrag : MonoBehaviour
 {
     //座標用の変数
     private Vector3 mousePos, worldPos;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-    }
-
+    //ドラッグされている間、ものをつかめる
     private void OnMouseDrag()
     {
         //マウス座標の取得

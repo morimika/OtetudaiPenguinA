@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
+//Mori Script
+
+/// <summary>
+/// ポケットを開閉するスクリプト
+/// 要変更
+/// </summary>
 public class PocketButton : MonoBehaviour
 {
     [SerializeField, Label("ポケットタブオブジェクト")]
@@ -15,26 +21,11 @@ public class PocketButton : MonoBehaviour
     [ReadOnly]
     private bool _isPocketOpen = false;
 
-    private enum Scenes
-    { 
-        Yuria_TitleScene,
-        Yuria_PlayScene,
-        Mori_MainGameScene,
-        Mori_FreeBook
-    }
-
-
     // Start is called before the first frame update
     void Start()
     {
         _isPocketOpen = false;
         _closeButton.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OpenPocket()
@@ -49,14 +40,5 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
-    }
-
-    public void ChangeFreeBook()
-    {
-        SceneManager.LoadScene(nameof(Scenes.Mori_FreeBook));
-    }
-    public void ChangeTwo()
-    {
-
     }
 }
