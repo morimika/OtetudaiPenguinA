@@ -14,6 +14,13 @@ public enum PlaySceneTapType
     Ground = 0x01 << 2,
     Panel = 0x01 << 3,
     Options = 0x01 << 4,
+    
+}
+[Flags]
+public enum PlaySceneType
+{
+    MapMove = 0x01 << 0,
+    
 }
 
 [CreateAssetMenu(fileName = "PlaySceneDatas", menuName = "PlaySceneDatas", order = 1)]

@@ -366,17 +366,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &994463251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 113984207961212132, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
-  m_PrefabInstance: {fileID: 4259884439410483398}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8498d674f2e2849ea94f9ed27bbc33d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1087159863
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,11 +802,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1899517884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1899517886}
+  - component: {fileID: 1899517885}
+  m_Layer: 0
+  m_Name: MapSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1899517885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899517884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13e529bed6ed4200977789dcda237cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
+--- !u!4 &1899517886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899517884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.37116334, y: 0.9185546, z: 42.71285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2111918794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7141400994477252353, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
   m_PrefabInstance: {fileID: 3726234282494299087}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2111918796 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4022773793923008853, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+  m_PrefabInstance: {fileID: 3726234282494299087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8498d674f2e2849ea94f9ed27bbc33d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3726234282494299087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -834,6 +879,10 @@ PrefabInstance:
       propertyPath: _playerTapMove
       value: 
       objectReference: {fileID: 372738665}
+    - target: {fileID: 4022773793923008853, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: _playSceneDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
     - target: {fileID: 5594404088908188845, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
       propertyPath: m_Name
       value: MenuButton
@@ -1023,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 640340729576030444, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 994463251}
+      objectReference: {fileID: 2111918796}
     - target: {fileID: 640340729576030444, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1034,7 +1083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 640340729576030444, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnTap
+      value: ClosePanel
       objectReference: {fileID: 0}
     - target: {fileID: 640340729576030444, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1270,3 +1319,4 @@ SceneRoots:
   - {fileID: 4259884439410483398}
   - {fileID: 119107451}
   - {fileID: 793333311}
+  - {fileID: 1899517886}

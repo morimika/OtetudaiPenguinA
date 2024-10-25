@@ -18,6 +18,7 @@ public class PlayerTapMove : MonoBehaviour
     private  bool _isMoving;
     //ダブルタップしているか判定
     private bool _isDoubleTapStart;
+    //何回タップしたかどうかの判定
     private int _isTapMode = 0;
     
     // Start is called before the first frame update
@@ -25,6 +26,17 @@ public class PlayerTapMove : MonoBehaviour
     {
         //初期はPlayerに設定しておく
         _playSceneDatas.TapType = PlaySceneTapType.Player;
+    }
+
+    /// <summary>
+    /// 変数の初期化
+    /// </summary>
+    public void ClearAllFlags()
+    {
+        _isMoving = false;
+        _isDoubleTapStart = false;
+        _doubTapTime = 0;
+        _isTapMode = 0;
     }
     
 
@@ -83,10 +95,14 @@ public class PlayerTapMove : MonoBehaviour
     }
     
 /// <summary>
-/// マウスのポジションの初期設定
+/// 移動中の処理
 /// </summary>
     private void Move()
     {
+        if (_playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player) == false) return;
+        {
+            
+        }
         if (!PanelManager._isPaused)
         {
             Debug.Log("動いている");

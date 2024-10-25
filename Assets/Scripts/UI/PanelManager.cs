@@ -9,16 +9,17 @@ public class PanelManager : MonoBehaviour
 {
     //ポーズ中かどうかの判定
     public static bool _isPaused;
-    //プレイヤーの動きのスクリプト
-    //[SerializeField] private PlayerTapMove _playerTapMove;
-    [SerializeField] private PlaySceneDatas _playSceneDatas;
+    [SerializeField,Header("ゲームモードデータ")] private PlaySceneDatas _playSceneDatas;
     private Button _resumeButton;
+
+    [SerializeField] private PlayerTapMove _playerTapMove;
     //表示するパネル先
     [SerializeField] private GameObject _pauseMenuUI;
 
 
     void Start()
     {
+        //戻るボタン取得
         _resumeButton = GetComponent<Button>();
     }
 
@@ -45,39 +46,49 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     public void Resume()
     {
-        
+        //パネルをアクティブ
         gameObject.SetActive(false);
+        //プレイヤーモードに変更する
         _playSceneDatas.TapType = PlaySceneTapType.Player;
         //パネルを消す
         _pauseMenuUI.SetActive(false);
-        //StartCoroutine("PauseEach");
+        _isPaused = false;
 
     }
     
-/*
-    IEnumerator PauseEach()
-    {
-        
-        //待機してから次の処理へ
-        yield return new WaitForSeconds(0.5f);
 
-        _isPaused = false;
-    }
-    */
 
     public void Pause()
     {
         _isPaused = true;
+        //すべてのフラグを初期化
+        _playerTapMove.ClearAllFlags();
+         //パネルに変更する
+        _playSceneDatas.TapType = PlaySceneTapType.Panel;
         //パネルの表示
         _pauseMenuUI.SetActive(true);
         
-        if (_playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player))
-        {
-            _playSceneDatas.TapType = PlaySceneTapType.Panel;
-            _pauseMenuUI ? .SetActive(true);
-        }
-        
         
     }
-    
+
+    /// <summary>
+    /// 戻るボタンを押した時の処理
+    /// </summary>
+    public void ClosePanel()
+    {
+        //モードをプレイヤーに戻す
+        _playSceneDatas.TapType = PlaySceneTapType.Player;
+        //パネルを消す
+        _pauseMenuUI.SetActive(false);
+        //コルーチンをスタートさせる
+        StartCoroutine(WaitFrame());
+    }
+
+    //1秒待つ
+    private IEnumerator WaitFrame()
+    {
+        yield return new WaitForSeconds(1);
+        _isPaused = false;
+        
+    }
 }
