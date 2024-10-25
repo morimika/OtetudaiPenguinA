@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
+    public static DialogManager instance;
+
     [SerializeField] private GameObject _dialogueBox;
     [SerializeField] private TextMeshProUGUI _dialogueText, _name;
     [TextArea(1, 3)]
@@ -13,13 +15,26 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private int _currentDialogueLine;//現在の会話文
     private bool _isScrolling;//テキストはスクロールしているかどうか
 
-    //void Start()
-    //{
-    //    _dialogueText.text = _dialogueLine[_currentDialogueLine];
-    //}
+    public NPC_Quest _NPC_Quest;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void Update()
     {
+        CheckQuestStatus();
         if (_dialogueBox.activeInHierarchy)//ダイアログボックスがあれば
         {
             if (Input.GetMouseButtonDown(0))
@@ -36,6 +51,7 @@ public class DialogManager : MonoBehaviour
                     else
                     {
                         _dialogueBox.SetActive(false);//会話が終わればダイアログボックスを無くす
+                        _NPC_Quest.delegateQuest();
                     }
                }
                 else
@@ -78,5 +94,22 @@ public class DialogManager : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
         _isScrolling = false;
+    }
+
+    public bool CheckQuestStatus()
+    {
+        if(_NPC_Quest == null)
+        {
+            return false;
+        }
+        for (int i = 0; i < Player_QuestList.instance.questList.Count;i++) 
+        {
+            if (Player_QuestList.instance.questList[i]._questStatus == QuestDetail.QuestStatus.Completed
+                && Player_QuestList.instance.questList[i]._questName == _NPC_Quest.QuestDetail._questName)
+            {
+                return true;              
+            }
+        }
+        return false;        
     }
 }
