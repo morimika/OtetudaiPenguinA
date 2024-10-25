@@ -3,7 +3,9 @@ guid: cf5ab5a20137e664ebb7eef420f4897b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _sealList: {instanceID: 0}
+  - _enptyImage: {fileID: 1343601836591531006, guid: 686eda075dd33a040aa797081ce65486, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
