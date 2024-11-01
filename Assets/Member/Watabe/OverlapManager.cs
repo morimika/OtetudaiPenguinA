@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
-public class ObjectOverlapManager : MonoBehaviour
+public class OverlapManager : MonoBehaviour
 {
     private int currentValue = 7;
     public TextMeshProUGUI valueText;
