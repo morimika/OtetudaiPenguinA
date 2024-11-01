@@ -16,6 +16,9 @@ public class PanelManager : MonoBehaviour
     //表示するパネル先
     [SerializeField] private GameObject _pauseMenuUI;
 
+    private bool _isTap = false;
+    private float _tapTimer = 0f;
+    private readonly float TapWaitMax = 1f;
 
     void Start()
     {
@@ -25,11 +28,21 @@ public class PanelManager : MonoBehaviour
 
     void Update()
     {
-
+        if (_isTap)
+        {
+            _tapTimer += Time.deltaTime;
+            if (_tapTimer >= TapWaitMax)
+            {
+                _isTap = false;
+                _tapTimer = 0;
+            }
+        }
     }
 
     public void OnTap()
     {
+        // if (_isTap) return;
+        // _isTap = true;
         if (_isPaused)
         {
             Resume();
@@ -47,7 +60,7 @@ public class PanelManager : MonoBehaviour
     public void Resume()
     {
         //パネルをアクティブ
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
         //プレイヤーモードに変更する
         _playSceneDatas.TapType = PlaySceneTapType.Player;
         //パネルを消す

@@ -4,28 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-
+ 
 //Mori Script
-
+ 
 /// <summary>
-/// ƒ|ƒPƒbƒg‚ğŠJ•Â‚·‚éƒXƒNƒŠƒvƒg
-/// —v•ÏX
+/// ãƒã‚±ãƒƒãƒˆã‚’é–‹é–‰ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+/// è¦å¤‰æ›´
 /// </summary>
 public class PocketButton : MonoBehaviour
 {
-    [SerializeField, Label("ƒ|ƒPƒbƒgƒ^ƒuƒIƒuƒWƒFƒNƒg")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆã‚¿ãƒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     private RectTransform _pocketUI;
-    [SerializeField, Label("ƒ|ƒPƒbƒg•Â‚¶•s‰Â‹ƒ{ƒ^ƒ“")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆé–‰ã˜ä¸å¯è¦–ãƒœã‚¿ãƒ³")]
     private GameObject _closeButton;
-
-    [SerializeField, Label("ƒ|ƒPƒbƒgƒ{ƒ^ƒ“•\¦bool")]
+ 
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆãƒœã‚¿ãƒ³è¡¨ç¤ºbool")]
     public bool IsHiddenButton = false;
-    [SerializeField, Label("ƒ|ƒPƒbƒg•\¦ƒ{ƒ^ƒ“")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆè¡¨ç¤ºãƒœã‚¿ãƒ³")]
     private GameObject _pocketButton;
-
+ 
     [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
-
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class PocketButton : MonoBehaviour
         _closeButton.SetActive(false);
         IsHiddenButton = false;
     }
-
+ 
     private void Update()
     {
         if (IsHiddenButton)
@@ -45,14 +45,14 @@ public class PocketButton : MonoBehaviour
             _pocketButton.SetActive(true);
         }
     }
-
+ 
     public void OpenPocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
         _isPocketOpen=true;
         _closeButton.SetActive(true);
     }
-
+ 
     public void ClosePocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
@@ -60,3 +60,4 @@ public class PocketButton : MonoBehaviour
         _closeButton.SetActive(false);
     }
 }
+
