@@ -1000,6 +1000,7 @@ MonoBehaviour:
   _moveSpeed: 5
   _dashSpeed: 10
   _doubTapTime: 0.2
+  _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
 --- !u!60 &670114560
 PolygonCollider2D:
   m_ObjectHideFlags: 0
