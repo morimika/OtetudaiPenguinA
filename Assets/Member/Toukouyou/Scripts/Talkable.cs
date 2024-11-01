@@ -6,12 +6,13 @@ using UnityEngine;
 public class Talkable : MonoBehaviour
 {
     [SerializeField] private bool _isTalkable;
-    [SerializeField] private GameObject _dialogueBox;
+    [SerializeField] private GameObject _dialogueBox_talking;
     [SerializeField] private TextMeshProUGUI _questionText;
     [TextArea(1, 3)]
     public string[] _line;
     private DialogManager _dialogManager;
-    [SerializeField] private RectTransform _rectTransform;
+    [SerializeField] private RectTransform _dialogueBox_rectTransform;
+    [SerializeField] private RectTransform _text_rectTransform;
 
     [TextArea(1, 3)]
     public string[] _questCompletedLine;
@@ -21,8 +22,9 @@ public class Talkable : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             _isTalkable = true;
-            _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300);//ダイアログボックスのサイズ調整
-            _questionText.text = "help";//テキスト調整
+            _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300);//ダイアログボックスのサイズ調整
+            _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300);
+            _questionText.text = "困ったな...";//テキスト調整
             DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();
         }
     }
@@ -31,7 +33,8 @@ public class Talkable : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _isTalkable = false;
-            _rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);//ダイアログボックスのサイズ調整
+            _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);//ダイアログボックスのサイズ調整
+            _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
             _questionText.text = "?";//テキスト調整
             DialogManager.instance._NPC_Quest = null;
         }
@@ -40,9 +43,9 @@ public class Talkable : MonoBehaviour
     private void Update()
     {
         //PlayerがNPC範囲内、会話始まっていない、画面をタップ
-        if (_isTalkable && _dialogueBox.activeInHierarchy == false && Input.GetKeyDown(KeyCode.Space))
+        if (_isTalkable && _dialogueBox_talking.activeInHierarchy == false && Input.GetKeyDown(KeyCode.Space))
         {
-            if (DialogManager.instance.CheckQuestStatus() == true)
+            if (DialogManager.instance.CheckQuestStatus() == "Completed")
             {
                 _line = _questCompletedLine;
             }
