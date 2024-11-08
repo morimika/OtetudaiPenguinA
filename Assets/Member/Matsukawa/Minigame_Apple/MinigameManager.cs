@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Matsukawa
+
 public class MinigameManager : MonoBehaviour
 {
     // 遷移のアニメーション後ゲームが始まる

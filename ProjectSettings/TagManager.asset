@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tree1
+  - Tree2
+  - Tree3
+  - Apple1
+  - Apple2
+  - Apple3
   layers:
   - Default
   - TransparentFX

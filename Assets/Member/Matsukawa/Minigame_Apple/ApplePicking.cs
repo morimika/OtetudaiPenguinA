@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Matsukawa
+
 // プレイヤーがappleに触れたのを感知するクラス
 public class ApplePicking : MonoBehaviour
 {
+
 
     public void OnClickAct()
     {
