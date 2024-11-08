@@ -22,7 +22,16 @@ public class PocketButton : MonoBehaviour
     public bool IsHiddenButton = false;
     [SerializeField, Label("ポケット表示ボタン")]
     private GameObject _pocketButton;
- 
+
+    [SerializeField, Label("絵本ウィンドウ")]
+    private GameObject _picturebook;
+
+    [SerializeField, Label("自由帳ウィンドウ")]
+    private GameObject _freebook;
+
+    private GameObject _player;
+    private PlayerTapMove _playerTapMove;
+
     [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
  
@@ -32,6 +41,8 @@ public class PocketButton : MonoBehaviour
         _isPocketOpen = false;
         _closeButton.SetActive(false);
         IsHiddenButton = false;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerTapMove = _player.GetComponent<PlayerTapMove>();
     }
  
     private void Update()
@@ -51,6 +62,7 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
         _isPocketOpen=true;
         _closeButton.SetActive(true);
+        //_playerTapMove.ClearAllFlags();
     }
  
     public void ClosePocket()
@@ -58,6 +70,31 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
+        //_playerTapMove.ClearAllFlags();
     }
+    public void ShowPictureBook()
+    {
+        _picturebook.SetActive(true);
+        //_playerTapMove.ClearAllFlags();
+        PanelManager._isPaused = true;
+        ClosePocket();
+    }
+
+    public void ShowFreeBook()
+    {
+        _freebook.SetActive(true);
+        //_playerTapMove.ClearAllFlags();
+        PanelManager._isPaused = true;
+        ClosePocket();
+    }
+
+    public void CloseWindow()
+    {
+        _freebook.SetActive(false);
+        _picturebook.SetActive(false);
+        //_playerTapMove.ClearAllFlags();
+        PanelManager._isPaused = false;
+    }
+
 }
 
