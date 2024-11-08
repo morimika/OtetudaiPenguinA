@@ -24,7 +24,7 @@ public class Talkable : MonoBehaviour
             _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);//Adjusting the size of the dialog box
             _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);
             _questionText.text = "À§¤Ã¤¿¤Ê...";//Change text
-            DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();
+            DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();//let Player get quest detail from this Npc
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

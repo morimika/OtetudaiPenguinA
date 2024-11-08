@@ -20,7 +20,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private Transform _cutInPos;
     public NPC_Quest _NPC_Quest;
 
-    public move _move;
+    public move _move;//change this to the player movement controll script later
 
     public bool _waitTimeController = true;
     private void Awake()
@@ -42,11 +42,11 @@ public class DialogManager : MonoBehaviour
     void Update()
     {
         CheckQuestStatus();
-        Debug.Log(CheckQuestStatus());
+        //Debug.Log(CheckQuestStatus());
         if (_dialogueBox_talking.activeInHierarchy)//If there is a dialog box
         {
             _waitTimeController = false;
-            _move.enabled = false;
+            _move.enabled = false;//disable player movement
             if (Input.GetMouseButtonDown(0))
             {
                if (_isScrolling == false)//If the scrolling is over
@@ -83,7 +83,7 @@ public class DialogManager : MonoBehaviour
         _dialogueLine = _newLine;
         _currentDialogueLine = 0;//Start the conversation from the beginning
         //CheckName();//‘í§∑ ÷§Œ±Ì æ
-        _dialogueBox_talking.SetActive(true); //Show dialog box
+        _dialogueBox_talking.SetActive(true); //Show talking dialog box
         _dialogueBox.SetActive(false);
         StartCoroutine("ScrollingText");
     }
@@ -100,7 +100,7 @@ public class DialogManager : MonoBehaviour
     private IEnumerator ScrollingText()
     {
         _isScrolling = true;//Begin scrolling
-        _dialogueText.text = null;//Show text from top of the dialog box
+        _dialogueText.text = null;//Show text from the head of the dialog box
         foreach(char letter in _dialogueLine[_currentDialogueLine].ToCharArray())
         {
             _dialogueText.text += letter;
@@ -111,7 +111,7 @@ public class DialogManager : MonoBehaviour
 
     public string CheckQuestStatus()
     {
-        if(_NPC_Quest == null)
+        if(_NPC_Quest == null)//if Npc has no quest,return null
         {
             return "null";
         }
@@ -131,15 +131,9 @@ public class DialogManager : MonoBehaviour
                         return "Accepted";
                     }
                     break;
-
             }
-            //if (Player_QuestList.instance.questList[i]._questStatus == QuestDetail.QuestStatus.Completed
-            //    && Player_QuestList.instance.questList[i]._questName == _NPC_Quest.QuestDetail._questName)
-            //{
-            //    return true;              
-            //}
         }  
-        return "Waiting";
+        return "Waiting";// return Waiting as default
     }
     public void ShowCutIn()
     {
