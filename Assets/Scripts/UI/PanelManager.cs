@@ -62,7 +62,7 @@ public class PanelManager : MonoBehaviour
         //パネルをアクティブ
         // gameObject.SetActive(false);
         //プレイヤーモードに変更する
-        _playSceneDatas.TapType = PlaySceneTapType.Player;
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
         //パネルを消す
         _pauseMenuUI.SetActive(false);
         _isPaused = false;
@@ -77,7 +77,7 @@ public class PanelManager : MonoBehaviour
         //すべてのフラグを初期化
         _playerTapMove.ClearAllFlags();
          //パネルに変更する
-        _playSceneDatas.TapType = PlaySceneTapType.Panel;
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
         //パネルの表示
         _pauseMenuUI.SetActive(true);
         
@@ -90,7 +90,7 @@ public class PanelManager : MonoBehaviour
     public void ClosePanel()
     {
         //モードをプレイヤーに戻す
-        _playSceneDatas.TapType = PlaySceneTapType.Player;
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
         //パネルを消す
         _pauseMenuUI.SetActive(false);
         //コルーチンをスタートさせる
@@ -104,4 +104,6 @@ public class PanelManager : MonoBehaviour
         _isPaused = false;
         
     }
+    
+    
 }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
@@ -12,13 +14,32 @@ public class ChangeScene : MonoBehaviour
     public static bool _isTap;
 
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //ボタン系を押さないときは全て処理しない
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            
+            Debug.Log("てすと");
+            OnStartTap();
+        }
+    }
+
+
     public void OnStartTap()
     {
+        Debug.Log("OnStartTap");
+        
         _isTap = true;
+        
         //フェードインが終わったら
         if (_fadeAnimation._fadeInEnd)
         {
-            Debug.Log("call2222");
+           
             
         }
         
@@ -37,8 +58,7 @@ public class ChangeScene : MonoBehaviour
         //if(PanelManager._isPaused) return;
         //メニューを開いてなければシーンへ飛ぶ
         //if (!PanelManager._isPaused)
-        
-        Debug.Log("呼んだ");
+       
         SceneManager.LoadScene("Yuria_PlayScene");
         
        
