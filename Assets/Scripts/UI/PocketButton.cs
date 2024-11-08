@@ -4,47 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-
+ 
 //Mori Script
-
+ 
 /// <summary>
-/// ƒ|ƒPƒbƒg‚ğŠJ•Â‚·‚éƒXƒNƒŠƒvƒg
-/// —v•ÏX
+/// ãƒã‚±ãƒƒãƒˆã‚’é–‹é–‰ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+/// è¦å¤‰æ›´
 /// </summary>
 public class PocketButton : MonoBehaviour
 {
-    [SerializeField, Label("ƒ|ƒPƒbƒgƒ^ƒuƒIƒuƒWƒFƒNƒg")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆã‚¿ãƒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     private RectTransform _pocketUI;
-    [SerializeField, Label("ƒ|ƒPƒbƒg•Â‚¶•s‰Â‹ƒ{ƒ^ƒ“")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆé–‰ã˜ä¸å¯è¦–ãƒœã‚¿ãƒ³")]
     private GameObject _closeButton;
-
-    [SerializeField, Label("ƒ|ƒPƒbƒgƒ{ƒ^ƒ“•\¦bool")]
+ 
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆãƒœã‚¿ãƒ³è¡¨ç¤ºbool")]
     public bool IsHiddenButton = false;
-    [SerializeField, Label("ƒ|ƒPƒbƒg•\¦ƒ{ƒ^ƒ“")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆè¡¨ç¤ºãƒœã‚¿ãƒ³")]
     private GameObject _pocketButton;
-
-    [SerializeField, Label("ŠG–{ƒCƒ[ƒW")]
-    private GameObject _picturebook;
-
-    [SerializeField, Label("©—R’ ")]
-    private GameObject _freebook;
-
+ 
     [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
-
-    private GameObject _player;
-    private PlayerTapMove _playerTapMove;
-
+ 
     // Start is called before the first frame update
     void Start()
     {
         _isPocketOpen = false;
         _closeButton.SetActive(false);
         IsHiddenButton = false;
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerTapMove=_player.GetComponent<PlayerTapMove>();
     }
-
+ 
     private void Update()
     {
         if (IsHiddenButton)
@@ -56,44 +45,19 @@ public class PocketButton : MonoBehaviour
             _pocketButton.SetActive(true);
         }
     }
-
+ 
     public void OpenPocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
         _isPocketOpen=true;
         _closeButton.SetActive(true);
-        _playerTapMove.ClearAllFlags();
     }
-
+ 
     public void ClosePocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
-        _playerTapMove.ClearAllFlags();
-    }
-
-    public void ShowPictureBook() 
-    { 
-        _picturebook.SetActive(true);
-        _playerTapMove.ClearAllFlags();
-        PanelManager._isPaused = true;
-        ClosePocket();
-    }
-
-    public void ShowFreeBook()
-    {
-        _freebook.SetActive(true);
-        _playerTapMove.ClearAllFlags();
-        PanelManager._isPaused = true;
-        ClosePocket();
-    }
-
-    public void CloseWindow()
-    {
-        _freebook.SetActive(false);
-        _picturebook.SetActive(false);
-        _playerTapMove.ClearAllFlags();
-        PanelManager._isPaused = false;
     }
 }
+
