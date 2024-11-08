@@ -10,7 +10,6 @@ public class Talkable : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _questionText;
     [TextArea(1, 3)]
     public string[] _line;
-    private DialogManager _dialogManager;
     [SerializeField] private RectTransform _dialogueBox_rectTransform;
     [SerializeField] private RectTransform _text_rectTransform;
 
@@ -22,9 +21,9 @@ public class Talkable : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             _isTalkable = true;
-            _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300);//ダイアログボックスのサイズ調整
-            _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300);
-            _questionText.text = "困ったな...";//テキスト調整
+            _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);//Adjusting the size of the dialog box
+            _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);
+            _questionText.text = "困ったな...";//Change text
             DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();
         }
     }
@@ -33,23 +32,23 @@ public class Talkable : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _isTalkable = false;
-            _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);//ダイアログボックスのサイズ調整
+            _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);//Adjusting the size of the dialog box
             _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
-            _questionText.text = "?";//テキスト調整
+            _questionText.text = "?";//Change text
             DialogManager.instance._NPC_Quest = null;
         }
     }
 
     private void Update()
     {
-        //PlayerがNPC範囲内、会話始まっていない、画面をタップ
-        if (_isTalkable && _dialogueBox_talking.activeInHierarchy == false && Input.GetKeyDown(KeyCode.Space))
+        //Player is within NPC range, conversation has not started, tap the screen
+        if (_isTalkable && _dialogueBox_talking.activeInHierarchy == false &&DialogManager.instance._waitTimeController == true && Input.GetMouseButtonDown(0))
         {
             if (DialogManager.instance.CheckQuestStatus() == "Completed")
             {
                 _line = _questCompletedLine;
             }
-                DialogManager.instance.ShowDialogue(_line);//ダイアログボックス表示                    
+                DialogManager.instance.ShowDialogue(_line);//Show dialogue box
         }
     }
 }
