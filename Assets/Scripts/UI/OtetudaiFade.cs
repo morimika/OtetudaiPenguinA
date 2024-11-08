@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 
+//Mori Script
+
 public class OtetudaiFade : MonoBehaviour
 {
     private Vector3 _playerPos;
@@ -23,12 +25,17 @@ public class OtetudaiFade : MonoBehaviour
 
     async Task Update()
     {
+        //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
+        //距離を測って物と近いか確認
         if (Vector3.Distance(this.transform.position,_playerPos)<=3)
         {
+            //押せるUI出現
             _action.SetActive(true);
+            //物をクリックしたとき
             if (Input.GetMouseButtonDown(0) && _onMouse)
             {
+                //フェードを待ち、遷移する
                 await ChangeMinigameAsync();
                 PlayerSetPos.PlayerPos = _playerPos;
                 SceneManager.LoadScene("WatanabeTestScene");
@@ -48,6 +55,9 @@ public class OtetudaiFade : MonoBehaviour
         await UniTask.Delay(1000);
     }
 
+    /// <summary>
+    /// 押しているか
+    /// </summary>
     private void OnMouseDown()
     {
         _onMouse = true;

@@ -38,9 +38,11 @@ public class PocketButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //初期設定
         _isPocketOpen = false;
         _closeButton.SetActive(false);
         IsHiddenButton = false;
+        //プレイヤー検索
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerTapMove = _player.GetComponent<PlayerTapMove>();
     }
@@ -57,6 +59,9 @@ public class PocketButton : MonoBehaviour
         }
     }
  
+    /// <summary>
+    /// ポケットを開く
+    /// </summary>
     public void OpenPocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
@@ -65,6 +70,9 @@ public class PocketButton : MonoBehaviour
         //_playerTapMove.ClearAllFlags();
     }
  
+    /// <summary>
+    /// ポケットを閉じる
+    /// </summary>
     public void ClosePocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
@@ -72,6 +80,10 @@ public class PocketButton : MonoBehaviour
         _closeButton.SetActive(false);
         //_playerTapMove.ClearAllFlags();
     }
+
+    /// <summary>
+    /// 絵本を開く
+    /// </summary>
     public void ShowPictureBook()
     {
         _picturebook.SetActive(true);
@@ -80,6 +92,9 @@ public class PocketButton : MonoBehaviour
         ClosePocket();
     }
 
+    /// <summary>
+    /// 自由帳を開く
+    /// </summary>
     public void ShowFreeBook()
     {
         _freebook.SetActive(true);
@@ -88,6 +103,9 @@ public class PocketButton : MonoBehaviour
         ClosePocket();
     }
 
+    /// <summary>
+    /// ウィンドウを閉じる
+    /// </summary>
     public void CloseWindow()
     {
         _freebook.SetActive(false);
