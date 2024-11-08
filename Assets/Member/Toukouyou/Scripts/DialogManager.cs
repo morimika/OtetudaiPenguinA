@@ -9,12 +9,15 @@ public class DialogManager : MonoBehaviour
     public static DialogManager instance;
 
     [SerializeField] private GameObject _dialogueBox;
-    [SerializeField] private TextMeshProUGUI _dialogueText, _name;
-    [TextArea(1, 3)]
+    [SerializeField] private GameObject _dialogueBox_talking;
+    [SerializeField] private TextMeshProUGUI _dialogueText;
+    //[SerializeField] private TextMeshProUGUI _name;
+     [TextArea(1, 3)]
     public string[] _dialogueLine;
     [SerializeField] private int _currentDialogueLine;//現在の会話文
     private bool _isScrolling;//テキストはスクロールしているかどうか
-
+    [SerializeField] private GameObject _cutIn;
+    [SerializeField] private Transform _cutInPos;
     public NPC_Quest _NPC_Quest;
     private void Awake()
     {
@@ -35,23 +38,25 @@ public class DialogManager : MonoBehaviour
     void Update()
     {
         CheckQuestStatus();
-        if (_dialogueBox.activeInHierarchy)//ダイアログボックスがあれば
+        Debug.Log(CheckQuestStatus());
+        if (_dialogueBox_talking.activeInHierarchy)//ダイアログボックスがあれば
         {
             if (Input.GetMouseButtonDown(0))
             {
                if (_isScrolling == false)//スクロールが終わったら
-                {
+               {
                     _currentDialogueLine++;//次の会話文
                     if (_currentDialogueLine <= _dialogueLine.Length - 1)
                     {
-                        CheckName();//話し手の表示
+                        //CheckName();//話し手の表示
                         //_dialogueText.text = _dialogueLine[_currentDialogueLine];
                         StartCoroutine("ScrollingText");
                     }
                     else
                     {
-                        _dialogueBox.SetActive(false);//会話が終わればダイアログボックスを無くす
-                        _NPC_Quest.delegateQuest();
+                        _dialogueBox_talking.SetActive(false);//会話が終わればダイアログボックスを無くす
+                        _NPC_Quest.delegateQuest(); 
+                        _dialogueBox.SetActive(true);                        
                     }
                }
                 else
@@ -69,20 +74,20 @@ public class DialogManager : MonoBehaviour
     {
         _dialogueLine = _newLine;
         _currentDialogueLine = 0;//初めてから会話文を表示する
-        CheckName();//話し手の表示
-        _dialogueBox.SetActive(true); //ダイアログボックス表示
-        //_dialogueText.text = _dialogueLine[_currentDialogueLine];
+        //CheckName();//話し手の表示
+        _dialogueBox_talking.SetActive(true); //ダイアログボックス表示
+        _dialogueBox.SetActive(false);
         StartCoroutine("ScrollingText");
     }
 
-    public void CheckName()
-    {
-        if (_dialogueLine[_currentDialogueLine].StartsWith("Name-"))
-        {
-            _name.text = _dialogueLine[_currentDialogueLine].Replace("Name-", "");
-            _currentDialogueLine++;//名前表示するための会話文を略す
-        }
-    }
+    //public void CheckName()
+    //{
+    //    if (_dialogueLine[_currentDialogueLine].StartsWith("Name-"))
+    //    {
+    //        _name.text = _dialogueLine[_currentDialogueLine].Replace("Name-", "");
+    //        _currentDialogueLine++;//名前表示するための会話文を略す
+    //    }
+    //}
 
     private IEnumerator ScrollingText()
     {
@@ -91,25 +96,45 @@ public class DialogManager : MonoBehaviour
         foreach(char letter in _dialogueLine[_currentDialogueLine].ToCharArray())
         {
             _dialogueText.text += letter;
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.1f);
         }
         _isScrolling = false;
     }
 
-    public bool CheckQuestStatus()
+    public string CheckQuestStatus()
     {
         if(_NPC_Quest == null)
         {
-            return false;
+            return "null";
         }
         for (int i = 0; i < Player_QuestList.instance.questList.Count;i++) 
         {
-            if (Player_QuestList.instance.questList[i]._questStatus == QuestDetail.QuestStatus.Completed
-                && Player_QuestList.instance.questList[i]._questName == _NPC_Quest.QuestDetail._questName)
+            switch(Player_QuestList.instance.questList[i]._questStatus)
             {
-                return true;              
+                case QuestDetail.QuestStatus.Completed:
+                    if(Player_QuestList.instance.questList[i]._questName == _NPC_Quest.QuestDetail._questName)
+                    {
+                        return "Completed";
+                    }
+                    break;
+                case QuestDetail.QuestStatus.Accepted:
+                    if (Player_QuestList.instance.questList[i]._questName == _NPC_Quest.QuestDetail._questName)
+                    {
+                        return "Accepted";
+                    }
+                    break;
+
             }
-        }
-        return false;        
+            //if (Player_QuestList.instance.questList[i]._questStatus == QuestDetail.QuestStatus.Completed
+            //    && Player_QuestList.instance.questList[i]._questName == _NPC_Quest.QuestDetail._questName)
+            //{
+            //    return true;              
+            //}
+        }  
+        return "Waiting";
+    }
+    public void ShowCutIn()
+    {
+        Instantiate(_cutIn, _cutInPos);
     }
 }
