@@ -122,16 +122,16 @@ public class PlayerTapMove : MonoBehaviour
 /// </summary>
     private void SetPlayerDirection()
     {
-        if (Mathf.Abs(_tapPos.x) > Mathf.Abs(_tapPos.y))
-        {
-            if(_tapPos.x > 0) Debug.Log("Right");
-            else Debug.Log("Left");
-        }
-        else
-        {
-            if(_tapPos.y > 0) Debug.Log("Up");
-            else Debug.Log("Down");
-        }
+        //if (Mathf.Abs(_tapPos.x) > Mathf.Abs(_tapPos.y))
+        //{
+        //    if(_tapPos.x > 0) Debug.Log("Right");
+        //    else Debug.Log("Left");
+        //}
+        //else
+        //{
+        //    if(_tapPos.y > 0) Debug.Log("Up");
+        //    else Debug.Log("Down");
+        //}
     }
     
     /// <summary>
