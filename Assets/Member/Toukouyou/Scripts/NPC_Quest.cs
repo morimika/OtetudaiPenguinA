@@ -9,12 +9,12 @@ public class NPC_Quest : MonoBehaviour
 
     public void delegateQuest()
     {
+        //delegate a quest only in the status of Waiting
         if (QuestDetail._questStatus == QuestDetail.QuestStatus.Waiting)
         {
             Player_QuestList.instance.questList.Add(QuestDetail);
             DialogManager.instance.ShowCutIn();
-            QuestDetail._questStatus = QuestDetail.QuestStatus.Accepted;
+            QuestDetail._questStatus = QuestDetail.QuestStatus.Accepted;//change the status after delegate the quest
         }
-
     }
 }
