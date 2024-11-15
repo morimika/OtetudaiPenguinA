@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,20 +18,14 @@ public class PlayerTapMove : MonoBehaviour
     private  bool _isMoving;
     //ダブルタップしているか判定
     private bool _isDoubleTapStart;
-
-    private bool _isAnimation;
     //何回タップしたかどうかの判定
     private int _isTapMode = 0;
-    //アニメーター取得用
-    private Animator _moveAnimator;
     
     // Start is called before the first frame update
     void Start()
     {
         //初期はPlayerに設定しておく
-        _playSceneDatas.TapType = PlaySceneTapType.Play;
-        //アニメーター取得
-        _moveAnimator = GetComponent<Animator>();
+        _playSceneDatas.TapType = PlaySceneTapType.Player;
     }
 
     /// <summary>
@@ -106,7 +99,7 @@ public class PlayerTapMove : MonoBehaviour
 /// </summary>
     private void Move()
     {
-        if (_playSceneDatas.TapType.HasFlag(PlaySceneTapType.Play) == false) return;
+        if (_playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player) == false) return;
         {
             
         }
@@ -125,40 +118,20 @@ public class PlayerTapMove : MonoBehaviour
     }
 
 /// <summary>
-/// プレイヤーがどっち向いているかどうかの処理
+/// プレイヤーがどっち向いているかどうか
 /// </summary>
     private void SetPlayerDirection()
     {
-        _isAnimation = true;
-        
-        if (Mathf.Abs(_tapPos.x) > Mathf.Abs(_tapPos.y))
-        {
-            if (_tapPos.x > 0)
-            {
-                Debug.Log("Right");
-                _moveAnimator.SetTrigger("Right");
-            }
-            else
-            {
-                Debug.Log("Left");
-                _moveAnimator.SetTrigger("Left");
-               
-               
-            }
-        }
-        else
-        {
-            if (_tapPos.y > 0)
-            {
-                Debug.Log("Up");
-                _moveAnimator.SetTrigger("Back");
-            }
-            else
-            {
-                Debug.Log("Down");
-                _moveAnimator.SetTrigger("Foward");
-            }
-        }
+        //if (Mathf.Abs(_tapPos.x) > Mathf.Abs(_tapPos.y))
+        //{
+        //    if(_tapPos.x > 0) Debug.Log("Right");
+        //    else Debug.Log("Left");
+        //}
+        //else
+        //{
+        //    if(_tapPos.y > 0) Debug.Log("Up");
+        //    else Debug.Log("Down");
+        //}
     }
     
     /// <summary>
@@ -166,12 +139,11 @@ public class PlayerTapMove : MonoBehaviour
     /// </summary>
     private void MovePos()
     {
-        if(_isAnimation == false) SetPlayerDirection();
+        SetPlayerDirection();
         transform.position = Vector2.MoveTowards(transform.position, _tapPos, _moveSpeed * Time.deltaTime);
         if (transform.position == _tapPos)
         {
             _isMoving = false;
-            _isAnimation = false;
         }
     }
 
@@ -194,16 +166,6 @@ public class PlayerTapMove : MonoBehaviour
     /// <returns>モードがプレイヤーなら</returns>
     private bool IsTapEnable()
     {
-        return _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Play);
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        _isMoving = false;
-    }
-
-    private void OnCollisionStay(Collision other)
-    {
-        _isMoving = false;
+        return _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player);
     }
 }
