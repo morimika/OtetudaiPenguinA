@@ -2,23 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class StrokePackData
 {
-    //書き順を格納するクラス
+    //  過基準を格納するクラス
     [Serializable]
-    public class StrokeData
+    public class StringData
     {
-        //座標を保存する場所
-        public List<Transform> StringPacks;
+        //  座標を保存する場所
+        public List<Transform> StrokePacks;
 
-        public StrokeData(List<Transform> StringPacks)
+        public StringData(List<Transform> strokePacks)
         {
-            StringPacks = StringPacks;
+            StrokePacks = strokePacks;
         }
     }
-
-    //書き順を貯める場所
-    public List<StrokeData> StrokeDatas = new List<StrokeData>();
+    //  過基準を貯める場所
+    [FormerlySerializedAs("StrokeDatas")]
+    public List<StringData> StrokeDatas = new List<StringData>();
 }

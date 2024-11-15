@@ -11,52 +11,28 @@ public class MaikeStringData : MonoBehaviour
     [SerializeField] private GameObject _positionPrefab;
 
     #region ヒエラルキーのデータを保存する場所
-
-    //public class StrokePackData
-    //{
-    //    //書き順　を決めるクラス
-    //   // [Serializable]
-    //    //public class StrokeData
-    //    //{
-    //    //    //座標を保存する場所
-    //    //    public List<Transform> StringPacks;
-    //    //    public StrokeData(List<Transform> stringPacks)
-    //    //    {
-    //    //        StringPacks = stringPacks;
-    //    //    }
-
-    //    }
-    ////書き順を貯める場所
-
-    //    //public List<StrokeData> StrokcDatas = new List<StrokeData>();
-    //}
     [SerializeField]
     private StrokePackData _strokePackData = new StrokePackData();
     #endregion
-    //画面に存在するオブジェクトを貼り付ける
-    // private string saveFileName = "MinGameStrokeorder.json";
-
 
     #region データー保存処理
     [Button]
-    private void MakeStrokData()
+    private void MakeStrokeData()
     {
-        CommnParm.StringPackDatas.StrokcDatas.Clear();
+        CommonParam.StringPackDatas.StringDatas.Clear();
         foreach(var index in Enumerable.Range(0,_strokePackData.StrokeDatas.Count))
         {
             var strokeData =
-               
-            _strokePackData.StrokeDatas[index]
-            .StringPacks
-            .Select(strData => strData.transform.position)
-            .ToList();
-            CommnParm.StringPackDatas.StrokcDatas.Add(new stringPackData.strokcData(strokeData));
+                _strokePackData.StrokeDatas[index]
+                                .StrokePacks
+                                .Select(strData => strData.transform.position)
+                                .ToList();
+            CommonParam.StringPackDatas.StringDatas.Add(new StringPackData.StringData(strokeData));
         }
-        Debug.Log("1kita");
-        var         path = $"{Application.dataPath}/{CommnParm.SaveFileName}.json";
+        var         path = $"{Application.dataPath}/{CommonParam.SaveFileName}.json";
         using var   stw = new StreamWriter(path,false);
-        Debug.Log(CommnParm.StringPackDatas.StrokcDatas[0].StringPacks.Count);
-        var         json = JsonUtility.ToJson(CommnParm.StringPackDatas);
+        Debug.Log(CommonParam.StringPackDatas.StringDatas[0].StringPacks.Count);
+        var json = JsonUtility.ToJson(CommonParam.StringPackDatas);
         Debug.Log(json);
         stw.Write(json);
     }
@@ -72,20 +48,20 @@ public class MaikeStringData : MonoBehaviour
     [Button]
     private void LoadStrokData()
     {
-        var          path = $"{Application.dataPath}/{CommnParm.SaveFileName}.json";
+        var          path = $"{Application.dataPath}/{CommonParam.SaveFileName}.json";
         using var    str  = new StreamReader (path);
-        CommnParm.StringPackDatas = JsonUtility.FromJson<stringPackData>(str.ReadToEnd());  
+        CommonParam.StringPackDatas = JsonUtility.FromJson<StringPackData>(str.ReadToEnd());  
 
         _strokePackData.StrokeDatas.Clear();
 
-        foreach (var index in Enumerable.Range(0,CommnParm.StringPackDatas.StrokcDatas.Count))
+        foreach (var index in Enumerable.Range(0,CommonParam.StringPackDatas.StringDatas.Count))
         {
             //レベルオブジェクトの生成
             var levelObject = new GameObject($"{(index + 1)}");
             levelObject.transform.SetParent(_parent);
             
             var strokeData =
-                CommnParm.StringPackDatas.StrokcDatas[index].StringPacks.Select(strData =>
+                CommonParam.StringPackDatas.StringDatas[index].StringPacks.Select(strData =>
                 {
                     var posObject = Instantiate(_positionPrefab, levelObject.transform);
                     posObject.name = count.ToString();
@@ -93,7 +69,7 @@ public class MaikeStringData : MonoBehaviour
                     posObject.transform.position = strData;
                     return posObject.transform;
                 }).ToList();
-            _strokePackData.StrokeDatas.Add(new StrokePackData.StrokeData(strokeData));
+            _strokePackData.StrokeDatas.Add(new StrokePackData.StringData(strokeData));
 
 
         }
