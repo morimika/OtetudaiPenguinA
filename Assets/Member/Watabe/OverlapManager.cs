@@ -1,74 +1,114 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
-public class OverlapManager : MonoBehaviour
+public class ObjectOverlapManager : MonoBehaviour
 {
-    private int currentValue = 7;
-    public TextMeshProUGUI valueText;
-    public List<GameObject> objectsToAdd3;
-    public List<GameObject> objectsToAdd4;
-    public List<GameObject> objectsToAdd5;
-    public GameObject successObject;
-    public GameObject failureObject;
-    public Button resetButton;
+    private int currentValue = 7; // 初期値を7に設定
+    public TextMeshProUGUI valueText; // 数値を表示するTextMeshProUGUI
+    public List<GameObject> objectsToAdd3; // 3増加するオブジェクトリスト
+    public List<GameObject> objectsToAdd4; // 4増加するオブジェクトリスト
+    public List<GameObject> objectsToAdd5; // 5増加するオブジェクトリスト
+    public GameObject successObject; // 成功時に表示するオブジェクト
+    public GameObject failureObject; // 失敗時に表示するオブジェクト
+    public Button resetButton; // リセットボタン
+    public DragAndDrop dragAndDropScript; // DragAndDropスクリプトの参照
+
+    public GameObject range7To10Object;
+    public GameObject range10To13Object;
+    public GameObject range13To15Object;
+    public GameObject range15AndAboveObject;
+
+    private HashSet<GameObject> overlappingObjects = new HashSet<GameObject>(); // 現在重なっているオブジェクトを追跡
 
     void Start()
     {
         UpdateValueText();
+
         successObject.SetActive(false);
         failureObject.SetActive(false);
 
-        // ���Z�b�g�{�^���Ƀ��Z�b�g���\�b�h��ǉ�
         resetButton.onClick.AddListener(ResetValue);
+
+        UpdateRangeObjects();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (objectsToAdd3.Contains(other.gameObject))
+        if (!overlappingObjects.Contains(other.gameObject))
         {
-            currentValue += 3;
-        }
-        else if (objectsToAdd4.Contains(other.gameObject))
-        {
-            currentValue += 4;
-        }
-        else if (objectsToAdd5.Contains(other.gameObject))
-        {
-            currentValue += 5;
-        }
-
-        UpdateValueText();
-
-        if (currentValue == 15)
-        {
-            ShowSuccess();
-        }
-        else if (currentValue > 15)
-        {
-            ShowFailure();
+            overlappingObjects.Add(other.gameObject);
+            HandleOverlapAsync(other.gameObject).Forget();
         }
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        overlappingObjects.Remove(other.gameObject);
+    }
+
+    private async UniTaskVoid HandleOverlapAsync(GameObject overlappingObject)
+    {
+        await UniTask.Delay(500);
+
+        if (overlappingObjects.Contains(overlappingObject))
+        {
+            if (objectsToAdd3.Contains(overlappingObject))
+            {
+                currentValue += 3;
+            }
+            else if (objectsToAdd4.Contains(overlappingObject))
+            {
+                currentValue += 4;
+            }
+            else if (objectsToAdd5.Contains(overlappingObject))
+            {
+                currentValue += 5;
+            }
+
+            UpdateValueText();
+            UpdateRangeObjects();
+
+            if (currentValue == 15)
+            {
+                ShowSuccess();
+            }
+            else if (currentValue > 15)
+            {
+                ShowFailure();
+            }
+        }
+    }
+
+    // 成功オブジェクトを表示し、リセットボタンを非表示にする
     private void ShowSuccess()
     {
-        successObject.SetActive(true); // �����I�u�W�F�N�g��\��
-        resetButton.gameObject.SetActive(false); // ���Z�b�g�{�^�����\��
+        // DragAndDropスクリプトを無効化
+        if (dragAndDropScript != null)
+            dragAndDropScript.enabled = false;
+        successObject.SetActive(true);
+        resetButton.gameObject.SetActive(false);
     }
 
+    // 失敗オブジェクトを表示し、リセットボタンを非表示にする
     private void ShowFailure()
     {
-        failureObject.SetActive(true); // ���s�I�u�W�F�N�g��\��
-        resetButton.gameObject.SetActive(false); // ���Z�b�g�{�^�����\��
-        StartCoroutine(RestartAfterDelay(5f)); // 5�b��Ƀ��X�^�[�g
+        // DragAndDropスクリプトを無効化
+        if (dragAndDropScript != null)
+            dragAndDropScript.enabled = false;
+        failureObject.SetActive(true);
+        resetButton.gameObject.SetActive(false);
+        StartCoroutine(RestartAfterDelay(5f));
     }
 
+    // 現在の数値をTextに表示
     private void UpdateValueText()
     {
-        valueText.text = "Current Value: " + currentValue.ToString();
+        valueText.text = currentValue.ToString();
     }
 
     private void ResetValue()
@@ -78,11 +118,28 @@ public class OverlapManager : MonoBehaviour
         successObject.SetActive(false);
         failureObject.SetActive(false);
         resetButton.gameObject.SetActive(true);
+
+        // シーンを再ロードする
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        // 範囲ごとのオブジェクトの表示を更新
+        UpdateRangeObjects();
     }
 
+
+    // 指定した秒数後にシーンを再ロードするコルーチン
     private IEnumerator RestartAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    // 現在の数値に応じて範囲ごとのオブジェクトを表示/非表示
+    private void UpdateRangeObjects()
+    {
+        range7To10Object.SetActive(currentValue > 7 && currentValue < 10);
+        range10To13Object.SetActive(currentValue >= 10 && currentValue < 13);
+        range13To15Object.SetActive(currentValue >= 13 && currentValue <= 15);
+        range15AndAboveObject.SetActive(currentValue >= 16);
     }
 }
