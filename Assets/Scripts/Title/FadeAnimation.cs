@@ -22,14 +22,19 @@ public class FadeAnimation : MonoBehaviour
     {
         if (ChangeScene._isTap)
         {
-            if (PanelManager._isPaused) return;
-
+            if (PanelManager._isPaused)
+            {
+                //return;
+            }
             else
             {
-                //キャンバスをアクティブにする
-                _changeAnimation.gameObject.SetActive(true);
                 //アニメーション終了判定
                 _fadeInEnd = true;
+                _changeScene.OnStartTap();
+                Debug.Log(_fadeInEnd);
+                //キャンバスをアクティブにする
+                _changeAnimation.gameObject.SetActive(true);
+                
             }
         }
         
