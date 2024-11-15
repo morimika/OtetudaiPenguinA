@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Talkable : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class Talkable : MonoBehaviour
 
     [TextArea(1, 3)]
     public string[] _questCompletedLine;
+
+    [TextArea(1, 3)]
+    public string[] _questRepeatLine;
+    [SerializeField] private NPC_Quest _NPC_Quest;
+    private void Start()
+    {
+        _NPC_Quest = GetComponent<NPC_Quest>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,14 +50,28 @@ public class Talkable : MonoBehaviour
 
     private void Update()
     {
+
         //Player is within NPC range, conversation has not started, tap the screen
         if (_isTalkable && _dialogueBox_talking.activeInHierarchy == false &&DialogManager.instance._waitTimeController == true && Input.GetMouseButtonDown(0))
         {
+            //if (EventSystem.current.IsPointerOverGameObject()) return;
             if (DialogManager.instance.CheckQuestStatus() == "Completed")
             {
-                _line = _questCompletedLine;
+
+                DialogManager.instance.ShowDialogue(_questCompletedLine); 
+                DialogManager.instance._isCompleted = true;
+                _NPC_Quest.QuestDetail._questStatus = QuestDetail.QuestStatus.Repeat;
             }
+            else if(DialogManager.instance.CheckQuestStatus() == "Repeat")
+            {
+                DialogManager.instance.ShowDialogue(_questRepeatLine);
+                DialogManager.instance._isRepeat = true;
+            }
+            else
+            {
                 DialogManager.instance.ShowDialogue(_line);//Show dialogue box
+            }
+            
         }
     }
 }
