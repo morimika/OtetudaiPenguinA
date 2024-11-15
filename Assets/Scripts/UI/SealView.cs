@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks.Triggers;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,50 +8,114 @@ using UnityEngine.UI;
 //Mori Script
 
 /// <summary>
-/// ƒV[ƒ‹‚âƒAƒCƒeƒ€‚ğ•À‚×‚Ä•\¦‚·‚éƒXƒNƒŠƒvƒg
+/// ã‚·ãƒ¼ãƒ«ã‚„ã‚¢ã‚¤ãƒ†ãƒ ã‚’ä¸¦ã¹ã¦è¡¨ç¤ºã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 /// </summary>
 public class SealView : MonoBehaviour
 {
-    [SerializeField, Label("ƒV[ƒ‹ƒŠƒXƒg")]
+    [SerializeField, Label("å…¨ã‚·ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ")]
+    private ItemList _allSealList;
+
+    [SerializeField, Label("æ‰€æŒã‚·ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ")]
     private ItemList _sealList;
 
-    [SerializeField, Header("‹ó‚ÌƒCƒ[ƒW")]
+    [SerializeField, Header("ç©ºã®ã‚¤ãƒ¡ãƒ¼ã‚¸")]
     private Image _enptyImage;
+    [SerializeField, Header("ç©ºç™½")]
+    private Image _noneImage;
 
-    [SerializeField, Header("‹ó‚ÌƒIƒuƒWƒFƒNƒg")]
+    [SerializeField, Header("ç©ºã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     private GameObject _enptyObj;
-    [SerializeField, Label("ƒIƒuƒWƒFƒNƒg—pF•À‚×‚éƒV[ƒ‹‚ÌŠÔŠu")]
+    [SerializeField, Label("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”¨ï¼šä¸¦ã¹ã‚‹ã‚·ãƒ¼ãƒ«ã®é–“éš”")]
     private float _sealInterval = 2;
 
+    [System.Obsolete]
     void Start()
+    {
+        SetSealCanvas();
+    }
+
+
+    [SerializeField, Button]
+    [System.Obsolete]
+    public void RefreshCanvasData()
+    {
+        //å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ¶ˆå»
+        //è‡ªåˆ†ã®å­ä¾›ã‚’å…¨ã¦èª¿ã¹ã‚‹
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            var cld = gameObject.transform.GetChild(i);
+            var spr = cld.GetComponent<Image>();
+            spr.sprite = null;
+        }
+        SetSealData();
+    }
+
+    [SerializeField, Button]
+    [System.Obsolete]
+    public void SetSealCanvas()
     {
         if (_enptyImage != null)
         {
-            //panel‚ÉƒAƒ^ƒbƒ`‚µLayoutƒOƒ‹[ƒv‚ğQl‚É•À‚×‚Ä‚¢‚­
-            for (int i = 0; i < _sealList.items.Count; i++)
+            int v = 0;
+            int e = 0;
+            //panelã«ã‚¢ã‚¿ãƒƒãƒã—Layoutã‚°ãƒ«ãƒ¼ãƒ—ã‚’å‚è€ƒã«ä¸¦ã¹ã¦ã„ã
+            //ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚·ãƒ¼ãƒ«
+            for (int i = 0; i < _allSealList.items.Count+e; i++)
             {
-                //Panel‚ğe‚Æ‚µ‚Ä¶¬
-                var ima = Instantiate(_enptyImage, transform);
-                //ƒAƒCƒeƒ€î•ñ‚ğæ“¾‚µ‚ÄƒAƒCƒRƒ“‚ğ•\¦
-                var spr = _sealList.items[i];
-                ima.sprite = spr.icon;
+                //2å€‹æ¯ã«é–“ã‚’ã‚ã‘ã‚‹
+                if(v<2)
+                {
+                    //Panelã‚’è¦ªã¨ã—ã¦ç”Ÿæˆ
+                    var ima = Instantiate(_enptyImage, transform);
+                    //ã‚¢ã‚¤ãƒ†ãƒ IDã®ãŸã‚ã«åå‰ã‚’ãƒŠãƒ³ãƒãƒªãƒ³ã‚°ã™ã‚‹
+                    ima.gameObject.name = (i - e+1).ToString();
+                    v++;
+                }
+                else
+                {
+                    //ç©ºç™½éƒ¨åˆ†
+                    v = 0;
+                    e++;
+                    //é€æ˜ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆ
+                    Image ins =Instantiate(_noneImage, transform);
+                    ins.color = new Color(0, 0, 0, 0);
+                }
             }
+            SetSealData();
         }
+
+
         if (_enptyObj != null)
         {
-            //ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÉƒAƒ^ƒbƒ`‚µ‚Ä‚»‚Ìq‚É‚·‚é
-            for (int i = 0; i < _sealList.items.Count; i++)
+            //ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¢ã‚¿ãƒƒãƒã—ã¦ãã®å­ã«ã™ã‚‹
+            for (int i = 0; i < _allSealList.items.Count; i++)
             {
-                //LayoutƒOƒ‹[ƒv‚ªg‚¦‚È‚¢‚Ì‚Å‚±‚±‚Å•À‚×‚éAq‚Æ‚µ‚Ä¶¬
+                //Layoutã‚°ãƒ«ãƒ¼ãƒ—ãŒä½¿ãˆãªã„ã®ã§ã“ã“ã§ä¸¦ã¹ã‚‹ã€å­ã¨ã—ã¦ç”Ÿæˆ
                 var ima = Instantiate(_enptyObj
-                    ,new Vector2(this.transform.position.x+(i*_sealInterval)
-                                ,this.transform.position.y)
-                    ,Quaternion.identity
-                    ,transform);
-                //ƒAƒCƒeƒ€î•ñ‚ğæ“¾‚µ‚ÄƒAƒCƒRƒ“‚ğ•\¦
-                var spr = _sealList.items[i];
+                    , new Vector2(this.transform.position.x + (i * _sealInterval)
+                                , this.transform.position.y)
+                    , Quaternion.identity
+                    , transform);
+                //ã‚¢ã‚¤ãƒ†ãƒ æƒ…å ±ã‚’å–å¾—ã—ã¦ã‚¢ã‚¤ã‚³ãƒ³ã‚’è¡¨ç¤º
+                var spr = _allSealList.items[i];
                 ima.GetComponent<SpriteRenderer>().sprite = spr.icon;
             }
+        }
+    }
+
+    [SerializeField,Button]
+    [System.Obsolete]
+    public void SetSealData()
+    {
+        //æŒã£ã¦ã„ã‚‹ã‚·ãƒ¼ãƒ«ã‚’åæ˜ ã™ã‚‹
+        for (int i = 0; i < _sealList.items.Count; i++)
+        {
+            //ã‚¢ã‚¤ãƒ†ãƒ IDã¨åŒã˜å ´æ‰€ã‚’è¦‹ã¤ã‘ã‚‹
+            var tra = gameObject.transform.FindChild(_sealList.items[i].itemId.ToString());
+            //ã‚¢ã‚¤ãƒ†ãƒ æƒ…å ±ã€Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—ã—ã¦ã‚¢ã‚¤ã‚³ãƒ³ã‚’åæ˜ 
+            var spr = _sealList.items[i].icon;
+            var obj = tra.GetComponent<Image>();
+            obj.sprite = spr;
         }
     }
 }

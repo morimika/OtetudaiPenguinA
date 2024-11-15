@@ -10,11 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4db2434c3e9e76745b9df5d1ee0e5c65, type: 3}
-  m_Name: PlayerSeal
+  m_Name: NotFoundSeal
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
-  - {fileID: 11400000, guid: e5139d76d5ba54c48bd34c5c3f98ae9d, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
   - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
   - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
   - {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}

@@ -29,8 +29,8 @@ public class PocketButton : MonoBehaviour
     [SerializeField, Label("自由帳ウィンドウ")]
     private GameObject _freebook;
 
-    private GameObject _player;
-    private PlayerTapMove _playerTapMove;
+    [SerializeField,Label("プレイヤーデータアセット")]
+    private PlaySceneDatas _playSceneDatas;
 
     [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
@@ -42,9 +42,6 @@ public class PocketButton : MonoBehaviour
         _isPocketOpen = false;
         _closeButton.SetActive(false);
         IsHiddenButton = false;
-        //プレイヤー検索
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerTapMove = _player.GetComponent<PlayerTapMove>();
     }
  
     private void Update()
@@ -67,7 +64,7 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
         _isPocketOpen=true;
         _closeButton.SetActive(true);
-        //_playerTapMove.ClearAllFlags();
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
     }
  
     /// <summary>
@@ -78,7 +75,7 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
-        //_playerTapMove.ClearAllFlags();
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
     }
 
     /// <summary>
@@ -87,7 +84,7 @@ public class PocketButton : MonoBehaviour
     public void ShowPictureBook()
     {
         _picturebook.SetActive(true);
-        //_playerTapMove.ClearAllFlags();
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
         PanelManager._isPaused = true;
         ClosePocket();
     }
@@ -98,7 +95,7 @@ public class PocketButton : MonoBehaviour
     public void ShowFreeBook()
     {
         _freebook.SetActive(true);
-        //_playerTapMove.ClearAllFlags();
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
         PanelManager._isPaused = true;
         ClosePocket();
     }
@@ -110,7 +107,7 @@ public class PocketButton : MonoBehaviour
     {
         _freebook.SetActive(false);
         _picturebook.SetActive(false);
-        //_playerTapMove.ClearAllFlags();
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
         PanelManager._isPaused = false;
     }
 
