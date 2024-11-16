@@ -23,9 +23,6 @@ public class DialogManager : MonoBehaviour
     public NPC_Quest _NPC_Quest;
     public RepeatQuestChoice _RepeatQuestChoice;
 
-    public move _move;//!!!
-                      //                                                   change this to the player movement controll script later
-
     public bool _waitTimeController = true;
     public bool _isCompleted;
     public bool _isRepeat;
@@ -50,11 +47,12 @@ public class DialogManager : MonoBehaviour
         if (_dialogueBox_talking.activeInHierarchy)//If there is a dialog box
         {
             _waitTimeController = false;
-            _move.enabled = false;//disable player movement
+           
             if (Input.GetMouseButtonDown(0))
             {
-               //if (EventSystem.current.IsPointerOverGameObject()) return;
-               if (_isScrolling == false)//If the scrolling is over
+               
+                //if (EventSystem.current.IsPointerOverGameObject()) return;
+                if (_isScrolling == false)//If the scrolling is over
                {
                     _currentDialogueLine++;//The next text
                     if (_currentDialogueLine <= _dialogueLine.Length - 1)
@@ -64,19 +62,7 @@ public class DialogManager : MonoBehaviour
                     else
                     {
                         _dialogueBox_talking.SetActive(false);//Eliminate the dialog box when the conversation is over
-                        _move.enabled = true;
-                        _NPC_Quest.delegateQuest(); 
-                        if(_isCompleted) 
-                        {
-                            ShowCompletedCutIn();
-                            _isCompleted = false;
-                        }
-                        else if (_isRepeat)
-                        {
-                            _RepeatQuestChoice.ShowCanvas();
-                            _isRepeat = false;
-                        }
-                        StartCoroutine(WaitTime());
+                        StartCoroutine(Zoom.instance.ZoomOut());                                               
                     }
                }
                 else
@@ -84,10 +70,27 @@ public class DialogManager : MonoBehaviour
                     //If it is scrolling,speed up
                     StopCoroutine("ScrollingText");
                     _dialogueText.text = _dialogueLine[_currentDialogueLine];
-                    _isScrolling = false;                   
+                    _isScrolling = false;
                 }
             }
-        }       
+        }
+        if (Zoom.instance._isZoomOut == true)
+        {
+            _NPC_Quest.delegateQuest();
+            if (_isCompleted)
+            {
+                ShowCompletedCutIn();
+                _isCompleted = false;
+            }
+            else if (_isRepeat)
+            {
+                _RepeatQuestChoice.ShowCanvas();
+                _isRepeat = false;
+            }
+            Zoom.instance._isZoomOut = false;
+            StartCoroutine(WaitTime());
+
+        }
     }
     public void ShowDialogue(string[] _newLine)
     {
@@ -152,7 +155,7 @@ public class DialogManager : MonoBehaviour
     }
     IEnumerator WaitTime()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.5f);
         _dialogueBox.SetActive(true);
         _waitTimeController = true;
     }
