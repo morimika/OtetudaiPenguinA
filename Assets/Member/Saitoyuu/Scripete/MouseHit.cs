@@ -6,6 +6,10 @@ public class MouseHit : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit");
+        if(Input.GetMouseButton(0))
+        {
+            Debug.Log("Hit");
+        }
+
     }
 }
