@@ -20,10 +20,14 @@ public class FadeAnimation : MonoBehaviour
 
     private void OnAnimActive()
     {
+        Debug.Log("test1");
+        Debug.Log(ChangeScene._isTap);
         if (ChangeScene._isTap)
         {
+            Debug.Log("test2");
             if (PanelManager._isPaused)
             {
+                Debug.Log("test2");
                 //return;
             }
             else

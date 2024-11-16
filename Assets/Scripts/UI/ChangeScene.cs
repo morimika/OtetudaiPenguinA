@@ -19,11 +19,11 @@ public class ChangeScene : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //ボタン系を押さないときは全て処理しない
+            
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;
             }
-            
             Debug.Log("てすと");
             OnStartTap();
         }
@@ -46,7 +46,7 @@ public class ChangeScene : MonoBehaviour
         //シーンを切り替える
         if (_toPlay)
         {
-            Invoke("CallChangeScene",3f);
+            Invoke("CallChangeScene",2f);
         }
     }
     /// <summary>
