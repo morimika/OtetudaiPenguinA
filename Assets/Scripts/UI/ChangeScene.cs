@@ -5,62 +5,63 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ChangeScene : MonoBehaviour
+public class ChangeScene : SingletonMonoBehaviour<ChangeScene>
 {
     //シーン遷移先
     [SerializeField,Header("シーン遷移先")] private bool _toPlay;
     //フェード管理スクリプト
     [SerializeField] private FadeAnimation _fadeAnimation;
-    public static bool _isTap;
+    public                   FadeAnimation FadeAnim => _fadeAnimation;
 
 
-    private void Update()
+    public void LoadNextScene(int sceneIndex)
     {
-        if (Input.GetMouseButtonDown(0))
+        StartCoroutine(NextScene(sceneIndex));
+    }
+    
+    /// <summary>
+    /// 次のシーン呼び出し
+    /// </summary>
+    /// <param name="sceneIndex">シーン番号</param>
+    /// <returns></returns>
+    public IEnumerator NextScene(int sceneIndex)
+    {
+        //  フェーアウト（画面内にパネルが入ってくる）
+        yield return StartCoroutine(_fadeAnimation.FadeOutASync());
+        //  フェードアウトが終了したのを検出する
+        yield return new WaitUntil(() => _fadeAnimation.IsFadeEnd);
+        //  シーン呼び出しを行う
+        SceneManager.LoadSceneAsync(sceneIndex);
+
+        yield return new WaitForSeconds(1);
+        Debug.Log("call fade in");
+        //  フェードイン（画面内のパネルが外に出る）
+        yield return StartCoroutine(_fadeAnimation.FadeInASync());
+        //  フェードアウトが終了したのを検出する
+        yield return new WaitUntil(() => _fadeAnimation.IsFadeEnd);
+    }
+    
+    /// <summary>
+    /// マウスクリック（全画面での）検出
+    /// </summary>
+    /// <param name="mouseType">0:左、1:右、2:中央</param>
+    /// <param name="clickMode">下のオブジェクトを無視する場合 true</param>
+    /// <returns></returns>
+    public bool IsMouseClicked(int mouseType, bool clickMode)
+    {
+        if (Input.GetMouseButtonDown(mouseType))
         {
             //ボタン系を押さないときは全て処理しない
-            
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (clickMode)
             {
-                return;
+                if (EventSystem.current.IsPointerOverGameObject() is false)
+                    return true;
             }
-            Debug.Log("てすと");
-            OnStartTap();
+            else
+            {
+                return true;
+            }
         }
-    }
-
-
-    public void OnStartTap()
-    {
-        Debug.Log("OnStartTap");
-        
-        _isTap = true;
-        
-        //フェードインが終わったら
-        if (_fadeAnimation._fadeInEnd)
-        {
-           
-            
-        }
-        
-        //シーンを切り替える
-        if (_toPlay)
-        {
-            Invoke("CallChangeScene",2f);
-        }
-    }
-    /// <summary>
-    /// シーン切り替えの関数
-    /// </summary>
-    private void CallChangeScene()
-    {
-        //メニュー中であればなにもしない
-        //if(PanelManager._isPaused) return;
-        //メニューを開いてなければシーンへ飛ぶ
-        //if (!PanelManager._isPaused)
-       
-        SceneManager.LoadScene("Yuria_PlayScene");
-        
-       
+        return false;
     }
 }

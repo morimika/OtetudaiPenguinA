@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 //ボタン系を押さないときは全て処理しない
-                //以下が問題で動かない
                 if(EventSystem.current.IsPointerOverGameObject()) return;
                 
                 //スクリーン座標からワールド座標に変換

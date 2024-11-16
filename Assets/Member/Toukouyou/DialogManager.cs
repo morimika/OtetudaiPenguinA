@@ -12,8 +12,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dialogueText, _name;
     [TextArea(1, 3)]
     public string[] _dialogueLine;
-    [SerializeField] private int _currentDialogueLine;//¬FÔÚ¤Î»áÔ’ÎÄ
-    private bool _isScrolling;//¥Æ¥­¥¹¥È¤Ï¥¹¥¯¥í©`¥ë¤·¤Æ¤¤¤ë¤«¤É¤¦¤«
+    [SerializeField] private int _currentDialogueLine;//ï¿½Fï¿½Ú¤Î»ï¿½Ô’ï¿½ï¿½
+    private bool _isScrolling;//ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½È¤Ï¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ë¤·ï¿½Æ¤ï¿½ï¿½ë¤«ï¿½É¤ï¿½ï¿½ï¿½
 
     public NPC_Quest _NPC_Quest;
     private void Awake()
@@ -35,28 +35,28 @@ public class DialogManager : MonoBehaviour
     void Update()
     {
         CheckQuestStatus();
-        if (_dialogueBox.activeInHierarchy)//¥À¥¤¥¢¥í¥°¥Ü¥Ã¥¯¥¹¤¬¤¢¤ì¤Ð
+        if (_dialogueBox.activeInHierarchy)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¥Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             if (Input.GetMouseButtonDown(0))
             {
-               if (_isScrolling == false)//¥¹¥¯¥í©`¥ë¤¬½K¤ï¤Ã¤¿¤é
+               if (_isScrolling == false)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ë¤¬ï¿½Kï¿½ï¿½Ã¤ï¿½ï¿½ï¿½
                 {
-                    _currentDialogueLine++;//´Î¤Î»áÔ’ÎÄ
+                    _currentDialogueLine++;//ï¿½Î¤Î»ï¿½Ô’ï¿½ï¿½
                     if (_currentDialogueLine <= _dialogueLine.Length - 1)
                     {
-                        CheckName();//Ô’¤·ÊÖ¤Î±íÊ¾
+                        CheckName();//Ô’ï¿½ï¿½ï¿½Ö¤Î±ï¿½Ê¾
                         //_dialogueText.text = _dialogueLine[_currentDialogueLine];
                         StartCoroutine("ScrollingText");
                     }
                     else
                     {
-                        _dialogueBox.SetActive(false);//»áÔ’¤¬½K¤ï¤ì¤Ð¥À¥¤¥¢¥í¥°¥Ü¥Ã¥¯¥¹¤òŸo¤¯¤¹
+                        _dialogueBox.SetActive(false);//ï¿½ï¿½Ô’ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½Ð¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¥Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½
                         _NPC_Quest.delegateQuest();
                     }
                }
                 else
                 {
-                    //¥¹¥¯¥í©`¥ë¤·¤Æ¤¤¤ì¤Ð¡¢¼ÓËÙ¤¹¤ë
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ë¤·ï¿½Æ¤ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ù¤ï¿½ï¿½ï¿½
                     StopCoroutine("ScrollingText");
                     _dialogueText.text = _dialogueLine[_currentDialogueLine];
                     _isScrolling = false;                   
@@ -68,9 +68,9 @@ public class DialogManager : MonoBehaviour
     public void ShowDialogue(string[] _newLine)
     {
         _dialogueLine = _newLine;
-        _currentDialogueLine = 0;//³õ¤á¤Æ¤«¤é»áÔ’ÎÄ¤ò±íÊ¾¤¹¤ë
-        CheckName();//Ô’¤·ÊÖ¤Î±íÊ¾
-        _dialogueBox.SetActive(true); //¥À¥¤¥¢¥í¥°¥Ü¥Ã¥¯¥¹±íÊ¾
+        _currentDialogueLine = 0;//ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½Ô’ï¿½Ä¤ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+        CheckName();//Ô’ï¿½ï¿½ï¿½Ö¤Î±ï¿½Ê¾
+        _dialogueBox.SetActive(true); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¥Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
         //_dialogueText.text = _dialogueLine[_currentDialogueLine];
         StartCoroutine("ScrollingText");
     }
@@ -80,14 +80,14 @@ public class DialogManager : MonoBehaviour
         if (_dialogueLine[_currentDialogueLine].StartsWith("Name-"))
         {
             _name.text = _dialogueLine[_currentDialogueLine].Replace("Name-", "");
-            _currentDialogueLine++;//ÃûÇ°±íÊ¾¤¹¤ë¤¿¤á¤Î»áÔ’ÎÄ¤òÂÔ¤¹
+            _currentDialogueLine++;//ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ë¤¿ï¿½ï¿½Î»ï¿½Ô’ï¿½Ä¤ï¿½ï¿½Ô¤ï¿½
         }
     }
 
     private IEnumerator ScrollingText()
     {
-        _isScrolling = true;//¥¹¥¯¥í©`¥ëé_Ê¼
-        _dialogueText.text = null;//Ò»·¬×î³õ¤Î¤È¤³¤í¤«¤éÎÄ×Ö¤ò±íÊ¾¤¹¤ë¤¿¤á
+        _isScrolling = true;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½_Ê¼
+        _dialogueText.text = null;//Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¤È¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ë¤¿ï¿½ï¿½
         foreach(char letter in _dialogueLine[_currentDialogueLine].ToCharArray())
         {
             _dialogueText.text += letter;
