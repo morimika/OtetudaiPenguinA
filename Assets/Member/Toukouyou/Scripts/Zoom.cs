@@ -36,7 +36,6 @@ public class Zoom : MonoBehaviour
     public IEnumerator ZoomIn()
     {
         _move.enabled = false;//disable player movement
-        //Debug.Log(_move.enabled);
         var pos = 
             new Vector3((_NPC.transform.position.x + _player.transform.position.x) / 2,
             (_NPC.transform.position.y + _player.transform.position.y) / 2,-10);
@@ -67,7 +66,6 @@ public class Zoom : MonoBehaviour
 
         yield return new WaitUntil(() => testNum == -1);
         _move.enabled = true;
-        //Debug.Log(_move.enabled);
         _isZoomOut = true;
     }
 }

@@ -61,7 +61,6 @@ public class Talkable : MonoBehaviour
             }        
             if (Zoom.instance._isDone == true)
             {
-                Debug.Log(Zoom.instance._isDone);
                 if (DialogManager.instance.CheckQuestStatus() == "Accepted" || DialogManager.instance.CheckQuestStatus() == "Waiting")
                 {
                     DialogManager.instance.ShowDialogue(_line);//Show dialogue box
@@ -79,7 +78,6 @@ public class Talkable : MonoBehaviour
                 }
                 
                 Zoom.instance._isDone = false;
-                Debug.Log(Zoom.instance._isDone);
             }
         }
     }
