@@ -1525,6 +1525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6787694661221311102, guid: 962542855c4614ae490387783d0e33cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1535,9 +1539,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1087159866}
+  - {fileID: 887409105}
   - {fileID: 3852074359568032702}
   - {fileID: 1724167069}
-  - {fileID: 887409105}
   - {fileID: 5215071060247793892}
   - {fileID: 4259884439410483398}
   - {fileID: 119107451}

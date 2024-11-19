@@ -12,6 +12,10 @@ public class SceneStart_W : MonoBehaviour
     public GameObject displayObject; // 1秒表示するオブジェクト
     public DragAndDrop dragAndDropScript; // DragAndDropスクリプトの参照
 
+    //mori
+    [SerializeField]
+    private bool _doCount = false;
+
     async void Start()
     {
         // DragAndDropスクリプトを無効化
@@ -24,7 +28,10 @@ public class SceneStart_W : MonoBehaviour
 
         // ゲーム開始フローを実行
         await MoveObjectToTargetAsync();
-        await ShowCountdownAsync();
+        if (_doCount)
+        {
+            await ShowCountdownAsync();
+        }
         await ShowDisplayObjectAsync();
 
         // DragAndDropスクリプトを再び有効化

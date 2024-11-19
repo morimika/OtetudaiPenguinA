@@ -2378,9 +2378,9 @@ MonoBehaviour:
   tree1: 4
   tree2: 3
   tree3: 5
-  apple1: {fileID: 0}
-  apple2: {fileID: 0}
-  apple3: {fileID: 0}
+  apple1: {fileID: 680349888}
+  apple2: {fileID: 957126854}
+  apple3: {fileID: 183979378}
 --- !u!1 &1576771189
 GameObject:
   m_ObjectHideFlags: 0

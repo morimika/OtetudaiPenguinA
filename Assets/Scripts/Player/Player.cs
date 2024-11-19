@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,11 @@ public class Player : MonoBehaviour
 
     [SerializeField, Header(("現在のタイプなのか"))]
     private PlaySceneDatas _playSceneDatas;
+
+    //mori
+    [SerializeField,Label("タップ地点に生成するアイコン")]
+    private GameObject _tapPointObj;
+    private GameObject _tapPointSaver;
 
     //タップした回数
     private int tap = 0;
@@ -84,6 +90,9 @@ public class Player : MonoBehaviour
                     moov = true;
                     //タップした間隔を見る
                     Invoke("Tap", _tapInterval);
+                    //mori
+                    if(_tapPointSaver!=null)Destroy(_tapPointSaver);
+                    _tapPointSaver=Instantiate(_tapPointObj, target_Point, Quaternion.identity);
                 }
             }
         }
@@ -231,5 +240,15 @@ public class Player : MonoBehaviour
     public void OnCollisionStay2D(Collision2D collision)
     {
         Moov_Finish();
+    }
+
+    //mori
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == _tapPointSaver)
+        {
+            Debug.Log("HI");
+            Destroy(_tapPointSaver);
+        }
     }
 }

@@ -25,7 +25,7 @@ public class PlayerTapMove : MonoBehaviour
     void Start()
     {
         //初期はPlayerに設定しておく
-        _playSceneDatas.TapType = PlaySceneTapType.Player;
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ public class PlayerTapMove : MonoBehaviour
 /// </summary>
     private void Move()
     {
-        if (_playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player) == false) return;
+        if (_playSceneDatas.TapType.HasFlag(PlaySceneTapType.Play) == false) return;
         {
             
         }
@@ -166,6 +166,6 @@ public class PlayerTapMove : MonoBehaviour
     /// <returns>モードがプレイヤーなら</returns>
     private bool IsTapEnable()
     {
-        return _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Player);
+        return _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Play);
     }
 }

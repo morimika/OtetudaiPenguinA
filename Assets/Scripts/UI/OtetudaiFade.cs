@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
+using UnityEngine.EventSystems;
+using System.Runtime.InteropServices;
+using NaughtyAttributes;
+using System;
 
 //Mori Script
 
@@ -12,18 +16,24 @@ public class OtetudaiFade : MonoBehaviour
     private Vector3 _playerPos;
     private GameObject _player;
 
-    private bool _isFade = false;
     private bool _onMouse = false;
 
     [SerializeField]
     private GameObject _action;
 
+    [SerializeField, Scene]
+    private int _sceneIndex;
+
+    [SerializeField]
+    private FadeView _fadeView;
+
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        //_fadeView= GameObject.Find("FadeView").GetComponent<FadeView>();
     }
 
-    async Task Update()
+    void Update()
     {
         //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
@@ -36,23 +46,14 @@ public class OtetudaiFade : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && _onMouse)
             {
                 //フェードを待ち、遷移する
-                await ChangeMinigameAsync();
                 PlayerSetPos.PlayerPos = _playerPos;
-                SceneManager.LoadScene("WatanabeTestScene");
+                ChangeScene.Instance.LoadNextScene(_sceneIndex);
             }
         }
         else
         {
             _action.SetActive(false);
         }
-    }
-
-    private async UniTask ChangeMinigameAsync()
-    {
-        //fade終わったら_isFade=true;
-        //フェード処理が終わるまでまつ
-        //await UniTask.WaitUntil(() => _isFade == true);
-        await UniTask.Delay(1000);
     }
 
     /// <summary>
@@ -62,7 +63,6 @@ public class OtetudaiFade : MonoBehaviour
     {
         _onMouse = true;
     }
-
     private void OnMouseUp()
     {
         _onMouse = false;

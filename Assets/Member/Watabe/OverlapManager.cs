@@ -53,7 +53,8 @@ public class ObjectOverlapManager : MonoBehaviour
 
     private async UniTaskVoid HandleOverlapAsync(GameObject overlappingObject)
     {
-        await UniTask.Delay(500);
+        //mori
+        await UniTask.Delay(00);
 
         if (overlappingObjects.Contains(overlappingObject))
         {
@@ -92,6 +93,15 @@ public class ObjectOverlapManager : MonoBehaviour
             dragAndDropScript.enabled = false;
         successObject.SetActive(true);
         resetButton.gameObject.SetActive(false);
+        //mori
+        PlayerSetPos.PlayerPos = new Vector2(-3.24f,-2.84f);
+        Invoke(nameof(ChangeScenetoMain), 2f);
+    }
+
+    //mori
+    private void ChangeScenetoMain()
+    {
+        SceneManager.LoadScene("Mori_MainGameScene");
     }
 
     // 失敗オブジェクトを表示し、リセットボタンを非表示にする
@@ -101,8 +111,9 @@ public class ObjectOverlapManager : MonoBehaviour
         if (dragAndDropScript != null)
             dragAndDropScript.enabled = false;
         failureObject.SetActive(true);
-        resetButton.gameObject.SetActive(false);
-        StartCoroutine(RestartAfterDelay(5f));
+        //mori
+        //resetButton.gameObject.SetActive(false);
+        //StartCoroutine(RestartAfterDelay(5f));
     }
 
     // 現在の数値をTextに表示
@@ -120,7 +131,8 @@ public class ObjectOverlapManager : MonoBehaviour
         resetButton.gameObject.SetActive(true);
 
         // シーンを再ロードする
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //mori
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         // 範囲ごとのオブジェクトの表示を更新
         UpdateRangeObjects();
