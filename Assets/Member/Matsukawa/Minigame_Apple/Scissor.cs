@@ -7,7 +7,6 @@ public class Scissor : MonoBehaviour
 {
     private Vector3 offset;
 
-
     void OnMouseDown()
     {
         offset = gameObject.transform.position - GetMouseWorldPos();
@@ -24,6 +23,4 @@ public class Scissor : MonoBehaviour
         mousePos.z = -Camera.main.transform.position.z;
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
-
-
 }
