@@ -9,6 +9,7 @@ using UnityEngine;
         Waiting,
         Accepted,
         Completed,
+        Repeat,
     }
 
     public string _questName;
