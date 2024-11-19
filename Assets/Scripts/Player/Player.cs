@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     //走っているかどうか
     private bool run = false;
+    
+    private string backAnime;
 
     //移動先の取得用
     private Vector3 target_Point;
