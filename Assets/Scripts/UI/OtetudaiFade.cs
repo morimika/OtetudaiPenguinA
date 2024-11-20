@@ -38,7 +38,8 @@ public class OtetudaiFade : MonoBehaviour
         //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認
-        if (Vector3.Distance(this.transform.position,_playerPos)<=3)
+        if (Vector3.Distance(this.transform.position,_playerPos)<=3
+            && HelpManager.helpNameEnum== HelpManager.HelpNameEnum.AppleGet)
         {
             //押せるUI出現
             _action.SetActive(true);
@@ -47,7 +48,8 @@ public class OtetudaiFade : MonoBehaviour
             {
                 //フェードを待ち、遷移する
                 PlayerSetPos.PlayerPos = _playerPos;
-                ChangeScene.Instance.LoadNextScene(_sceneIndex);
+                //ChangeScene.Instance.LoadNextScene(_sceneIndex);
+                SceneManager.LoadScene("WatanabeTestScene");
             }
         }
         else

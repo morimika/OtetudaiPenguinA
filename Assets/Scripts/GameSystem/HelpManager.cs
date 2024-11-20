@@ -34,13 +34,12 @@ public class HelpManager : HelpInfo
     {
         helpName = helpNameEnum.ToString();
 
-        if(helpName==HelpNameEnum.None.ToString())
+        if(helpName!=HelpNameEnum.None.ToString())
         {
-            Debug.Log("NONjyuytu");
+            Debug.Log("éÛíçÅF" + helpName);
         }
         else
         {
-            Debug.Log("jyuytu");
         }
     }
 }
@@ -48,6 +47,5 @@ public class HelpManager : HelpInfo
 public class HelpInfo:MonoBehaviour
 {
     public string helpName;
-    public static bool isOrder = false;
     public static bool isClear = false;
 }

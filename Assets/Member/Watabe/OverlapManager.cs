@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 
 public class ObjectOverlapManager : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class ObjectOverlapManager : MonoBehaviour
     public GameObject range15AndAboveObject;
 
     private HashSet<GameObject> overlappingObjects = new HashSet<GameObject>(); // 現在重なっているオブジェクトを追跡
+
+    //mori
+    [SerializeField,Label("プレイヤーの所持シールデータ")]
+    private ItemList _playerSeal;
+    [SerializeField,Label("プレイヤーに与えるシール")]
+    private ItemData _giveSeal;
 
     void Start()
     {
@@ -94,6 +101,8 @@ public class ObjectOverlapManager : MonoBehaviour
         successObject.SetActive(true);
         resetButton.gameObject.SetActive(false);
         //mori
+        _playerSeal.items.Add(_giveSeal);
+        HelpInfo.isClear = true;
         PlayerSetPos.PlayerPos = new Vector2(-3.24f,-2.84f);
         Invoke(nameof(ChangeScenetoMain), 2f);
     }
@@ -130,8 +139,11 @@ public class ObjectOverlapManager : MonoBehaviour
         failureObject.SetActive(false);
         resetButton.gameObject.SetActive(true);
 
-        // シーンを再ロードする
         //mori
+        dragAndDropScript.enabled = true;
+        resetButton.onClick.AddListener(ResetValue);
+        UpdateRangeObjects();
+        // シーンを再ロードする
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         // 範囲ごとのオブジェクトの表示を更新
