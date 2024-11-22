@@ -2085,6 +2085,7 @@ MonoBehaviour:
   range15AndAboveObject: {fileID: 80744812}
   _playerSeal: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}
   _giveSeal: {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+  _scissoersObj: {fileID: 2045209879}
 --- !u!1 &897585651
 GameObject:
   m_ObjectHideFlags: 0
@@ -6079,11 +6080,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 978983212}
+  - {fileID: 461141649}
   - {fileID: 1585467387}
-  - {fileID: 447774323}
   - {fileID: 920439302}
   - {fileID: 274330876}
-  - {fileID: 73846796}
-  - {fileID: 461141649}
   - {fileID: 2035415376}
+  - {fileID: 447774323}
+  - {fileID: 73846796}
   - {fileID: 99325391}

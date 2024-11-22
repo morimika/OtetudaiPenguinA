@@ -31,6 +31,8 @@ public class ObjectOverlapManager : MonoBehaviour
     private ItemList _playerSeal;
     [SerializeField,Label("プレイヤーに与えるシール")]
     private ItemData _giveSeal;
+    [SerializeField]
+    private GameObject _scissoersObj;
 
     void Start()
     {
@@ -140,6 +142,7 @@ public class ObjectOverlapManager : MonoBehaviour
         resetButton.gameObject.SetActive(true);
 
         //mori
+        _scissoersObj.gameObject.transform.position = new Vector2(3,-2.5f);
         dragAndDropScript.enabled = true;
         resetButton.onClick.AddListener(ResetValue);
         UpdateRangeObjects();

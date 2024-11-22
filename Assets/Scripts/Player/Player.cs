@@ -247,7 +247,6 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject == _tapPointSaver)
         {
-            Debug.Log("HI");
             Destroy(_tapPointSaver);
         }
     }
