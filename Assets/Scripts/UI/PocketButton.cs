@@ -4,36 +4,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-
+ 
 //Mori Script
-
+ 
 /// <summary>
-/// ƒ|ƒPƒbƒg‚ğŠJ•Â‚·‚éƒXƒNƒŠƒvƒg
-/// —v•ÏX
+/// ãƒã‚±ãƒƒãƒˆã‚’é–‹é–‰ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+/// è¦å¤‰æ›´
 /// </summary>
 public class PocketButton : MonoBehaviour
 {
-    [SerializeField, Label("ƒ|ƒPƒbƒgƒ^ƒuƒIƒuƒWƒFƒNƒg")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆã‚¿ãƒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     private RectTransform _pocketUI;
-    [SerializeField, Label("ƒ|ƒPƒbƒg•Â‚¶•s‰Â‹ƒ{ƒ^ƒ“")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆé–‰ã˜ä¸å¯è¦–ãƒœã‚¿ãƒ³")]
     private GameObject _closeButton;
-
-    [SerializeField, Label("ƒ|ƒPƒbƒgƒ{ƒ^ƒ“•\¦bool")]
+ 
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆãƒœã‚¿ãƒ³è¡¨ç¤ºbool")]
     public bool IsHiddenButton = false;
-    [SerializeField, Label("ƒ|ƒPƒbƒg•\¦ƒ{ƒ^ƒ“")]
+    [SerializeField, Label("ãƒã‚±ãƒƒãƒˆè¡¨ç¤ºãƒœã‚¿ãƒ³")]
     private GameObject _pocketButton;
+
+    [SerializeField, Label("çµµæœ¬ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦")]
+    private GameObject _picturebook;
+
+    [SerializeField, Label("è‡ªç”±å¸³ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦")]
+    private GameObject _freebook;
+
+    [SerializeField,Label("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚¢ã‚»ãƒƒãƒˆ")]
+    private PlaySceneDatas _playSceneDatas;
 
     [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
-
+ 
     // Start is called before the first frame update
     void Start()
     {
+        //åˆæœŸè¨­å®š
         _isPocketOpen = false;
         _closeButton.SetActive(false);
         IsHiddenButton = false;
     }
-
+ 
     private void Update()
     {
         if (IsHiddenButton)
@@ -45,18 +55,61 @@ public class PocketButton : MonoBehaviour
             _pocketButton.SetActive(true);
         }
     }
-
+ 
+    /// <summary>
+    /// ãƒã‚±ãƒƒãƒˆã‚’é–‹ã
+    /// </summary>
     public void OpenPocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
         _isPocketOpen=true;
         _closeButton.SetActive(true);
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
     }
-
+ 
+    /// <summary>
+    /// ãƒã‚±ãƒƒãƒˆã‚’é–‰ã˜ã‚‹
+    /// </summary>
     public void ClosePocket()
     {
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
     }
+
+    /// <summary>
+    /// çµµæœ¬ã‚’é–‹ã
+    /// </summary>
+    public void ShowPictureBook()
+    {
+        _picturebook.SetActive(true);
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
+        PanelManager._isPaused = true;
+        ClosePocket();
+    }
+
+    /// <summary>
+    /// è‡ªç”±å¸³ã‚’é–‹ã
+    /// </summary>
+    public void ShowFreeBook()
+    {
+        _freebook.SetActive(true);
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
+        PanelManager._isPaused = true;
+        ClosePocket();
+    }
+
+    /// <summary>
+    /// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
+    /// </summary>
+    public void CloseWindow()
+    {
+        _freebook.SetActive(false);
+        _picturebook.SetActive(false);
+        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
+        PanelManager._isPaused = false;
+    }
+
 }
+
