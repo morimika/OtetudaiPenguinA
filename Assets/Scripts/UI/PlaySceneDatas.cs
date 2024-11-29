@@ -9,11 +9,9 @@ using UnityEngine;
 [Flags]
 public enum PlaySceneTapType
 {
-    Player = 0x01 << 0,
-    Enemy = 0x01 << 1,
-    Ground = 0x01 << 2,
-    Panel = 0x01 << 3,
-    Options = 0x01 << 4,
+    Play = 0x01 << 0,
+    Talk = 0x01 << 1,
+    Pose = 0x01 << 2,
     
 }
 [Flags]
@@ -26,5 +24,5 @@ public enum PlaySceneType
 [CreateAssetMenu(fileName = "PlaySceneDatas", menuName = "PlaySceneDatas", order = 1)]
 public class PlaySceneDatas : ScriptableObject
 {
-   public PlaySceneTapType TapType = PlaySceneTapType.Player;
+   public PlaySceneTapType TapType = PlaySceneTapType.Play;
 }

@@ -1419,7 +1419,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1147531616565751036}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 113984207961212132}
+        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
+        m_MethodName: OnTap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9176367181081528804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1535,5 +1547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8498d674f2e2849ea94f9ed27bbc33d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playSceneDatas: {fileID: 0}
   _playerTapMove: {fileID: 0}
   _pauseMenuUI: {fileID: 1268703255444141020}
