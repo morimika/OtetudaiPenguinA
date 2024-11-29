@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5248206278227442170}
   - component: {fileID: 8248885324712622474}
-  - component: {fileID: 5147807386662665990}
   - component: {fileID: 6690277726683531523}
   - component: {fileID: 7802290716279326855}
   - component: {fileID: 4369759591930195536}
@@ -89,22 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5147807386662665990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3387444717170337922}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 328c509b1461d4dbf861ca24e75e172a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _dashSpeed: 10
-  _doubTapTime: 0.2
-  _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
 --- !u!95 &6690277726683531523
 Animator:
   serializedVersion: 5
@@ -167,7 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoovSpeed: 5
   RunSpeed: 20
-  _tapInterval: 0
+  _tapInterval: 0.3
+  _playSceneDatas: {fileID: 0}
+  _tapPointObj: {fileID: 3919626275026617720, guid: 47155a2aae36ff4408a88e851b52efb5, type: 3}
 --- !u!61 &3511421620338493884
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -243,6 +243,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &48554959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4369759591930195536, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
+  m_PrefabInstance: {fileID: 1204563026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db387cf7ef56e46b8b3731323a90e67f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &73106468
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,9 +532,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 113984207961212132, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 48554959}
+    - target: {fileID: 113984207961212132, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: _playerTapMove
       value: 
-      objectReference: {fileID: 1189087545}
+      objectReference: {fileID: 0}
     - target: {fileID: 113984207961212132, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
       propertyPath: _playSceneDatas
       value: 
@@ -1175,17 +1190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1189087545 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5147807386662665990, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
-  m_PrefabInstance: {fileID: 1204563026}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 328c509b1461d4dbf861ca24e75e172a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1204563026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1200,8 +1204,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3387444717170337922, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4369759591930195536, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
+      propertyPath: _playSceneDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
     - target: {fileID: 5248206278227442170, guid: ae0352a2a7baa43d3a93be3b8a2b7ee1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.8499756
