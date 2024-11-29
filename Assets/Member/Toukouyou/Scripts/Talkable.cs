@@ -8,6 +8,7 @@ public class Talkable : MonoBehaviour
 {
     [SerializeField] private bool _isTalkable;
     [SerializeField] private GameObject _dialogueBox_talking;
+    [SerializeField] private GameObject _dialogueBox;
     [SerializeField] private TextMeshProUGUI _questionText;
     [TextArea(1, 3)]
     public string[] _line;
@@ -20,26 +21,50 @@ public class Talkable : MonoBehaviour
     [TextArea(1, 3)]
     public string[] _questRepeatLine;
     [SerializeField] private NPC_Quest _NPC_Quest;
+    [SerializeField] private GameObject Player;
+    
     private void Start()
     {
         _NPC_Quest = GetComponent<NPC_Quest>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.CompareTag("Player"))
+    //    {
+    //        _isTalkable = true;
+    //        _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);//Adjusting the size of the dialog box
+    //        _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);
+    //        _questionText.text = "ç¢Ç¡ÇΩÇ»...";//Change text
+    //        DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();//let Player get quest detail from this Npc
+    //        Zoom.instance._NPC = this.gameObject;
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player"))
+    //    {
+    //        _isTalkable = false;
+    //        _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);//Adjusting the size of the dialog box
+    //        _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
+    //        _questionText.text = "?";//Change text
+    //        DialogManager.instance._NPC_Quest = null;
+    //        Zoom.instance._NPC = null;
+    //    }
+    //}
+
+    private void Update()
     {
-        if(collision.CompareTag("Player"))
+        if (CalculateDistance() <= 4 )
         {
             _isTalkable = true;
             _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);//Adjusting the size of the dialog box
             _text_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);
-            _questionText.text = "ç¢Ç¡ÇΩÇ»...";//Change text
+            _questionText.text = "Mission start?";//"ç¢Ç¡ÇΩÇ»...";//Change text
             DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();//let Player get quest detail from this Npc
             Zoom.instance._NPC = this.gameObject;
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        else if (CalculateDistance() > 4 )
         {
             _isTalkable = false;
             _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);//Adjusting the size of the dialog box
@@ -48,16 +73,15 @@ public class Talkable : MonoBehaviour
             DialogManager.instance._NPC_Quest = null;
             Zoom.instance._NPC = null;
         }
-    }
 
-    private void Update()
-    {
         //Player is within NPC range, conversation has not started, tap the screen
-        if (_isTalkable && _dialogueBox_talking.activeInHierarchy == false &&DialogManager.instance._waitTimeController == true)
+        if (_isTalkable && _dialogueBox.activeInHierarchy == true && _dialogueBox_talking.activeInHierarchy == false &&DialogManager.instance._waitTimeController == true && DialogManager.instance._testClick == true)
         {
-        
-            if(Input.GetMouseButtonDown(0))
+            Debug.Log("if is ready");
+            if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("Mouse Clicked");
+                DialogManager.instance._testClick = false;
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     StartCoroutine(Zoom.instance.ZoomIn());
@@ -85,5 +109,10 @@ public class Talkable : MonoBehaviour
                 Zoom.instance._isDone = false;
             }
         }
+    }
+
+    public float CalculateDistance()
+    {
+        return Mathf.Sqrt(Mathf.Pow(this.transform.position.x - Player.transform.position.x, 2) + Mathf.Pow(this.transform.position.y - Player.transform.position.y, 2));
     }
 }

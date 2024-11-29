@@ -11,7 +11,7 @@ public class RepeatQuestChoice : MonoBehaviour
     private CanvasGroup _canvasGroup;
     [SerializeField] private Button _YESButton;
     [SerializeField] private Button _NOButton;
-    public move _move;//!!!
+    public Player _move;//!!!
                       //                                     change this to the player movement controll script later
     void Start()
     {

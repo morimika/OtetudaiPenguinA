@@ -13,8 +13,8 @@ public class Zoom : MonoBehaviour
     private int testNum;
     public bool _isDone;
     public bool _isZoomOut;
-   
-    public move _move;//!!!
+
+    public Player _move;//!!!
                       //                                                   change this to the player movement controll script later
     private void Awake()
     {
@@ -36,6 +36,7 @@ public class Zoom : MonoBehaviour
     public IEnumerator ZoomIn()
     {
         _move.enabled = false;//disable player movement
+        yield return new WaitForSeconds(0.1f);
         var pos = 
             new Vector3((_NPC.transform.position.x + _player.transform.position.x) / 2,
             (_NPC.transform.position.y + _player.transform.position.y) / 2,-10);
@@ -48,9 +49,11 @@ public class Zoom : MonoBehaviour
         {
             _camera.orthographicSize -= Time.deltaTime;
             yield return _camera.orthographicSize == 4.0f;
-
         }
         _isDone = true;
+        DialogManager.instance._testClick = true;
+        Debug.Log("_isDone = true");
+        Debug.Log(DialogManager.instance._testClick);
     }
     public IEnumerator ZoomOut()
     {
@@ -65,7 +68,9 @@ public class Zoom : MonoBehaviour
         _camera.transform.DOMove(pos, 1f).OnComplete(() => testNum = -1);
 
         yield return new WaitUntil(() => testNum == -1);
-        _move.enabled = true;
+
         _isZoomOut = true;
+        yield return new WaitForSeconds(0.1f);
+        _move.enabled = true;
     }
 }
