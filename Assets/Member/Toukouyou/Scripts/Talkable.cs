@@ -33,7 +33,7 @@ public class Talkable : MonoBehaviour
             _isTalkable = true;
             _dialogueBox_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);//Adjusting the size of the dialog box
             _questionText_rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320);
-            _questionText.text = "ç¢Ç¡ÇΩÇ»...";//Change text
+            _questionText.text = "Help Me";//"ç¢Ç¡ÇΩÇ»...";//Change text
             DialogManager.instance._NPC_Quest = GetComponent<NPC_Quest>();//let Player get quest detail from this Npc
             Zoom.instance._NPC = this.gameObject;
         }
