@@ -52,8 +52,6 @@ public class Zoom : MonoBehaviour
         }
         _isDone = true;
         DialogManager.instance._testClick = true;
-        Debug.Log("_isDone = true");
-        Debug.Log(DialogManager.instance._testClick);
     }
     public IEnumerator ZoomOut()
     {

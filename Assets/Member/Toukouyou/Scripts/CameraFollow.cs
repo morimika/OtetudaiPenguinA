@@ -6,11 +6,10 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CameraFollow : MonoBehaviour
 {
-    public UnityEngine.Transform target;
-
+    public UnityEngine.Transform Player;
     void LateUpdate()
     {
-        Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
+        Vector3 targetPosition = new Vector3(Player.position.x, Player.position.y, transform.position.z);
         transform.position = targetPosition;
     }
 }
