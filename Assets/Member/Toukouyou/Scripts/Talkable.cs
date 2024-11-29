@@ -55,9 +55,14 @@ public class Talkable : MonoBehaviour
         //Player is within NPC range, conversation has not started, tap the screen
         if (_isTalkable && _dialogueBox_talking.activeInHierarchy == false &&DialogManager.instance._waitTimeController == true)
         {
+        
             if(Input.GetMouseButtonDown(0))
             {
-                StartCoroutine(Zoom.instance.ZoomIn());
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    StartCoroutine(Zoom.instance.ZoomIn());
+                }
+                
             }        
             if (Zoom.instance._isDone == true)
             {
