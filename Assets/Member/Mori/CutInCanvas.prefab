@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bae4d11e1011b43a0e6298f81efcbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeKind: Slide
+  fadeKind: Line
 --- !u!1 &3418920623581014436
 GameObject:
   m_ObjectHideFlags: 0
