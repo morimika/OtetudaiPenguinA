@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Yuria_TitleScene.unity
     guid: ccfd0d9082bd842728b8bc67d51a697d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Yuria_PlayScene.unity
     guid: d9589539660654513b6a32279c31292b
+  - enabled: 1
+    path: Assets/Scenes/Mori_MainGameScene.unity
+    guid: 83949cad895b5054d909f11ed5c03972
+  - enabled: 1
+    path: Assets/Member/Watabe/WatanabeTestScene.unity
+    guid: af609be3d4317bc458e410be4866dc7a
   m_configObjects: {}

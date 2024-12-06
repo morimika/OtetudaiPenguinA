@@ -4,12 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Tree1
-  - Tree2
-  - Tree3
-  - Apple1
-  - Apple2
-  - Apple3
+  - Target
+  - Apple
   layers:
   - Default
   - TransparentFX

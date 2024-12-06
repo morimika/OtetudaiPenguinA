@@ -10,7 +10,7 @@ public class MapSceneManager : MonoBehaviour
     void Start()
     {
         //最初にプレイヤーに戻す
-        _playSceneDatas.TapType = PlaySceneTapType.Player;
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
     }
 
     // Update is called once per frame
