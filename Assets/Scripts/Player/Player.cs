@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     [SerializeField, Header(("現在のタイプなのか"))]
     private PlaySceneDatas _playSceneDatas;
+    
 
     //mori
     [SerializeField,Label("タップ地点に生成するアイコン")]
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
             //押したとき
             if (Input.GetMouseButtonDown(0))
             {
+                //SoundManager.Instance.PlaySE(SESoundData.SE.Click);
                 //ボタン系を押さないときは全て処理しない
                 if(EventSystem.current.IsPointerOverGameObject()) return;
                 
@@ -174,20 +176,24 @@ public class Player : MonoBehaviour
             //上方向
             if (dis.y < 0.1f)
             {
-                //歩き
+
                 if (!flag)
                 {
-                   
-                    _animator.SetTrigger("Up");
+                    //歩き
+                    if (backAnime != "Up" || backAnime == null)
+                    {
+                        backAnime = "Up";
+                        _animator.SetTrigger("Up");
+                    }
                 }
                 //走り
                 else
                 {
                     boxCol2D.size = new Vector2(1.4f, 1);
-                    if (run)
+                    if (backAnime != "Run_Back" || backAnime == null)
                     {
-                       // Debug.Log("call F");
-                        _animator.SetTrigger("Run_Foward");
+                       backAnime = "Run_Back";
+                        _animator.SetTrigger("Run_Back");
                        
                     }
                     
@@ -198,16 +204,20 @@ public class Player : MonoBehaviour
             {
                 if (!flag)
                 {
-                    _animator.SetTrigger("Down");
+                    if (backAnime != "Down" || backAnime == null)
+                    {
+                        backAnime = "Down";
+                        _animator.SetTrigger("Down");
                    
+                    }
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.4f, 1);
-                    if (run)
+                    if (backAnime != "Run_Foward" || backAnime == null)
                     {
-                        _animator.SetTrigger("Run_Back");
-                        //Debug.Log("call D");
+                        backAnime = "Run_Foward";
+                        _animator.SetTrigger("Run_Foward");
                         
                     }
                 }
@@ -216,18 +226,25 @@ public class Player : MonoBehaviour
         //左右方向
         else
         {
+            
             //右方向
             if (dis.x < 0.1f)
             {
                 if (!flag)
                 {
-                    _animator.SetTrigger("Right");
+
+                    if (backAnime != "Right" || backAnime == null)
+                    {
+                        backAnime = "Right";
+                        _animator.SetTrigger("Right");
+                    }
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.8f, 1.1f);
-                    if (run)
+                    if (backAnime != "Run_Right" || backAnime == null)
                     {
+                        backAnime = "Run_Right";
                         _animator.SetTrigger("Run_Right");
                     }
                 }
@@ -237,13 +254,18 @@ public class Player : MonoBehaviour
             {
                 if (!flag)
                 {
-                    _animator.SetTrigger("Left");
+                    if (backAnime != "Left" || backAnime == null)
+                    {
+                        backAnime = "Left";
+                        _animator.SetTrigger("Left");
+                    }
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.8f, 1.1f);
-                    if (run)
+                    if (backAnime != "Run_Left" || backAnime == null)
                     {
+                        backAnime = "Run_Left";
                         _animator.SetTrigger("Run_Left");
                     }
                 }
@@ -254,11 +276,17 @@ public class Player : MonoBehaviour
     //移動後の初期化
     public void Moov_Finish()
     {
+        
+        
         //初期化
         run = false;
         move = false;
         sprite_C = false;
+        
+        _animator.SetTrigger("Idle");
+        
         boxCol2D.size = new Vector2(1, 1.4f);
+        
         
     }
     
