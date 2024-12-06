@@ -38,10 +38,10 @@ public class MaikeStringData : MonoBehaviour
     }
     #endregion
 
-    #region　ローカルデータ
+    
     //private stringPackData _stringPackDate;
     //private string saveFileName = "MinGameStrokeorder.json";
-    #endregion
+
 
 
     #region データの読み込み
