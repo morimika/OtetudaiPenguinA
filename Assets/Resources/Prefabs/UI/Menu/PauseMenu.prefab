@@ -1547,6 +1547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8498d674f2e2849ea94f9ed27bbc33d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playSceneDatas: {fileID: 0}
-  _playerTapMove: {fileID: 0}
+  _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
+  _player: {fileID: 0}
   _pauseMenuUI: {fileID: 1268703255444141020}
