@@ -9,23 +9,23 @@ using NaughtyAttributes;
 public class CutInFade : MonoBehaviour
 {
     //プルダウンでインスペクターからフェード形式を選択
-    [Dropdown("fadeKindsB")]
-    public string fadeKindB;
-    public static List<string> fadeKindsB => new List<string>() { nameof(Slide), nameof(Line) };
+    [Dropdown("fadeKinds")]
+    public string fadeKind;
+    public static List<string> fadeKinds => new List<string>() { nameof(Slide), nameof(Line) };
 
     private bool _isFadeFin = false;
 
     void Start()
     {
         //選択したフェードを呼び出し
-        StartCoroutine(fadeKindB);
+        StartCoroutine(fadeKind);
     }
 
     void Update()
     {
         if(Input.GetMouseButtonDown(0)&&_isFadeFin)
         {
-            StartCoroutine(fadeKindB+"Out");
+            StartCoroutine(fadeKind+"Out");
         }
     }
 
@@ -135,6 +135,6 @@ public class CutInFade : MonoBehaviour
     private void DebugFade()
     {
         //選択したフェードを呼び出し
-        StartCoroutine(fadeKindB);
+        StartCoroutine(fadeKind);
     }
 }
