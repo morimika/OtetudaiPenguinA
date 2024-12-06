@@ -3921,6 +3921,8 @@ MonoBehaviour:
   - "\u307E\u305F\u304A\u9858\u3044\u3057\u3066\u3082\u3044\u3044\u304B\u3044\uFF1F\r"
   _NPC_Quest: {fileID: 0}
   Player: {fileID: 1328459189}
+  _talkableSizeX: 1.5
+  _talkableSizeY: 1.5
 --- !u!212 &999017242
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3980,7 +3982,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999017237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
