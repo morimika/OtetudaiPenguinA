@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private bool sprite_C = false;
 
     //移動中かどうかの判定
-    private bool moov = false;
+    private bool move = false;
 
     //走っているかどうか
     private bool run = false;
@@ -73,7 +73,12 @@ public class Player : MonoBehaviour
                 Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //レイを飛ばす
                 RaycastHit2D hit2d = Physics2D.Raycast(worldPoint, Vector2.zero);
-
+                
+                //mori
+                //クリックした座標にアイコンを出す処理
+                if(_tapPointSaver!=null)Destroy(_tapPointSaver);
+                _tapPointSaver=Instantiate(_tapPointObj, target_Point, Quaternion.identity);
+                
                 //当たり判定があった場合の処理z
                 if (hit2d)
                 {
@@ -87,18 +92,17 @@ public class Player : MonoBehaviour
                     sprite_C = false;
                     //タップを加算
                     tap++;
-                    moov = true;
+                    move = true;
+                    Debug.Log($"tap Count:{tap}");
                     //タップした間隔を見る
                     Invoke("Tap", _tapInterval);
-                    //mori
-                    if(_tapPointSaver!=null)Destroy(_tapPointSaver);
-                    _tapPointSaver=Instantiate(_tapPointObj, target_Point, Quaternion.identity);
                 }
+                
             }
         }
 
         //移動中なら
-        if (moov)
+        if (move)
         {
             //走っていない時
             if (!run)
@@ -108,7 +112,7 @@ public class Player : MonoBehaviour
                 //処理は一回だけ実行させるようにする
                 if (!sprite_C)
                 {
-                    Moov_Direction(run);
+                    Move_Direction(run);
                     //走る時にコライダーを再設定する
                     boxCol2D.size = new Vector2(1, 1.4f);
                 }
@@ -120,7 +124,7 @@ public class Player : MonoBehaviour
                 //処理は一回だけ実行させるようにする
                 if (!sprite_C)
                 {
-                    Moov_Direction(run);
+                    Move_Direction(run);
                 }
             }
 
@@ -128,6 +132,7 @@ public class Player : MonoBehaviour
             if (transform.position == target_Point)
             {
                 Moov_Finish();
+                
             }
         }
     }
@@ -143,7 +148,8 @@ public class Player : MonoBehaviour
         }
 
         //ダッシュ状態にするかどうか
-        else
+        //else
+        if(tap == 2)
         {
             run = true;
             sprite_C = false;
@@ -153,7 +159,7 @@ public class Player : MonoBehaviour
     }
 
     //アニメーションの管理用
-    void Moov_Direction(bool flag)
+    void Move_Direction(bool flag)
     {
            sprite_C = true;
         //どの方向に進んでいるか
@@ -168,13 +174,23 @@ public class Player : MonoBehaviour
             //上方向
             if (dis.y < 0.1f)
             {
+                //歩き
                 if (!flag)
                 {
+                   
                     _animator.SetTrigger("Up");
                 }
+                //走り
                 else
                 {
                     boxCol2D.size = new Vector2(1.4f, 1);
+                    if (run)
+                    {
+                       // Debug.Log("call F");
+                        _animator.SetTrigger("Run_Foward");
+                       
+                    }
+                    
                 }
             }
             //下方向
@@ -183,10 +199,17 @@ public class Player : MonoBehaviour
                 if (!flag)
                 {
                     _animator.SetTrigger("Down");
+                   
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.4f, 1);
+                    if (run)
+                    {
+                        _animator.SetTrigger("Run_Back");
+                        //Debug.Log("call D");
+                        
+                    }
                 }
             }
         }
@@ -203,6 +226,10 @@ public class Player : MonoBehaviour
                 else
                 {
                     boxCol2D.size = new Vector2(1.8f, 1.1f);
+                    if (run)
+                    {
+                        _animator.SetTrigger("Run_Right");
+                    }
                 }
             }
             //左方向
@@ -215,6 +242,10 @@ public class Player : MonoBehaviour
                 else
                 {
                     boxCol2D.size = new Vector2(1.8f, 1.1f);
+                    if (run)
+                    {
+                        _animator.SetTrigger("Run_Left");
+                    }
                 }
             }
         }
@@ -225,10 +256,13 @@ public class Player : MonoBehaviour
     {
         //初期化
         run = false;
-        moov = false;
+        move = false;
         sprite_C = false;
         boxCol2D.size = new Vector2(1, 1.4f);
+        
     }
+    
+    
 
     //最初にぶつかった追突からのガリガリ防止①
     public void OnCollisionEnter2D(Collision2D collision)
