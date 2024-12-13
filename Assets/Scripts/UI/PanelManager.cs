@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PanelManager : MonoBehaviour
@@ -12,7 +13,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField,Header("ゲームモードデータ")] private PlaySceneDatas _playSceneDatas;
     private Button _resumeButton;
 
-    [SerializeField] private PlayerTapMove _playerTapMove;
+    [FormerlySerializedAs("_playerTapMove")] [SerializeField] private Player _player;
     //表示するパネル先
     [SerializeField] private GameObject _pauseMenuUI;
 
@@ -75,7 +76,7 @@ public class PanelManager : MonoBehaviour
     {
         _isPaused = true;
         //すべてのフラグを初期化
-        _playerTapMove.ClearAllFlags();
+        _player.Moov_Finish();
          //パネルに変更する
         _playSceneDatas.TapType = PlaySceneTapType.Pose;
         //パネルの表示
