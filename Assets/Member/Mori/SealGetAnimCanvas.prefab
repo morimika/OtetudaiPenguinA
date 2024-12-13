@@ -368,6 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sealImage: {fileID: 3617673495341984172}
   _playerSeals: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}
+  _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
 --- !u!1 &8808437841461552725
 GameObject:
   m_ObjectHideFlags: 0

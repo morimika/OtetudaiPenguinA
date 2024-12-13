@@ -16,6 +16,9 @@ public class CutInSealAnim : MonoBehaviour
 
     private bool _isSlideFin = false;
 
+    [SerializeField]
+    private PlaySceneDatas _playSceneDatas;
+
     void Start()
     {
         //選択したフェードを呼び出し
@@ -28,7 +31,6 @@ public class CutInSealAnim : MonoBehaviour
         {
             StartCoroutine(nameof(SlideLineOut));
         }
-
     }
 
     #region
@@ -40,8 +42,6 @@ public class CutInSealAnim : MonoBehaviour
         RectTransform sealRectTransform = _sealImage.gameObject.GetComponent<RectTransform>();
 
         Debug.Log(_sealImage);
-        Debug.Log(_sealImage.rectTransform.localScale);
-
 
         //初期位置にセット
         rectTransform.localPosition = new Vector3(1690, 1690, 0);
@@ -79,7 +79,8 @@ public class CutInSealAnim : MonoBehaviour
         rectTransform.DOAnchorPos(new Vector3(-1690, -1690, 0), 1f).SetEase(Ease.InOutQuart);
         _isSlideFin = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
     }
     #endregion
 

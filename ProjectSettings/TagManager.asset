@@ -7,6 +7,14 @@ TagManager:
   - Target
   - Apple
   - NPC
+  - Apple2
+  - Apple1
+  - Apple3
+  - Tree3
+  - Tree2
+  - Tree1
+  - VirtualCamera
+  - GameManager
   layers:
   - Default
   - TransparentFX

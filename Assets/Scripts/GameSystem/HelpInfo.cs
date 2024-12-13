@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class HelpInfo : HelpManager
 {
+    /// <summary>
+    /// 各お手伝い内容
+    /// </summary>
     [Header("お手伝い内容")]
     public HelpKind kind;
     private Vector3 _playerPos;
@@ -18,6 +21,9 @@ public class HelpInfo : HelpManager
     private bool _isIn = false;
 
     private CharactorTalk charactorTalk;
+
+    [SerializeField]
+    private float _distance = 4;
 
     void Start()
     {
@@ -31,7 +37,7 @@ public class HelpInfo : HelpManager
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認
         //範囲内に入ったとき
-        if (Vector3.Distance(this.transform.position, _playerPos) <= 3)
+        if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
         {
             //入った1フレームだけテキスト処理呼び
             if (!_isIn)
@@ -43,22 +49,24 @@ public class HelpInfo : HelpManager
             if (Input.GetMouseButtonDown(0) && _onMouse)
             {
                 //既に成功している場合
-                if (IsClear)
+                if (IsClear && HavingHelpTask == kind.ToString())
                 {
+                    Debug.Log("HI");
                     charactorTalk.ClearText();
-                    HavingHelpTask = "";
                 }
                 //まだ成功していないしていない
                 //受注テキスト処理
-                else
+                else if(!IsClear)
                 {
+                    Debug.LogError("HI");
                     charactorTalk.OrderText();
+                    //タスク受注
                     HavingHelpTask = kind.ToString();
                 }
             }
         }
         //出るとき1フレームだけ呼び
-        else if (Vector3.Distance(this.transform.position, _playerPos) > 3&&_isIn)
+        else if (Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn)
         {
             charactorTalk.ByeText();
             _isIn = false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
+using UnityEngine.UIElements;
 
 //Mori Script
 
@@ -14,6 +15,9 @@ public class CutInFade : MonoBehaviour
     public static List<string> fadeKinds => new List<string>() { nameof(Slide), nameof(Line) };
 
     private bool _isFadeFin = false;
+
+    [SerializeField]
+    private PlaySceneDatas _playSceneDatas;
 
     void Start()
     {
@@ -68,7 +72,9 @@ public class CutInFade : MonoBehaviour
         rectTransform.DOAnchorPosX(-3470, 1f).SetEase(Ease.InOutQuart);
         _isFadeFin = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        yield return new WaitForSeconds(1);
         DestroyThis();
     }
     #endregion
@@ -80,6 +86,7 @@ public class CutInFade : MonoBehaviour
         GameObject penguin = GameObject.Find("Penguin");
         CanvasGroup canvasGroup = penguin.GetComponent<CanvasGroup>();
         RectTransform rectTransform = GetComponent<RectTransform>();
+
 
         //初期位置にセット
         rectTransform.localPosition = new Vector3(3470, 0, 0);
@@ -115,8 +122,9 @@ public class CutInFade : MonoBehaviour
         //スライドアウト
         rectTransform.DOAnchorPosX(-3470, 1f).SetEase(Ease.InOutQuart);
         _isFadeFin = false;
-
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        yield return new WaitForSeconds(1);
         DestroyThis();
     }
     #endregion
