@@ -104,7 +104,6 @@ public class ObjectOverlapManager : MonoBehaviour
         resetButton.gameObject.SetActive(false);
         //mori
         _playerSeal.items.Add(_giveSeal);
-        HelpInfo.isClear = true;
         PlayerSetPos.PlayerPos = new Vector2(-3.24f,-2.84f);
         Invoke(nameof(ChangeScenetoMain), 2f);
     }
