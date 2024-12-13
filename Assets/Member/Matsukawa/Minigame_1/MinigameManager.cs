@@ -26,7 +26,7 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] Vector2 startImageTargetPos;
 
     bool isMiss = false;
-    bool isClear = false;
+    // bool isClear = false;
 
 
     void Start()
