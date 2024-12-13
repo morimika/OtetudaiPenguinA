@@ -89,15 +89,13 @@ public class AppleController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Tree3")
         {
-            /*
-            Count = Count + tree3;
-            for
-            apple8rb.isKinematic = false;
-            apple9rb.isKinematic = false;
-            apple10rb.isKinematic = false;
-            apple11rb.isKinematic = false;
-            apple12rb.isKinematic = false;
-            */
+            //Count = Count + tree3;
+            //for ()
+            //apple8rb.isKinematic = false;
+            //apple9rb.isKinematic = false;
+            //apple10rb.isKinematic = false;
+            //apple11rb.isKinematic = false;
+            //apple12rb.isKinematic = false;
         }
     }
 
@@ -113,7 +111,7 @@ public class AppleController : MonoBehaviour
 
     void kanss(Rigidbody rb, GameObject a)
     {
-        rb = a.GetComponent<Rigidbody>();
+         rb = a.GetComponent<Rigidbody>();
         rb.isKinematic = false;
 
     }
