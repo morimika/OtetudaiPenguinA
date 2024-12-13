@@ -15,12 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField, Header(("現在のタイプなのか"))]
     private PlaySceneDatas _playSceneDatas;
     
-
-    //mori
-    [SerializeField,Label("タップ地点に生成するアイコン")]
-    private GameObject _tapPointObj;
-    private GameObject _tapPointSaver;
-
+    
     //タップした回数
     private int tap = 0;
 
@@ -71,15 +66,12 @@ public class Player : MonoBehaviour
                 //ボタン系を押さないときは全て処理しない
                 if(EventSystem.current.IsPointerOverGameObject()) return;
                 
+                
                 //スクリーン座標からワールド座標に変換
                 Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //レイを飛ばす
                 RaycastHit2D hit2d = Physics2D.Raycast(worldPoint, Vector2.zero);
                 
-                //mori
-                //クリックした座標にアイコンを出す処理
-                if(_tapPointSaver!=null)Destroy(_tapPointSaver);
-                _tapPointSaver=Instantiate(_tapPointObj, target_Point, Quaternion.identity);
                 
                 //当たり判定があった場合の処理z
                 if (hit2d)
@@ -98,14 +90,17 @@ public class Player : MonoBehaviour
                     Debug.Log($"tap Count:{tap}");
                     //タップした間隔を見る
                     Invoke("Tap", _tapInterval);
+                    
+                   
                 }
-                
             }
+            
         }
 
         //移動中なら
         if (move)
         {
+            
             //走っていない時
             if (!run)
             {
@@ -115,6 +110,7 @@ public class Player : MonoBehaviour
                 if (!sprite_C)
                 {
                     Move_Direction(run);
+
                     //走る時にコライダーを再設定する
                     boxCol2D.size = new Vector2(1, 1.4f);
                 }
@@ -134,7 +130,6 @@ public class Player : MonoBehaviour
             if (transform.position == target_Point)
             {
                 Moov_Finish();
-                
             }
         }
     }
@@ -163,6 +158,7 @@ public class Player : MonoBehaviour
     //アニメーションの管理用
     void Move_Direction(bool flag)
     {
+       
            sprite_C = true;
         //どの方向に進んでいるか
         Vector3 dis = transform.position - target_Point;
@@ -272,7 +268,9 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+    
+    
+    
     //移動後の初期化
     public void Moov_Finish()
     {
@@ -304,12 +302,6 @@ public class Player : MonoBehaviour
         Moov_Finish();
     }
 
-    //mori
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject == _tapPointSaver)
-        {
-            Destroy(_tapPointSaver);
-        }
-    }
+   
+   
 }
