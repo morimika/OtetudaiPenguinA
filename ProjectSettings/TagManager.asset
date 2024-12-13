@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Target
   - Apple
+  - Apple2
+  - Apple1
+  - Apple3
+  - Tree3
+  - Tree2
+  - Tree1
+  - Ground
   layers:
   - Default
   - TransparentFX
