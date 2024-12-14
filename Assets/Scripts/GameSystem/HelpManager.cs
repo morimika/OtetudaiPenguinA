@@ -23,10 +23,6 @@ public class HelpManager : MonoBehaviour
 #if UNITY_EDITOR
     //お手伝いを更新したタイミングでログを出す
     private string haveTask;
-    private void Start()
-    {
-        HavingHelpTask = "AppleCut";
-    }
     private void Update()
     {
         IsClear = isClear;
