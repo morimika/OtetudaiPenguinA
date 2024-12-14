@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class ChangeScene : SingletonMonoBehaviour<ChangeScene>
     [SerializeField,Header("シーン遷移先")] private bool _toPlay;
     //フェード管理スクリプト
     [SerializeField] private FadeAnimation _fadeAnimation;
+   
     public                   FadeAnimation FadeAnim => _fadeAnimation;
 
 
@@ -51,6 +53,7 @@ public class ChangeScene : SingletonMonoBehaviour<ChangeScene>
     {
         if (Input.GetMouseButtonDown(mouseType))
         {
+            
             //ボタン系を押さないときは全て処理しない
             if (clickMode)
             {

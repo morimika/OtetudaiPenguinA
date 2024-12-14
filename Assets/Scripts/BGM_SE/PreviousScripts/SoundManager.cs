@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     [SerializeField,Header("サウンドマネージャーのオブジェクト先")] AudioSource _bgmAudioSource;
+    
 
     void Awake()
     {
