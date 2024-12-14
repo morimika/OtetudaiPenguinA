@@ -25,6 +25,8 @@ public class HelpInfo : HelpManager
     [SerializeField]
     private float _distance = 4;
 
+    public bool isEnd = false;
+
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -33,6 +35,8 @@ public class HelpInfo : HelpManager
 
     void Update()
     {
+        if (isEnd) return;
+        Debug.Log(_onMouse);
         //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認
@@ -49,16 +53,15 @@ public class HelpInfo : HelpManager
             if (Input.GetMouseButtonDown(0) && _onMouse)
             {
                 //既に成功している場合
-                if (IsClear && HavingHelpTask == kind.ToString())
+                if (IsClear==true && HavingHelpTask == kind.ToString())
                 {
-                    Debug.Log("HI");
+                    Debug.Log("CLA");
                     charactorTalk.ClearText();
                 }
-                //まだ成功していないしていない
+                //まだ成功していない
                 //受注テキスト処理
-                else if(!IsClear)
+                else if(IsClear==false)
                 {
-                    Debug.LogError("HI");
                     charactorTalk.OrderText();
                     //タスク受注
                     HavingHelpTask = kind.ToString();

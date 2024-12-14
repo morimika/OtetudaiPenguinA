@@ -13,6 +13,7 @@ using System;
 
 public class OtetudaiFade : MonoBehaviour
 {
+    #region 変数作成
     private Vector3 _playerPos;
     private GameObject _player;
 
@@ -27,27 +28,25 @@ public class OtetudaiFade : MonoBehaviour
     [SerializeField]
     private float _distance = 4;
 
-    //[SerializeField]
-    //private FadeView _fadeView;
-
     private HelpInfo _helpInfo;
-
+    #endregion
 
 
     void Start()
     {
+        //初期取得
         _player = GameObject.FindGameObjectWithTag("Player");
         _helpInfo= transform.parent.gameObject.transform.GetComponentInChildren<HelpInfo>();
-        //_fadeView= GameObject.Find("FadeView").GetComponent<FadeView>();
     }
 
     void Update()
     {
-        //プレイヤーのポジションを更新
+        //プレイヤーのポジションを更新、取得
         _playerPos = _player.transform.position;
+        //対応するお手伝いを受けていたら
         if(HelpManager.HavingHelpTask == _helpInfo.kind.ToString())
         {
-            //距離を測って物と近いか確認
+            //距離を測ってプレイヤーと近いか確認
             if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
             {
                 //押せるUI出現
@@ -57,12 +56,14 @@ public class OtetudaiFade : MonoBehaviour
                 {
                     //フェードを待ち、遷移する
                     PlayerSetPos.PlayerPos = _playerPos;
+                    //debug
+                    //シーン遷移、フェード処理による
                     ChangeScene.Instance.LoadNextScene(_sceneIndex);
-                    //SceneManager.LoadScene("WatanabeTestScene");
                 }
             }
             else
             {
+                //debug
                 _action.SetActive(false);
             }
         }

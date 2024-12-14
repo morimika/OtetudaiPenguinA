@@ -2601,7 +2601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473945858137225415, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: _clearTxt.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473945858137225415, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: _orderTxt.Array.size

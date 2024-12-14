@@ -13,6 +13,8 @@ public class CutInSealAnim : MonoBehaviour
     private Image _sealImage;
     [SerializeField, Label("プレイヤーのシール情報")]
     private ItemList _playerSeals;
+    [SerializeField, Label("背景画像")]
+    private CanvasGroup _bgCanvasG;
 
     private bool _isSlideFin = false;
 
@@ -49,6 +51,9 @@ public class CutInSealAnim : MonoBehaviour
         rectTransform.localScale = new Vector3(0.01f, 1f, 1f);
         //取得シールを設定
         _sealImage.sprite = _playerSeals.items[_playerSeals.items.Count - 1].icon;
+        //BGフェードイン
+        _bgCanvasG.DOFade(1f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
         //スライドイン
         rectTransform.DOAnchorPos(new Vector3(0,0,0), 1f).SetEase(Ease.InOutQuart);
         //待ったのちラインを広げる
@@ -77,10 +82,17 @@ public class CutInSealAnim : MonoBehaviour
         rectTransform.DOScaleX(0.01f, 0.5f);
         //スライドアウト
         rectTransform.DOAnchorPos(new Vector3(-1690, -1690, 0), 1f).SetEase(Ease.InOutQuart);
+        yield return new WaitForSeconds(0.5f);
+        //BGフェードアウト
+        _bgCanvasG.DOFade(0f, 0.5f);
         _isSlideFin = false;
 
         yield return new WaitForSeconds(1);
+        //お手伝い状況リセット
+        HelpManager.HavingHelpTask = "";
+        HelpManager.IsClear = false;
         _playSceneDatas.TapType = PlaySceneTapType.Play;
+        DestroyThis();
     }
     #endregion
 
