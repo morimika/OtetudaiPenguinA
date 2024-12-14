@@ -24,6 +24,8 @@ public class HelpInfo : HelpManager
 
     [SerializeField]
     private float _distance = 4;
+    [SerializeField]
+    private PlaySceneDatas _playSceneDatas;
 
     public bool isEnd = false;
 
@@ -35,8 +37,6 @@ public class HelpInfo : HelpManager
 
     void Update()
     {
-        if (isEnd) return;
-        Debug.Log(_onMouse);
         //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認
@@ -44,18 +44,22 @@ public class HelpInfo : HelpManager
         if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
         {
             //入った1フレームだけテキスト処理呼び
-            if (!_isIn)
+            if (!_isIn && !isEnd)
             {
                 charactorTalk.HelloText();
                 _isIn = true;
             }
+            else if(!_isIn && isEnd)
+            {
+                charactorTalk.EndText();
+                _isIn = true;
+            }
             //対象をクリックしたとき
-            if (Input.GetMouseButtonDown(0) && _onMouse)
+            if (Input.GetMouseButtonDown(0) && _onMouse && _playSceneDatas.TapType==PlaySceneTapType.Play && !isEnd)    
             {
                 //既に成功している場合
                 if (IsClear==true && HavingHelpTask == kind.ToString())
                 {
-                    Debug.Log("CLA");
                     charactorTalk.ClearText();
                 }
                 //まだ成功していない
@@ -69,9 +73,14 @@ public class HelpInfo : HelpManager
             }
         }
         //出るとき1フレームだけ呼び
-        else if (Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn)
+        else if (Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn && !isEnd)
         {
             charactorTalk.ByeText();
+            _isIn = false;
+        }
+        else if(Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn && isEnd)
+        {
+            charactorTalk.Stay();
             _isIn = false;
         }
     }

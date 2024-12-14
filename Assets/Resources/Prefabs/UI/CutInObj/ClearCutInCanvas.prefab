@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeKind: Line
   _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
+  _isClear: 1
 --- !u!1 &3418920623581014436
 GameObject:
   m_ObjectHideFlags: 0

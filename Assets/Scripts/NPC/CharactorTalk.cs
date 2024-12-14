@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using Cinemachine;
-using UnityEditor.Tilemaps;
 
 //Mori Script
 
@@ -18,13 +17,17 @@ public class CharactorTalk : MonoBehaviour
     [SerializeField]
     private PlaySceneDatas playSceneDatas;
 
-    [Header("会話文")]
+    [Header("会話文------------------------")]
     [SerializeField, Label("会話前テキスト")]
     public string _helloTxt;
     [SerializeField, Label("受注テキスト"),TextArea]
     public List<string> _orderTxt;
     [SerializeField, Label("達成テキスト"),TextArea]
     public List<string> _clearTxt;
+    [SerializeField, Label("達成後テキスト")]
+    public string _endTxt;
+
+    [Header("会話文------------------------")]
 
     [SerializeField,Label("テキスト")] 
     private TMP_Text tmpText;
@@ -117,22 +120,18 @@ public class CharactorTalk : MonoBehaviour
 
     //debug
     [SerializeField, Button]
-    public async void EndText()
+    public void EndText()
     {
-        tmpText.text = "^-^";
-        if (_boxSR.size == _beforeSize) return;
-        if (_beforeSize.y != _afterSize.y)
-        {
-            await DOVirtual.Float(
-                from: _afterSize.y, to: _beforeSize.y, duration: 0.1f,
-                //値が変わった時の処理
-                onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(_afterSize.x, tweenValue); });
-        }
+        tmpText.text = _endTxt;
+        SetEnableBox();
+    }
 
-        await DOVirtual.Float(
-            from: _afterSize.x, to: _beforeSize.x+8, duration: 0.1f,
-            //値が変わった時の処理
-            onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(tweenValue, _beforeSize.y); });
+    //debug
+    [SerializeField, Button]
+    public void Stay()
+    {
+        tmpText.text = "";
+        SetDisBox();
     }
 
     [SerializeField, Button]
@@ -334,6 +333,55 @@ public class CharactorTalk : MonoBehaviour
             from: _afterSize.x, to: _beforeSize.x, duration: 0.1f,
             //値が変わった時の処理
             onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(tweenValue, _beforeSize.y); });
+    }
+
+    [SerializeField, Button]
+    public async void SetDisBox()
+    {
+        if (_boxSR.size == _beforeSize) return;
+        tmpText.gameObject.SetActive(false);
+        if (_beforeSize.x != _afterSize.x)
+        {
+            await DOVirtual.Float(
+                from: _afterSize.x, to: 16.5f, duration: 0.1f,
+                //値が変わった時の処理
+                onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(tweenValue, _afterSize.y); });
+        }
+
+        await DOVirtual.Float(
+            from: _afterSize.y, to: 5, duration: 0.2f,
+            //値が変わった時の処理
+            onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(16.5f, tweenValue); });
+
+        await DOVirtual.Float(
+            from: 1, to: 0, duration: 0.1f,
+            //値が変わった時の処理
+            onVirtualUpdate: (tweenValue) => { _boxSR.color = new Color(255,255,255,tweenValue); });
+    }
+
+    [SerializeField, Button]
+    public async void SetEnableBox()
+    {
+        if (_boxSR.size == _afterSize) return;
+        tmpText.gameObject.SetActive(false);
+        await DOVirtual.Float(
+            from: 0, to: 1, duration: 0.2f,
+            //値が変わった時の処理
+            onVirtualUpdate: (tweenValue) => { _boxSR.color = new Color(255, 255, 255, tweenValue); });
+        if (_beforeSize.y != _afterSize.y)
+        {
+            await DOVirtual.Float(
+                from: 5, to: _afterSize.y, duration: 0.2f,
+                //値が変わった時の処理
+                onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(16.5f, tweenValue); });
+        }
+
+        await DOVirtual.Float(
+            from: 16.5f, to: _afterSize.x, duration: 0.3f,
+            //値が変わった時の処理
+            onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(tweenValue, _afterSize.y); });
+        tmpText.gameObject.SetActive(true);
+        TxtAnim();
     }
 
     [SerializeField, Button]

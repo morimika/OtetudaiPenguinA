@@ -19,6 +19,10 @@ public class CutInFade : MonoBehaviour
     [SerializeField]
     private PlaySceneDatas _playSceneDatas;
 
+
+    [SerializeField]
+    private bool _isClear = false;
+
     void Start()
     {
         //選択したフェードを呼び出し
@@ -73,7 +77,10 @@ public class CutInFade : MonoBehaviour
         _isFadeFin = false;
 
         yield return new WaitForSeconds(1);
-        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        if(!_isClear)
+        {
+            _playSceneDatas.TapType = PlaySceneTapType.Play;
+        }
         yield return new WaitForSeconds(1);
         DestroyThis();
     }
@@ -123,7 +130,10 @@ public class CutInFade : MonoBehaviour
         rectTransform.DOAnchorPosX(-3470, 1f).SetEase(Ease.InOutQuart);
         _isFadeFin = false;
         yield return new WaitForSeconds(1);
-        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        if (!_isClear)
+        {
+            _playSceneDatas.TapType = PlaySceneTapType.Play;
+        }
         yield return new WaitForSeconds(1);
         DestroyThis();
     }
