@@ -68,7 +68,7 @@ public class AppleController : MonoBehaviour
         CountBasketAppleNum();
 
         _scissorCuttingAnimation = gameObject.GetComponent<Animator>();
-        _scissorCuttingAnimation.SetBool("_isCutting", false);
+        _scissorCuttingAnimation.GetComponent<Animator>().enabled = false;
     }
 
     // Update is called once per frame
@@ -125,7 +125,7 @@ public class AppleController : MonoBehaviour
 
         Collider _apple1Coll = _apple1.GetComponent<Collider>();
         Collider _apple2Coll = _apple2.GetComponent<Collider>();
-        Collider _apple3Coll = _apple3.GetComponent<Collider>();    
+        Collider _apple3Coll = _apple3.GetComponent<Collider>();
         Collider _apple4Coll = _apple4.GetComponent<Collider>();
         Collider _apple5Coll = _apple5.GetComponent<Collider>();
         Collider _apple6Coll = _apple6.GetComponent<Collider>();
@@ -141,6 +141,7 @@ public class AppleController : MonoBehaviour
         if (collision.gameObject.tag == "Tree1" &&  _canTouchTree == true)
         {
             // はさみがチョキチョキするアニメーション開始
+            _scissorCuttingAnimation.enabled = true;
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             // 木１に当たった時
@@ -170,6 +171,7 @@ public class AppleController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Tree2" && _canTouchTree2)
         {
+            _scissorCuttingAnimation.enabled = true;
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             Count = Count + _tree2;
@@ -179,11 +181,16 @@ public class AppleController : MonoBehaviour
 
             _canTouchTree2 = false;
 
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple5Pos, _basketPos, _basketPos2, _apple5Coll, apple5rb, _apple5));
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple6Pos, _basketPos, _basketPos2, _apple6Coll, apple6rb, _apple6));
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple7Pos, _basketPos, _basketPos2, _apple7Coll, apple7rb, _apple7));
+
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
             _scissorCuttingAnimation.SetBool("_isCutting", false);
         }
         else if (collision.gameObject.tag == "Tree3" && _canTouchTree3)
         {
+            _scissorCuttingAnimation.enabled = true;
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             Count = Count + _tree3;
@@ -196,12 +203,16 @@ public class AppleController : MonoBehaviour
 
             _canTouchTree3 = false;
 
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple8Pos, _basketPos, _basketPos2, _apple8Coll, apple8rb, _apple8));
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple9Pos, _basketPos, _basketPos2, _apple9Coll, apple9rb, _apple9));
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple10Pos, _basketPos, _basketPos2, _apple10Coll, apple10rb, _apple10));
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple11Pos, _basketPos, _basketPos2, _apple11Coll, apple11rb, _apple11));
+            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple12Pos, _basketPos, _basketPos2, _apple12Coll, apple12rb, _apple12));
+
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
             _scissorCuttingAnimation.SetBool("_isCutting", false);
-
         }
     }
-
 
     public void ApplesGoInBascket(Transform currentPos, Vector3 targetPos, Vector3 targetPos2, Collider coll, Rigidbody rb, GameObject obj)
     {
@@ -215,7 +226,7 @@ public class AppleController : MonoBehaviour
           //.AppendInterval(0.5f)
           //.Append(currentPos.transform.DOMove(targetPos2, _appleAnimation));
 
-        DOVirtual.DelayedCall(5.0f, () => Destroy(obj));
+        DOVirtual.DelayedCall(5.0f, () => obj.SetActive(false));
     }
 
 
@@ -263,8 +274,10 @@ public class AppleController : MonoBehaviour
     /// <summary>
     /// リセットボタンを押されたとき
     /// </summary>
-    private void ResetButton()
+    private void OnClickResetButton()
     {
+        // 画面遷移時のアニメーションをはさむ
+
         // リンゴの数をリセット
         Count = 7;
 
@@ -274,6 +287,20 @@ public class AppleController : MonoBehaviour
         _canTouchTree3 = true;
 
         // リンゴの表示をリセット
+        // リンゴをインスタンシエイトする
+        var obj = Instantiate(_apple1);
+        var obj2 = Instantiate(_apple2);
+        var obj3 = Instantiate(_apple3);
+        var obj4 = Instantiate(_apple4);
+        var obj5 = Instantiate(_apple5);
+        var obj6 = Instantiate(_apple6);
+        var obj7 = Instantiate(_apple7);
+        var obj8 = Instantiate(_apple8);
+        var obj9 = Instantiate(_apple9);
+        var obj10 = Instantiate(_apple10);
+        var obj11 = Instantiate(_apple11);
+        var obj12 = Instantiate(_apple12);
+
         #region
         #endregion
     }
