@@ -66,8 +66,7 @@ public class AppleController : MonoBehaviour
     private float _scissorAnimWait = 1.0f;
 
     // クリア判定
-    // クリア判定の関数は Update() の 89行
-    // クリア判定の呼び出しは 
+    // クリア判定の関数は OnClickClearButton() 250行
     public static bool _blClear = false;
 
     public void Start()
@@ -83,10 +82,6 @@ public class AppleController : MonoBehaviour
     {
         // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
         ShowInBasketApples();
-
-        // クリア判定
-        // 15個の時OKボタンをおしたら
-
     }
 
     // はさみが木に触れたときりんごがおちる
