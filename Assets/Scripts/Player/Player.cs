@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     [SerializeField, Header(("現在のタイプなのか"))]
     private PlaySceneDatas _playSceneDatas;
+    
 
     //mori
     [SerializeField,Label("タップ地点に生成するアイコン")]
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
     private bool sprite_C = false;
 
     //移動中かどうかの判定
-    private bool moov = false;
+    private bool move = false;
 
     //走っているかどうか
     private bool run = false;
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
             //押したとき
             if (Input.GetMouseButtonDown(0))
             {
+                //SoundManager.Instance.PlaySE(SESoundData.SE.Click);
                 //ボタン系を押さないときは全て処理しない
                 if(EventSystem.current.IsPointerOverGameObject()) return;
                 
@@ -73,7 +75,12 @@ public class Player : MonoBehaviour
                 Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //レイを飛ばす
                 RaycastHit2D hit2d = Physics2D.Raycast(worldPoint, Vector2.zero);
-
+                
+                //mori
+                //クリックした座標にアイコンを出す処理
+                if(_tapPointSaver!=null)Destroy(_tapPointSaver);
+                _tapPointSaver=Instantiate(_tapPointObj, target_Point, Quaternion.identity);
+                
                 //当たり判定があった場合の処理z
                 if (hit2d)
                 {
@@ -87,18 +94,17 @@ public class Player : MonoBehaviour
                     sprite_C = false;
                     //タップを加算
                     tap++;
-                    moov = true;
+                    move = true;
+                    Debug.Log($"tap Count:{tap}");
                     //タップした間隔を見る
                     Invoke("Tap", _tapInterval);
-                    //mori
-                    if(_tapPointSaver!=null)Destroy(_tapPointSaver);
-                    _tapPointSaver=Instantiate(_tapPointObj, target_Point, Quaternion.identity);
                 }
+                
             }
         }
 
         //移動中なら
-        if (moov)
+        if (move)
         {
             //走っていない時
             if (!run)
@@ -108,7 +114,7 @@ public class Player : MonoBehaviour
                 //処理は一回だけ実行させるようにする
                 if (!sprite_C)
                 {
-                    Moov_Direction(run);
+                    Move_Direction(run);
                     //走る時にコライダーを再設定する
                     boxCol2D.size = new Vector2(1, 1.4f);
                 }
@@ -120,7 +126,7 @@ public class Player : MonoBehaviour
                 //処理は一回だけ実行させるようにする
                 if (!sprite_C)
                 {
-                    Moov_Direction(run);
+                    Move_Direction(run);
                 }
             }
 
@@ -128,6 +134,7 @@ public class Player : MonoBehaviour
             if (transform.position == target_Point)
             {
                 Moov_Finish();
+                
             }
         }
     }
@@ -143,7 +150,8 @@ public class Player : MonoBehaviour
         }
 
         //ダッシュ状態にするかどうか
-        else
+        //else
+        if(tap == 2)
         {
             run = true;
             sprite_C = false;
@@ -153,7 +161,7 @@ public class Player : MonoBehaviour
     }
 
     //アニメーションの管理用
-    void Moov_Direction(bool flag)
+    void Move_Direction(bool flag)
     {
            sprite_C = true;
         //どの方向に進んでいるか
@@ -168,13 +176,27 @@ public class Player : MonoBehaviour
             //上方向
             if (dis.y < 0.1f)
             {
+
                 if (!flag)
                 {
-                    _animator.SetTrigger("Up");
+                    //歩き
+                    if (backAnime != "Up" || backAnime == null)
+                    {
+                        backAnime = "Up";
+                        _animator.SetTrigger("Up");
+                    }
                 }
+                //走り
                 else
                 {
                     boxCol2D.size = new Vector2(1.4f, 1);
+                    if (backAnime != "Run_Back" || backAnime == null)
+                    {
+                       backAnime = "Run_Back";
+                        _animator.SetTrigger("Run_Back");
+                       
+                    }
+                    
                 }
             }
             //下方向
@@ -182,27 +204,49 @@ public class Player : MonoBehaviour
             {
                 if (!flag)
                 {
-                    _animator.SetTrigger("Down");
+                    if (backAnime != "Down" || backAnime == null)
+                    {
+                        backAnime = "Down";
+                        _animator.SetTrigger("Down");
+                   
+                    }
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.4f, 1);
+                    if (backAnime != "Run_Foward" || backAnime == null)
+                    {
+                        backAnime = "Run_Foward";
+                        _animator.SetTrigger("Run_Foward");
+                        
+                    }
                 }
             }
         }
         //左右方向
         else
         {
+            
             //右方向
             if (dis.x < 0.1f)
             {
                 if (!flag)
                 {
-                    _animator.SetTrigger("Right");
+
+                    if (backAnime != "Right" || backAnime == null)
+                    {
+                        backAnime = "Right";
+                        _animator.SetTrigger("Right");
+                    }
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.8f, 1.1f);
+                    if (backAnime != "Run_Right" || backAnime == null)
+                    {
+                        backAnime = "Run_Right";
+                        _animator.SetTrigger("Run_Right");
+                    }
                 }
             }
             //左方向
@@ -210,11 +254,20 @@ public class Player : MonoBehaviour
             {
                 if (!flag)
                 {
-                    _animator.SetTrigger("Left");
+                    if (backAnime != "Left" || backAnime == null)
+                    {
+                        backAnime = "Left";
+                        _animator.SetTrigger("Left");
+                    }
                 }
                 else
                 {
                     boxCol2D.size = new Vector2(1.8f, 1.1f);
+                    if (backAnime != "Run_Left" || backAnime == null)
+                    {
+                        backAnime = "Run_Left";
+                        _animator.SetTrigger("Run_Left");
+                    }
                 }
             }
         }
@@ -223,12 +276,21 @@ public class Player : MonoBehaviour
     //移動後の初期化
     public void Moov_Finish()
     {
+        
+        
         //初期化
         run = false;
-        moov = false;
+        move = false;
         sprite_C = false;
+        
+        _animator.SetTrigger("Idle");
+        
         boxCol2D.size = new Vector2(1, 1.4f);
+        
+        
     }
+    
+    
 
     //最初にぶつかった追突からのガリガリ防止①
     public void OnCollisionEnter2D(Collision2D collision)

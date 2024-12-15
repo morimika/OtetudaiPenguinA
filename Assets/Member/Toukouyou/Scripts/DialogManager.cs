@@ -26,6 +26,11 @@ public class DialogManager : MonoBehaviour
     public bool _waitTimeController = true;
     public bool _isCompleted;
     public bool _isRepeat;
+    public Player _move;//!!!
+                      //                                     change this to the player movement controll script later
+
+    public bool _testClick = true;
+
     private void Awake()
     {
         if (instance == null)
@@ -46,6 +51,7 @@ public class DialogManager : MonoBehaviour
     {
         if (_dialogueBox_talking.activeInHierarchy)//If there is a dialog box
         {
+            _move.enabled = false;
             _waitTimeController = false;
            
             if (Input.GetMouseButtonDown(0))

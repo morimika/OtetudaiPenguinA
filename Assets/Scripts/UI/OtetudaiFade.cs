@@ -38,8 +38,7 @@ public class OtetudaiFade : MonoBehaviour
         //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認
-        if (Vector3.Distance(this.transform.position,_playerPos)<=3
-            && HelpManager.helpNameEnum== HelpManager.HelpNameEnum.AppleGet)
+        if (Vector3.Distance(this.transform.position,_playerPos)<=3)
         {
             //押せるUI出現
             _action.SetActive(true);

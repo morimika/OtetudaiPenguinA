@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Grass : MonoBehaviour
 {
-    private List<int> _targetNumbers = new List<int>();
-    private int Counter = 0;
+   [SerializeField] public List<int> _targetNumbers = new List<int>();
+    [SerializeField]private int Counter = 0;
 
     private void Start()
     {
@@ -25,6 +25,7 @@ public class Grass : MonoBehaviour
                     }
                 }
             }
+           // Debug.Log("----------");
             _targetNumbers.ForEach(num => Debug.Log(num));
         }
     }
