@@ -6,6 +6,8 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 // Matsukawa
 
@@ -57,11 +59,16 @@ public class AppleController : MonoBehaviour
 
     // リンゴがかごに移動する速さ
     protected float _appleAnimation = 3.0f;
-    protected float _waitAppleAnimation = 1.5f;     // 上のアニメーションが始まるまで待つ時間
+    protected int _waitAppleAnimation = 2;     // 上のアニメーションが始まるまで待つ時間
 
     // はさみのカットアニメーション
     private Animator _scissorCuttingAnimation;
     private float _scissorAnimWait = 1.0f;
+
+    // クリア判定
+    // クリア判定の関数は Update() の 89行
+    // クリア判定の呼び出しは 
+    public static bool _blClear = false;
 
     public void Start()
     {
@@ -74,10 +81,12 @@ public class AppleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 現在合計いくつのappleを取得しているか
-        CountBasketAppleNum();
         // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
         ShowInBasketApples();
+
+        // クリア判定
+        // 15個の時OKボタンをおしたら
+
     }
 
     // はさみが木に触れたときりんごがおちる
@@ -147,6 +156,8 @@ public class AppleController : MonoBehaviour
             // 木１に当たった時
             // 木１のリンゴの数とかごにある数字を足す
             Count = Count + _tree1;
+            // かごの中にある数を更新する
+            CountBasketAppleNum();
 
             // りんごを落とす
             apple1rb.isKinematic = false;
@@ -158,10 +169,11 @@ public class AppleController : MonoBehaviour
             _canTouchTree = false;
 
             //// かごに入るアニメーション
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple1Pos, _basketPos, _basketPos2, _apple1Coll, apple1rb, _apple1));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple2Pos, _basketPos, _basketPos2, _apple2Coll, apple2rb, _apple2));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple3Pos, _basketPos, _basketPos2, _apple3Coll, apple3rb, _apple3));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple4Pos, _basketPos, _basketPos2, _apple4Coll, apple4rb, _apple4));
+            await UniTask.Delay(TimeSpan.FromSeconds(_waitAppleAnimation));
+            ApplesGoInBascket(_apple1Pos, _basketPos, _basketPos2, _apple1Coll, apple1rb, _apple1);
+            ApplesGoInBascket(_apple2Pos, _basketPos, _basketPos2, _apple2Coll, apple2rb, _apple2);
+            ApplesGoInBascket(_apple3Pos, _basketPos, _basketPos2, _apple3Coll, apple3rb, _apple3);
+            ApplesGoInBascket(_apple4Pos, _basketPos, _basketPos2, _apple4Coll, apple4rb, _apple4);
 
             // はさみのアニメーションの時間が過ぎたらアニメーションをおわらせる
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
@@ -175,15 +187,18 @@ public class AppleController : MonoBehaviour
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             Count = Count + _tree2;
+            CountBasketAppleNum();
+
             apple5rb.isKinematic = false;
             apple6rb.isKinematic = false;
             apple7rb.isKinematic = false;
 
             _canTouchTree2 = false;
 
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple5Pos, _basketPos, _basketPos2, _apple5Coll, apple5rb, _apple5));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple6Pos, _basketPos, _basketPos2, _apple6Coll, apple6rb, _apple6));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple7Pos, _basketPos, _basketPos2, _apple7Coll, apple7rb, _apple7));
+            await UniTask.Delay(TimeSpan.FromSeconds(_waitAppleAnimation));
+            ApplesGoInBascket(_apple5Pos, _basketPos, _basketPos2, _apple5Coll, apple5rb, _apple5);
+            ApplesGoInBascket(_apple6Pos, _basketPos, _basketPos2, _apple6Coll, apple6rb, _apple6);
+            ApplesGoInBascket(_apple7Pos, _basketPos, _basketPos2, _apple7Coll, apple7rb, _apple7);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
             _scissorCuttingAnimation.SetBool("_isCutting", false);
@@ -194,7 +209,8 @@ public class AppleController : MonoBehaviour
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             Count = Count + _tree3;
-            
+            CountBasketAppleNum();
+
             apple8rb.isKinematic = false;
             apple9rb.isKinematic = false;
             apple10rb.isKinematic = false;
@@ -203,39 +219,71 @@ public class AppleController : MonoBehaviour
 
             _canTouchTree3 = false;
 
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple8Pos, _basketPos, _basketPos2, _apple8Coll, apple8rb, _apple8));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple9Pos, _basketPos, _basketPos2, _apple9Coll, apple9rb, _apple9));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple10Pos, _basketPos, _basketPos2, _apple10Coll, apple10rb, _apple10));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple11Pos, _basketPos, _basketPos2, _apple11Coll, apple11rb, _apple11));
-            DOVirtual.DelayedCall(_waitAppleAnimation, () => ApplesGoInBascket(_apple12Pos, _basketPos, _basketPos2, _apple12Coll, apple12rb, _apple12));
+
+            await UniTask.Delay(TimeSpan.FromSeconds(_waitAppleAnimation));
+            ApplesGoInBascket(_apple8Pos, _basketPos, _basketPos2, _apple8Coll, apple8rb, _apple8);
+            ApplesGoInBascket(_apple9Pos, _basketPos, _basketPos2, _apple9Coll, apple9rb, _apple9);
+            ApplesGoInBascket(_apple10Pos, _basketPos, _basketPos2, _apple10Coll, apple10rb, _apple10);
+            ApplesGoInBascket(_apple11Pos, _basketPos, _basketPos2, _apple11Coll, apple11rb, _apple11);
+            ApplesGoInBascket(_apple12Pos, _basketPos, _basketPos2, _apple12Coll, apple12rb, _apple12);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
             _scissorCuttingAnimation.SetBool("_isCutting", false);
         }
     }
 
-    public void ApplesGoInBascket(Transform currentPos, Vector3 targetPos, Vector3 targetPos2, Collider coll, Rigidbody rb, GameObject obj)
+    public async void ApplesGoInBascket(Transform currentPos, Vector3 targetPos, Vector3 targetPos2, Collider coll, Rigidbody rb, GameObject obj)
     {
         // りんご同士で衝突させない（爆発しちゃうから）
         coll.isTrigger = true;
         rb.isKinematic = true;
 
         // 目的位置(currentPos)に向かって 目的秒(_appleAnimation) かけて移動させる
-        DOTween.Sequence()
-          .Append(currentPos.DOMove(targetPos2, _appleAnimation));
+        
+         await (currentPos.DOMove(targetPos2, _appleAnimation));
           //.AppendInterval(0.5f)
           //.Append(currentPos.transform.DOMove(targetPos2, _appleAnimation));
 
-        DOVirtual.DelayedCall(5.0f, () => obj.SetActive(false));
+        obj.SetActive(false);
+    }
+
+    public void OnClickClearButton()
+    {
+        // 15かどうか確認
+        // 15なら _blClear を trueにする
+        // 15以外ならリセット
+        if (Count is 15)
+        {
+            _blClear = true;
+            Debug.Log("クリア");
+        }
+        else
+        {
+            OnClickResetButton();
+        }
     }
 
 
-    /// <summary>
-    /// かごの数字によって、かごの中にあるリンゴの表示が変わる
-    /// </summary>
+    // リセットボタンを押されたとき
+    public void OnClickResetButton()
+    {
+        // 画面遷移時のアニメーションをはさむ
+        OnCollisionEnter2D(null);
+        SceneManager.LoadScene("Minigame_AppleScene");
+
+        //// リンゴの数をリセット
+        Count = 7;
+
+        // 木をまた触れるようにする
+        _canTouchTree = true;
+        _canTouchTree2 = true;
+        _canTouchTree3 = true;
+    }
+
+    #region かごの数字によって、かごの中にあるリンゴの表示が変わる
     public void ShowInBasketApples()
     {
-        if(Count <= 7)
+        if (Count <= 7)
         {
             // かごのリンゴ数が９個未満の時
             // かごにあるリンゴの画像は表示しない
@@ -244,7 +292,7 @@ public class AppleController : MonoBehaviour
             _appleInbasket3.SetActive(false);
             _appleInbasket4.SetActive(false);
         }
-        if(8 <= Count)
+        if (8 <= Count)
         {
             // かごのリンゴ数が 10個以上 の時
             // かごのリンゴを 1個 表示する
@@ -270,40 +318,7 @@ public class AppleController : MonoBehaviour
             _appleInbasket5.SetActive(true);
         }
     }
-
-    /// <summary>
-    /// リセットボタンを押されたとき
-    /// </summary>
-    private void OnClickResetButton()
-    {
-        // 画面遷移時のアニメーションをはさむ
-
-        // リンゴの数をリセット
-        Count = 7;
-
-        // リンゴの木をさわれるように
-        _canTouchTree  = true;
-        _canTouchTree2 = true;
-        _canTouchTree3 = true;
-
-        // リンゴの表示をリセット
-        // リンゴをインスタンシエイトする
-        var obj = Instantiate(_apple1);
-        var obj2 = Instantiate(_apple2);
-        var obj3 = Instantiate(_apple3);
-        var obj4 = Instantiate(_apple4);
-        var obj5 = Instantiate(_apple5);
-        var obj6 = Instantiate(_apple6);
-        var obj7 = Instantiate(_apple7);
-        var obj8 = Instantiate(_apple8);
-        var obj9 = Instantiate(_apple9);
-        var obj10 = Instantiate(_apple10);
-        var obj11 = Instantiate(_apple11);
-        var obj12 = Instantiate(_apple12);
-
-        #region
-        #endregion
-    }
+    #endregion
 
     #region りんごの数表示
     public void CountBasketAppleNum()

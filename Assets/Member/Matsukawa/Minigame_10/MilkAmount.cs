@@ -7,32 +7,32 @@ using UnityEngine.UI;
 // Matsukawa
 public class MilkAmount : MonoBehaviour
 {
-    #region インスペクター上　ミルク量の取得
-    // ミルク樽
-    [SerializeField, Foldout("ミルク樽")] private Image         _caskImage;
-    // ミルク樽　現在の　ミルク量
-    [SerializeField, Foldout("ミルク樽")] private float         _caskCarrentAmount = 1.0f;
-    // ミルク樽　最大の　ミルク量
-    [SerializeField, Foldout("ミルク樽")] private float         _caskMaxAmount      = 1f;
+    //#region インスペクター上　ミルク量の取得
+    //// ミルク樽
+    [SerializeField, Foldout("ミルク樽")] private Image _caskImage;
+    //// ミルク樽　現在の　ミルク量
+    //[SerializeField, Foldout("ミルク樽")] private float         _caskCarrentAmount = 1.0f;
+    //// ミルク樽　最大の　ミルク量
+    //[SerializeField, Foldout("ミルク樽")] private float         _caskMaxAmount      = 1f;
 
-    // ボトル１（左）
-    [SerializeField, Foldout("ボトル１(左)")] private Image      _bottleImage;
-    // ボトル１（左） 現在の　ミルク量
-    [SerializeField, Foldout("ボトル１(左)")] private float      _bottleCarrentAmount = 0f;
-    // ボトル１（左） 最大の　ミルク量
-    [SerializeField, Foldout("ボトル１(左)")] private float      _bottleMaxAmount     = 0.8f;
-    // ボトル１（左） 正解の　ミルク量
-    [SerializeField, Foldout("ボトル１(左)")] private float      _bottleCorrectAmount;
+    //// ボトル１（左）
+    [SerializeField, Foldout("ボトル１(左)")] private Image _bottleImage;
+    //// ボトル１（左） 現在の　ミルク量
+    //[SerializeField, Foldout("ボトル１(左)")] private float      _bottleCarrentAmount = 0f;
+    //// ボトル１（左） 最大の　ミルク量
+    //[SerializeField, Foldout("ボトル１(左)")] private float      _bottleMaxAmount     = 0.8f;
+    //// ボトル１（左） 正解の　ミルク量
+    //[SerializeField, Foldout("ボトル１(左)")] private float      _bottleCorrectAmount;
 
-    // ボトル２（右）
-    [SerializeField, Foldout("ボトル２(右)")] private Image      _bottle2_Image;
-    // ボトル２（右） 現在の　ミルク量
-    [SerializeField, Foldout("ボトル２(右)")] private float      _bottle2_carrentAmount = 0f;
-    // ボトル２（右） 最大の　ミルク量
-    [SerializeField, Foldout("ボトル２(右)")] private float      _bottle2_maxAmount     = 0.8f;
-    // ボトル２（右） 正解の　ミルク量
-    [SerializeField, Foldout("ボトル２(右)")] private float      _bottle2_correctAmount;
-    #endregion
+    //// ボトル２（右）
+    [SerializeField, Foldout("ボトル２(右)")] private Image _bottle2_Image;
+    //// ボトル２（右） 現在の　ミルク量
+    //[SerializeField, Foldout("ボトル２(右)")] private float      _bottle2_carrentAmount = 0f;
+    //// ボトル２（右） 最大の　ミルク量
+    //[SerializeField, Foldout("ボトル２(右)")] private float      _bottle2_maxAmount     = 0.8f;
+    //// ボトル２（右） 正解の　ミルク量
+    //[SerializeField, Foldout("ボトル２(右)")] private float      _bottle2_correctAmount;
+    //#endregion
 
     // ボトル１を押しているときのフラグ
     private bool _ClickBottleFlag;
