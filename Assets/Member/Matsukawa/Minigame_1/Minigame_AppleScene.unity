@@ -3508,7 +3508,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2025771361}
         m_TargetAssemblyTypeName: AppleController, Assembly-CSharp
-        m_MethodName: OnClickClear
+        m_MethodName: OnClickClearButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
