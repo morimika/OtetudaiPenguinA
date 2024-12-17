@@ -9,8 +9,9 @@ public class ResetDebug : MonoBehaviour
 {
     [SerializeField,ReadOnly]
     private List<HelpInfo> _helpInfo;
+
     [SerializeField]
-    private SealView _sealView;
+    private ItemList ItemList;
 
     private void Start()
     {
@@ -33,7 +34,7 @@ public class ResetDebug : MonoBehaviour
         HelpManager.IsClear = false;
 
         //シール獲得状況のリセット
-        _sealView.ClearSeals();
+        ItemList.items.Clear();
 
         //プレイヤーの保存座標のリセット
         PlayerSetPos.PlayerPos = Vector2.zero;
