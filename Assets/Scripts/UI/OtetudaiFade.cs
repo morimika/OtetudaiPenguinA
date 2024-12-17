@@ -28,7 +28,7 @@ public class OtetudaiFade : MonoBehaviour
     [SerializeField]
     private float _distance = 4;
 
-    private HelpInfo _helpInfo;
+    public HelpInfo _helpInfo;
     #endregion
 
 

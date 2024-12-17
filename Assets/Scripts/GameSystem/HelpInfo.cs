@@ -61,14 +61,13 @@ public class HelpInfo : HelpManager
                 if (IsClear==true && HavingHelpTask == kind.ToString())
                 {
                     charactorTalk.ClearText();
+                    HavingHelpTask = null;
                 }
                 //まだ成功していない
                 //受注テキスト処理
                 else if(IsClear==false)
                 {
                     charactorTalk.OrderText();
-                    //タスク受注
-                    HavingHelpTask = kind.ToString();
                 }
             }
         }

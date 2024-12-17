@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Yuria_TitleScene.unity
     guid: ccfd0d9082bd842728b8bc67d51a697d
   - enabled: 0
@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Member/Watabe/WatanabeTestScene.unity
     guid: 50eb3d13d8b347e4a9e4bb68ea5c945c
+  - enabled: 1
+    path: Assets/Member/Saitoyuu/minigame1.unity
+    guid: 63d7baa2b0f88e449892e130c3f9e4c1
+  - enabled: 1
+    path: Assets/Member/Matsukawa/Minigame_1/Minigame_AppleScene.unity
+    guid: fea82d494e9e69744b1bfbafec01329e
   m_configObjects: {}

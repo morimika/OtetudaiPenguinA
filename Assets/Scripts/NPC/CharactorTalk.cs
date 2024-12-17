@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using Cinemachine;
+using static UnityEngine.InputManagerEntry;
 
 //Mori Script
 
@@ -41,6 +42,10 @@ public class CharactorTalk : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _boxSR;
+    [SerializeField]
+    private Sprite _txtboxSp;
+    [SerializeField]
+    private Sprite _cloudSp;
 
     [SerializeField]
     private Button _clearButton;
@@ -105,6 +110,7 @@ public class CharactorTalk : MonoBehaviour
     [SerializeField,Button]
     public async void HelloText()
     {
+        //_boxSR.sprite = _txtboxSp;
         SetMaxBoxSize();
         await Task.Delay((int)1f);
         tmpText.text = _helloTxt;
@@ -114,6 +120,7 @@ public class CharactorTalk : MonoBehaviour
     [SerializeField, Button]
     public void ByeText()
     {
+        //_boxSR.sprite = _cloudSp;
         tmpText.text = "?";
         SetMinBoxSize();
     }
@@ -122,6 +129,7 @@ public class CharactorTalk : MonoBehaviour
     [SerializeField, Button]
     public void EndText()
     {
+        //_boxSR.sprite = _txtboxSp;
         tmpText.text = _endTxt;
         SetEnableBox();
     }
@@ -137,6 +145,7 @@ public class CharactorTalk : MonoBehaviour
     [SerializeField, Button]
     public async void OrderText()
     {
+        //_boxSR.sprite = _txtboxSp;
         _orderButton.interactable = false;
         //最初に話しかけた
         if (_orderIndex == 0)
@@ -193,6 +202,9 @@ public class CharactorTalk : MonoBehaviour
             //カメラ制御のゲームオブジェクトを削除
             Destroy(gameObj.gameObject);
 
+            //タスク受注
+            HelpManager.HavingHelpTask = helpInfo.kind.ToString();
+
             //会話進行度初期化
             _orderIndex = 0;
 
@@ -214,6 +226,7 @@ public class CharactorTalk : MonoBehaviour
     [SerializeField, Button]
     public async void ClearText()
     {
+        //_boxSR.sprite = _txtboxSp;
         _clearButton.interactable = false;
 
         if (_clearIndex == 0)
