@@ -34,6 +34,23 @@ public class AppleController : MonoBehaviour
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple11;
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple12;
 
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple1generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple2generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple3generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple4generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple5generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple6generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple7generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple8generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple9generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple10generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple11generatePos;
+    [Foldout("りんごのpos"), SerializeField] protected Vector3 _apple12generatePos;
+
+    [Foldout("木のpos"), SerializeField] protected Transform _tree1pos;
+    [Foldout("木のpos"), SerializeField] protected Transform _tree2pos;
+    [Foldout("木のpos"), SerializeField] protected Transform _tree3pos;
+
     // それぞれの木が持ってるりんごの数をあらかじめ設定
     private int _tree1 = 4;
     private int _tree2 = 3;
@@ -80,8 +97,7 @@ public class AppleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
-        ShowInBasketApples();
+        ClearJudge();
     }
 
     // はさみが木に触れたときりんごがおちる
@@ -153,6 +169,9 @@ public class AppleController : MonoBehaviour
             Count = Count + _tree1;
             // かごの中にある数を更新する
             CountBasketAppleNum();
+            // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
+            ShowInBasketApples();
+
 
             // りんごを落とす
             apple1rb.isKinematic = false;
@@ -183,6 +202,7 @@ public class AppleController : MonoBehaviour
 
             Count = Count + _tree2;
             CountBasketAppleNum();
+            ShowInBasketApples();
 
             apple5rb.isKinematic = false;
             apple6rb.isKinematic = false;
@@ -205,6 +225,7 @@ public class AppleController : MonoBehaviour
 
             Count = Count + _tree3;
             CountBasketAppleNum();
+            ShowInBasketApples();
 
             apple8rb.isKinematic = false;
             apple9rb.isKinematic = false;
@@ -235,44 +256,154 @@ public class AppleController : MonoBehaviour
 
         // 目的位置(currentPos)に向かって 目的秒(_appleAnimation) かけて移動させる
         
-         await (currentPos.DOMove(targetPos2, _appleAnimation));
-          //.AppendInterval(0.5f)
-          //.Append(currentPos.transform.DOMove(targetPos2, _appleAnimation));
+         await (currentPos.DOMove(targetPos, _appleAnimation));
 
-        obj.SetActive(false);
+        if(obj  != null)
+        {
+           obj.SetActive(false);
+        }
     }
 
-    public void OnClickClearButton()
+    public void ClearJudge()
     {
         // 15かどうか確認
         // 15なら _blClear を trueにする
         // 15以外ならリセット
-        if (Count is 15)
+        if (Count == 15)
         {
             _blClear = true;
             Debug.Log("クリア");
         }
-        else
-        {
-            OnClickResetButton();
-        }
+
     }
 
 
     // リセットボタンを押されたとき
     public void OnClickResetButton()
     {
-        // 画面遷移時のアニメーションをはさむ
-        OnCollisionEnter2D(null);
-        SceneManager.LoadScene("Minigame_AppleScene");
-
-        //// リンゴの数をリセット
-        Count = 7;
-
         // 木をまた触れるようにする
         _canTouchTree = true;
         _canTouchTree2 = true;
         _canTouchTree3 = true;
+
+        _apple1.SetActive(true);
+        _apple2.SetActive(true);
+        _apple3.SetActive(true);
+        _apple4.SetActive(true);
+        _apple5.SetActive(true);
+        _apple6.SetActive(true);
+        _apple7.SetActive(true);
+        _apple8.SetActive(true);
+        _apple9.SetActive(true);
+        _apple10.SetActive(true);
+        _apple11.SetActive(true);
+        _apple12.SetActive(true);
+
+
+        Instantiate(_apple1, new Vector3(-5.3f, 0.2f, 0), Quaternion.identity, _tree1pos );
+        Instantiate(_apple2, new Vector3(-3.5f, 0.2f, 0), Quaternion.identity, _tree1pos) ;
+        Instantiate(_apple3, new Vector3(-5, 1.6f, 0), Quaternion.identity, _tree1pos);
+        Instantiate(_apple4, new Vector3(-3.8f, 1.6f, 0), Quaternion.identity, _tree1pos);
+        Instantiate(_apple5, new Vector3(-0.8f, -1.5f, 0), Quaternion.identity, _tree2pos);
+        Instantiate(_apple6, new Vector3(1, -1.5f, 0), Quaternion.identity, _tree2pos);
+        Instantiate(_apple7, new Vector3(0.1f, 0, 0), Quaternion.identity, _tree2pos);
+        Instantiate(_apple8, new Vector3(3.5f, 0.2f, 0), Quaternion.identity, _tree3pos);
+        Instantiate(_apple9, new Vector3(5.7f, 0.2f, 0), Quaternion.identity, _tree3pos);
+        Instantiate(_apple10, new Vector3(4.2f, 1.6f, 0), Quaternion.identity, _tree3pos);
+        Instantiate(_apple11, new Vector3(5, 1.6f, 0), Quaternion.identity, _tree3pos);
+        Instantiate(_apple12, new Vector3(4.6f, 0, 0), Quaternion.identity, _tree3pos);
+
+        //// リンゴの数をリセット
+        Count = 7;
+
+        Debug.Log("リセット");
+
+        //if (_apple1 = null)
+        //{
+        //    _apple1.SetActive(true);
+        //    Rigidbody apple1rb = _apple1.GetComponent<Rigidbody>();
+        //    Collider _apple1Coll = _apple1.GetComponent<Collider>();
+        //}
+        //if (_apple2 = null)
+        //{ 
+        //    _apple2.SetActive(true);
+        //    Rigidbody apple2rb = _apple2.GetComponent<Rigidbody>();
+        //    Collider _apple2Coll = _apple2.GetComponent<Collider>();
+
+        //}
+        //if (_apple3 = null)
+        //{
+        //    _apple3.SetActive(true);
+        //    Rigidbody apple3rb = _apple3.GetComponent<Rigidbody>();
+        //    Collider _apple3Coll = _apple3.GetComponent<Collider>();
+
+        //}
+        //if (_apple4 = null)
+        //{ 
+        //    _apple4.SetActive(true);
+        //    Rigidbody apple4rb = _apple4.GetComponent<Rigidbody>();
+        //    Collider _apple4Coll = _apple4.GetComponent<Collider>();
+
+        //}
+        //if (_apple5 = null)
+        //{ 
+        //    _apple5.SetActive(true);
+        //    Rigidbody apple5rb = _apple5.GetComponent<Rigidbody>();
+        //    Collider _apple5Coll = _apple5.GetComponent<Collider>();
+
+        //}
+        //if (_apple6 = null)
+        //{ 
+        //    _apple6.SetActive(true);
+        //    Rigidbody apple6rb = _apple6.GetComponent<Rigidbody>();
+        //    Collider _apple6Coll = _apple6.GetComponent<Collider>();
+
+
+        //}
+        //if (_apple7 = null)
+        //{ 
+        //    _apple7.SetActive(true); 
+        //    Rigidbody apple7rb = _apple7.GetComponent<Rigidbody>();
+        //    Collider _apple7Coll = _apple7.GetComponent<Collider>();
+        //}
+        //if (_apple8 = null)
+        //{ 
+        //    _apple8.SetActive(true); 
+        //    Rigidbody apple8rb = _apple8.GetComponent<Rigidbody>();
+        //    Collider _apple8Coll = _apple8.GetComponent<Collider>();
+
+        //}
+        //if (_apple9 = null)
+        //{ 
+        //    _apple9.SetActive(true);
+        //    Rigidbody apple9rb= _apple9.GetComponent<Rigidbody>();
+        //    Collider _apple9Coll = _apple9.GetComponent<Collider>();
+        //}
+        //if (_apple10 = null)
+        //{ 
+        //    _apple10.SetActive(true);
+        //    Rigidbody apple10rb = _apple10.GetComponent<Rigidbody>();
+        //    Collider _apple10Coll = _apple10.GetComponent<Collider>();
+
+        //}
+        //if (_apple11 = null)
+        //{ 
+        //    _apple11.SetActive(true);
+        //    Rigidbody apple11rb = _apple11.GetComponent<Rigidbody>();
+        //    Collider _apple11Coll = _apple11.GetComponent<Collider>();
+
+        //}
+        //if (_apple12 = null)
+        //{ 
+        //    _apple12.SetActive(true);
+        //    Rigidbody apple12rb = _apple12.GetComponent<Rigidbody>();
+        //    Collider _apple12Coll = _apple12.GetComponent<Collider>();
+
+        //}
+
+        //_scissorCuttingAnimation.GetComponent<Animator>();
+
+
     }
 
     #region かごの数字によって、かごの中にあるリンゴの表示が変わる
