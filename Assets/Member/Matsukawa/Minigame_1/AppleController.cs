@@ -34,6 +34,10 @@ public class AppleController : MonoBehaviour
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple11;
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple12;
 
+    [Foldout("木のpos"), SerializeField] protected Transform _tree1pos;
+    [Foldout("木のpos"), SerializeField] protected Transform _tree2pos;
+    [Foldout("木のpos"), SerializeField] protected Transform _tree3pos;
+
     // それぞれの木が持ってるりんごの数をあらかじめ設定
     private int _tree1 = 4;
     private int _tree2 = 3;
@@ -80,12 +84,17 @@ public class AppleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ClearJudge();
+
+        // かごの中にある数を更新する
+        CountBasketAppleNum();
         // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
         ShowInBasketApples();
+
     }
 
     // はさみが木に触れたときりんごがおちる
-    private async void OnCollisionEnter2D(Collision2D collision)
+    public async void OnCollisionEnter2D(Collision2D collision)
     {
         #region apple　GetComponents
         Rigidbody apple1rb = _apple1.GetComponent<Rigidbody>();
@@ -99,7 +108,7 @@ public class AppleController : MonoBehaviour
         Rigidbody apple9rb = _apple9.GetComponent<Rigidbody>();
         Rigidbody apple10rb = _apple10.GetComponent<Rigidbody>();
         Rigidbody apple11rb = _apple11.GetComponent<Rigidbody>();
-        Rigidbody apple12rb = _apple12.GetComponent<Rigidbody>();
+        Rigidbody  apple12rb = _apple12.GetComponent<Rigidbody>();
 
         Transform _apple1Pos = _apple1.GetComponent<Transform>();
         Transform _apple2Pos = _apple2.GetComponent<Transform>();
@@ -142,7 +151,7 @@ public class AppleController : MonoBehaviour
 
         #endregion
 
-        if (collision.gameObject.tag == "Tree1" &&  _canTouchTree == true)
+        if (collision.gameObject.name == "Tree1" &&  _canTouchTree == true)
         {
             // はさみがチョキチョキするアニメーション開始
             _scissorCuttingAnimation.enabled = true;
@@ -151,8 +160,6 @@ public class AppleController : MonoBehaviour
             // 木１に当たった時
             // 木１のリンゴの数とかごにある数字を足す
             Count = Count + _tree1;
-            // かごの中にある数を更新する
-            CountBasketAppleNum();
 
             // りんごを落とす
             apple1rb.isKinematic = false;
@@ -182,7 +189,6 @@ public class AppleController : MonoBehaviour
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             Count = Count + _tree2;
-            CountBasketAppleNum();
 
             apple5rb.isKinematic = false;
             apple6rb.isKinematic = false;
@@ -204,7 +210,6 @@ public class AppleController : MonoBehaviour
             _scissorCuttingAnimation.SetBool("_isCutting", true);
 
             Count = Count + _tree3;
-            CountBasketAppleNum();
 
             apple8rb.isKinematic = false;
             apple9rb.isKinematic = false;
@@ -234,45 +239,70 @@ public class AppleController : MonoBehaviour
         rb.isKinematic = true;
 
         // 目的位置(currentPos)に向かって 目的秒(_appleAnimation) かけて移動させる
-        
-         await (currentPos.DOMove(targetPos2, _appleAnimation));
-          //.AppendInterval(0.5f)
-          //.Append(currentPos.transform.DOMove(targetPos2, _appleAnimation));
 
-        obj.SetActive(false);
+        await (currentPos.DOMove(targetPos, _appleAnimation));
+
+        if(obj  != null)
+        {
+           obj.SetActive(false);
+        }
     }
 
-    public void OnClickClearButton()
+    public void ClearJudge()
     {
         // 15かどうか確認
         // 15なら _blClear を trueにする
         // 15以外ならリセット
-        if (Count is 15)
+        if (Count == 15)
         {
             _blClear = true;
             Debug.Log("クリア");
         }
-        else
-        {
-            OnClickResetButton();
-        }
+
     }
 
 
     // リセットボタンを押されたとき
     public void OnClickResetButton()
     {
-        // 画面遷移時のアニメーションをはさむ
-        OnCollisionEnter2D(null);
-        SceneManager.LoadScene("Minigame_AppleScene");
 
-        //// リンゴの数をリセット
-        Count = 7;
+        if (Tree1._blcanGenerateApple1 == true)
+        {
+            Instantiate(_apple1, new Vector3(-5.7f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+            Instantiate(_apple2, new Vector3(-3.3f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+            Instantiate(_apple3, new Vector3(-5.1f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+            Instantiate(_apple4, new Vector3(-3.9f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
 
-        // 木をまた触れるようにする
-        _canTouchTree = true;
-        _canTouchTree2 = true;
-        _canTouchTree3 = true;
+            // 木をまた触れるようにする
+            _canTouchTree = true;
+            //// リンゴの数をリセット
+            Count = 7;
+            Debug.Log("木１リセット");
+        }
+
+        if (Tree2._blcanGenerateApple2 == true)
+        {
+            Instantiate(_apple5, new Vector3(-0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+            Instantiate(_apple6, new Vector3(0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+            Instantiate(_apple7, new Vector3(0, 0.5f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+
+            _canTouchTree2 = true;
+            Count = 7;
+            Debug.Log("木２リセット");
+        }
+
+        if ( Tree3._blcanGenerateApple3 == true)
+        {
+            Instantiate(_apple8, new Vector3(3.3f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+            Instantiate(_apple9, new Vector3(5.7f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+            Instantiate(_apple10, new Vector3(3.9f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+            Instantiate(_apple11, new Vector3(5.1f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+            Instantiate(_apple12, new Vector3(4.5f, 0.4f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+
+            _canTouchTree3 = true;
+            Count = 7;
+            Debug.Log("木２リセット");
+        }
     }
 
     #region かごの数字によって、かごの中にあるリンゴの表示が変わる
