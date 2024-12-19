@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Member/Matsukawa/Minigame_1/Minigame_AppleScene.unity
     guid: fea82d494e9e69744b1bfbafec01329e
+  - enabled: 0
+    path: Assets/Taguchi/TaguchiUnityTest.unity
+    guid: a750b0cc2c2138f4faae71143dbfd92e
   m_configObjects: {}

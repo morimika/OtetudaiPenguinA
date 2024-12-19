@@ -29,6 +29,9 @@ public class OtetudaiFade : MonoBehaviour
     private float _distance = 4;
 
     public HelpInfo _helpInfo;
+
+    [SerializeField,Scene]
+    private string Scene;
     #endregion
 
 
@@ -58,7 +61,8 @@ public class OtetudaiFade : MonoBehaviour
                     PlayerSetPos.PlayerPos = _playerPos;
                     //debug
                     //シーン遷移、フェード処理による
-                    ChangeScene.Instance.LoadNextScene(_sceneIndex);
+                    //ChangeScene.Instance.LoadNextScene(_sceneIndex);
+                    SceneManager.LoadScene(Scene);
                 }
             }
             else

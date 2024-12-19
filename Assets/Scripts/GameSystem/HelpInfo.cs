@@ -27,7 +27,7 @@ public class HelpInfo : HelpManager
     [SerializeField]
     private PlaySceneDatas _playSceneDatas;
 
-    public bool isEnd = false;
+    public bool isEnd;
 
     void Start()
     {

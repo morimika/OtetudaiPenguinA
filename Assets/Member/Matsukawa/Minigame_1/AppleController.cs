@@ -19,7 +19,7 @@ public class AppleController : MonoBehaviour
     #region インスペクター上
     public static AppleController instance;
     public        TextMeshProUGUI textBasketNum;
-    public static int             Count = 7;
+    public int             Count = 7;
 
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple1;
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple2;
@@ -54,6 +54,15 @@ public class AppleController : MonoBehaviour
     [Foldout("かごの中にあるりんご"), SerializeField] private GameObject _appleInbasket4; // かごのリンゴ 17 以上で表示　リンゴは６つ
     [Foldout("かごの中にあるりんご"), SerializeField] private GameObject _appleInbasket5; // かごのリンゴ 17 以上で表示　リンゴは６つ
 
+
+    //mori
+    [SerializeField]
+    private GameObject clearCutInObj;
+    [SerializeField]
+    private ItemData _itemData;
+    [SerializeField]
+    private ItemList _playerItem;
+
     #endregion
 
     // リンゴがおちた木をもう一度触れないようにする
@@ -62,8 +71,11 @@ public class AppleController : MonoBehaviour
     private bool _canTouchTree3 = true;
 
     // リンゴがかごに移動する速さ
+    //mori
+    [SerializeField]
     protected float _appleAnimation = 3.0f;
-    protected int _waitAppleAnimation = 2;     // 上のアニメーションが始まるまで待つ時間
+    [SerializeField]
+    protected float _waitAppleAnimation = 2;     // 上のアニメーションが始まるまで待つ時間
 
     // はさみのカットアニメーション
     private Animator _scissorCuttingAnimation;
@@ -71,7 +83,7 @@ public class AppleController : MonoBehaviour
 
     // クリア判定
     // クリア判定の関数は OnClickClearButton() 250行
-    public static bool _blClear = false;
+    public bool _blClear = false;
 
     public void Start()
     {
@@ -79,11 +91,26 @@ public class AppleController : MonoBehaviour
 
         _scissorCuttingAnimation = gameObject.GetComponent<Animator>();
         _scissorCuttingAnimation.GetComponent<Animator>().enabled = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(HelpManager.IsClear);
+        //mori
+        //ボタンを押したとき
+        if (Input.GetMouseButtonDown(0))
+        {
+            //クリアしている、かつ、フェードインされて待機中の場合
+            if (HelpManager.IsClear && CutInFade.IsFadeFin)
+            {
+                Invoke(nameof(ReturnGameScene), 1);
+            }
+        }
+        //クリア後は動かさない
+        if (HelpManager.IsClear) return;
+
         ClearJudge();
 
         // かごの中にある数を更新する
@@ -91,11 +118,14 @@ public class AppleController : MonoBehaviour
         // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
         ShowInBasketApples();
 
+
     }
 
     // はさみが木に触れたときりんごがおちる
     public async void OnCollisionEnter2D(Collision2D collision)
     {
+        //mori
+        if (_blClear) return;
         #region apple　GetComponents
         Rigidbody apple1rb = _apple1.GetComponent<Rigidbody>();
         Rigidbody apple2rb = _apple2.GetComponent<Rigidbody>();
@@ -246,6 +276,23 @@ public class AppleController : MonoBehaviour
         {
            obj.SetActive(false);
         }
+
+        //mori
+        //0.5秒まってクリアする
+        await Task.Delay(500);
+        if (Count == 15)
+        {
+            _blClear = true;
+            //マップに戻ったときNPCの前にプレイヤーを配置する
+            PlayerSetPos.PlayerPos = new Vector2(0.1f, 1.12f);
+        }
+    }
+
+    //mori
+    //シーン遷移
+    public void ReturnGameScene()
+    {
+        SceneManager.LoadScene("Mori_MainGameScene");
     }
 
     public void ClearJudge()
@@ -253,9 +300,15 @@ public class AppleController : MonoBehaviour
         // 15かどうか確認
         // 15なら _blClear を trueにする
         // 15以外ならリセット
-        if (Count == 15)
+
+        //mori
+        //クリアしているなら
+        if (_blClear == true)
         {
-            _blClear = true;
+            //カットインを呼び、クリアにする
+            Instantiate(clearCutInObj);
+            HelpManager.IsClear = true;
+            _playerItem.items.Add(_itemData);
             Debug.Log("クリア");
         }
 

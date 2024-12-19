@@ -10,6 +10,14 @@ TagManager:
   - GameManager
   - VirtualCamera
   - StartObj
+  - Ground
+  - Tree3
+  - Tree2
+  - Tree1
+  - Apple3
+  - Apple1
+  - Apple2
+  - Clear
   layers:
   - Default
   - TransparentFX

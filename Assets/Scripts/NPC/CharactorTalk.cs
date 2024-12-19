@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using Cinemachine;
-using static UnityEngine.InputManagerEntry;
 
 //Mori Script
 
@@ -204,6 +203,7 @@ public class CharactorTalk : MonoBehaviour
 
             //タスク受注
             HelpManager.HavingHelpTask = helpInfo.kind.ToString();
+            HelpManager.IsClear = false;
 
             //会話進行度初期化
             _orderIndex = 0;

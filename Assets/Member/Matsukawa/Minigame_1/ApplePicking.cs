@@ -14,6 +14,7 @@ public class ApplePicking : MonoBehaviour
         Destroy(this.gameObject);
 
         // 1‰ñƒNƒŠƒbƒN‚·‚é‚Æ‚©‚²‚É‚ ‚éapple‚Ì”‚ª‘‚¦‚é
-        AppleController.Count++;
+        //mori
+        //AppleController.Count++;
     }
 }
