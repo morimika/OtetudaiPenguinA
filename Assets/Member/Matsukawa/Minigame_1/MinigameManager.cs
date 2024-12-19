@@ -1,4 +1,5 @@
 using DG.Tweening;
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -19,34 +20,24 @@ public class MinigameManager : MonoBehaviour
     // ゲームスタート時にゲームスタートイメージを表示
     // ゲーム終了時、失敗したらミスイメージ、成功したらクリアイメージを表示
 
-    [SerializeField] GameObject startQ;
-    [SerializeField] Image startImage;
-    [SerializeField] Image bg_startImage;
-    [SerializeField] Image finishClearImage;
-    [SerializeField] Image finishMissImage;
+    [SerializeField, Label("問題文全体")] GameObject _questionImageAll;     // 問題文全体
+    [SerializeField, Label("問題文のもくもく")] Image _questiomCircle;  // 問題文のもくもく
+    [SerializeField, Label("問題文")] Image _questionImage;      // 問題文
+    [SerializeField, Label("問題文の背景")] Image _bgQuestionImage;    // 問題文の背景
+    [SerializeField, Label("問題文の問題文を言うぺんぎん背景")] Image _questionPenguin;    // 問題文を言うぺんぎん
 
-    [SerializeField] Vector2 startImageTargetPos;
-
-    bool isMiss = false;
-    // bool isClear = false;
-
+    [SerializeField, Label("問題文の移動先")] Vector2 _qusetionImageTargetPos;   // 問題文が移動する先
 
     void Start()
     {
         // startImageの現在位置を取得
-        RectTransform startImageRect = startImage.GetComponent<RectTransform>();
+        RectTransform startImageRect = _questionImage.GetComponent<RectTransform>();
         // 
-        startQ.SetActive(true);
-        DOVirtual.DelayedCall(3, () => MoveImage(startImageRect, startImageTargetPos, bg_startImage));
-    }
+        _questionImageAll.SetActive(true);
+        DOVirtual.DelayedCall(3, () => MoveImage(startImageRect, _qusetionImageTargetPos, _bgQuestionImage));
+        DOVirtual.DelayedCall(3, () => _questiomCircle.DOFade(0, 1));
+        DOVirtual.DelayedCall(3, () => _questionPenguin.DOFade(0, 1));
 
-    void Update()
-    {
-        if(isMiss == true)
-        {
-            finishMissImage.gameObject.SetActive(true);
-            // りんごの数と表示を元に戻す
-        }
     }
 
     void MoveImage(RectTransform currentPos, Vector2 targetPos, Image im)

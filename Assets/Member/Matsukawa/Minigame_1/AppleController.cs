@@ -8,6 +8,7 @@ using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using UnityEditor.SearchService;
 
 // Matsukawa
 
@@ -265,44 +266,45 @@ public class AppleController : MonoBehaviour
     // リセットボタンを押されたとき
     public void OnClickResetButton()
     {
+        SceneManager.LoadScene("Mori_MainGameScene");
 
-        if (Tree1._blcanGenerateApple1 == true)
-        {
-            Instantiate(_apple1, new Vector3(-5.7f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
-            Instantiate(_apple2, new Vector3(-3.3f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
-            Instantiate(_apple3, new Vector3(-5.1f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
-            Instantiate(_apple4, new Vector3(-3.9f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        //if (Tree1._blcanGenerateApple1 == true)
+        //{
+        //    Instantiate(_apple1, new Vector3(-5.7f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        //    Instantiate(_apple2, new Vector3(-3.3f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        //    Instantiate(_apple3, new Vector3(-5.1f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        //    Instantiate(_apple4, new Vector3(-3.9f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
 
-            // 木をまた触れるようにする
-            _canTouchTree = true;
-            //// リンゴの数をリセット
-            Count = 7;
-            Debug.Log("木１リセット");
-        }
+        //    // 木をまた触れるようにする
+        //    _canTouchTree = true;
+        //    //// リンゴの数をリセット
+        //    Count = 7;
+        //    Debug.Log("木１リセット");
+        //}
 
-        if (Tree2._blcanGenerateApple2 == true)
-        {
-            Instantiate(_apple5, new Vector3(-0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
-            Instantiate(_apple6, new Vector3(0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
-            Instantiate(_apple7, new Vector3(0, 0.5f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+        //if (Tree2._blcanGenerateApple2 == true)
+        //{
+        //    Instantiate(_apple5, new Vector3(-0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+        //    Instantiate(_apple6, new Vector3(0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+        //    Instantiate(_apple7, new Vector3(0, 0.5f, 0), Quaternion.identity, _tree2pos).SetActive(true);
 
-            _canTouchTree2 = true;
-            Count = 7;
-            Debug.Log("木２リセット");
-        }
+        //    _canTouchTree2 = true;
+        //    Count = 7;
+        //    Debug.Log("木２リセット");
+        //}
 
-        if ( Tree3._blcanGenerateApple3 == true)
-        {
-            Instantiate(_apple8, new Vector3(3.3f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
-            Instantiate(_apple9, new Vector3(5.7f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
-            Instantiate(_apple10, new Vector3(3.9f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
-            Instantiate(_apple11, new Vector3(5.1f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
-            Instantiate(_apple12, new Vector3(4.5f, 0.4f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        //if ( Tree3._blcanGenerateApple3 == true)
+        //{
+        //    Instantiate(_apple8, new Vector3(3.3f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        //    Instantiate(_apple9, new Vector3(5.7f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        //    Instantiate(_apple10, new Vector3(3.9f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        //    Instantiate(_apple11, new Vector3(5.1f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        //    Instantiate(_apple12, new Vector3(4.5f, 0.4f, 0), Quaternion.identity, _tree3pos).SetActive(true);
 
-            _canTouchTree3 = true;
-            Count = 7;
-            Debug.Log("木２リセット");
-        }
+        //    _canTouchTree3 = true;
+        //    Count = 7;
+        //    Debug.Log("木２リセット");
+        //}
     }
 
     #region かごの数字によって、かごの中にあるリンゴの表示が変わる
