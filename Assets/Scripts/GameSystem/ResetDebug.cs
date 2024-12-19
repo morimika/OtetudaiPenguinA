@@ -25,13 +25,18 @@ public class ResetDebug : MonoBehaviour
     public void ResetGame()
     {
         //お手伝い終了状況のリセット
-        for (int i = 0; i < _helpInfo.Count; i++)
+        for (int i = 0; i < HelpManager.IsEndBool.Count; i++)
         {
-            _helpInfo[i].isEnd = false;
+            HelpManager.IsEndBool[i] = false;
         }
         //お手伝い受注状況のリセット
         HelpManager.HavingHelpTask = null;
         HelpManager.IsClear = false;
+
+        //for (int i = 0; i < HelpManager.IsClear.Count; i++)
+        //{
+        //    HelpManager.IsClear[i] = false;
+        //}
 
         //シール獲得状況のリセット
         ItemList.items.Clear();

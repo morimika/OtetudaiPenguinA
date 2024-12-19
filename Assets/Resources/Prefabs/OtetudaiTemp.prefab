@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 6844956799276139517}
   - component: {fileID: 3600837890248273127}
   - component: {fileID: 75993251416928386}
+  - component: {fileID: 9005090139117136986}
   m_Layer: 0
   m_Name: StartObj
   m_TagString: StartObj
@@ -359,6 +360,8 @@ MonoBehaviour:
   _action: {fileID: 5833020918408329139}
   _sceneIndex: 1
   _distance: 4
+  _helpInfo: {fileID: 0}
+  Scene: Yuria_TitleScene
 --- !u!50 &3600837890248273127
 Rigidbody2D:
   serializedVersion: 4
@@ -431,6 +434,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.163635, y: 9.827416}
   m_EdgeRadius: 0
+--- !u!114 &9005090139117136986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432752896794161901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcca94a1c7c0ae947801016f1d4577b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneIndex: 1
 --- !u!1 &3020939810224851256
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '?'
+  m_text: ' '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 765ff8aed7595ca43ab4a99dfdc86faf, type: 2}
   m_sharedMaterial: {fileID: 7431833504239414923, guid: 765ff8aed7595ca43ab4a99dfdc86faf, type: 2}
@@ -640,7 +656,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5.9
+  m_fontSize: 10
   m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -859,7 +875,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7527576339160600878}
   - component: {fileID: 5225139350138122934}
-  - component: {fileID: 2366703729656186148}
   m_Layer: 5
   m_Name: txtBox
   m_TagString: Untagged
@@ -928,7 +943,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b39ae3b568541fa449bb49a72aa37452, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -938,18 +953,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!225 &2366703729656186148
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6090544585302647571}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &6819627586393709410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,11 +1159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae6bbca570c052469c6b590030ddbef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClear: 0
   kind: 0
   _distance: 6
   _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
-  isEnd: 0
+  _itemData: {fileID: 0}
+  _playerItem: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}
 --- !u!114 &6473945858137225415
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class TitleManager : MonoBehaviour
     {
         //  メニューボタン押しの処理を関連付ける
         _menuButton ? .onClick.AddListener(OnMenuButtonClicked);
-        _nextSceneButton ? .onClick.AddListener(OnNextSceneButtonClicked);
+        //_nextSceneButton ? .onClick.AddListener(OnNextSceneButtonClicked);
     }
 
     /// <summary>

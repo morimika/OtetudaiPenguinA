@@ -41,16 +41,17 @@ public class ArrowInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Play中以外は表示しない
+        if (_playSceneDatas.TapType != PlaySceneTapType.Play)
+        {
+            _arrowTra.gameObject.SetActive(false);
+        }
         //クリアしているとき、または、お手伝いが無いときは何もしない
         if (HelpManager.IsClear == true || HelpManager.HavingHelpTask == null)
         {
             _arrowTra.gameObject.SetActive(false);
             _targetTra = null;
             return;
-        }
-        if (_playSceneDatas.TapType != PlaySceneTapType.Play)
-        {
-            _arrowTra.gameObject.SetActive(false);
         }
         //プレイヤーの位置に合わせる
         _arrowTra.position = _player.transform.position;

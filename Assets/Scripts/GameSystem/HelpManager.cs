@@ -18,7 +18,12 @@ public class HelpManager : MonoBehaviour
         KanjiHarvest,
     }
     public static bool IsClear = false;
-    public bool isClear = false;
+    public static List<bool> IsEndBool 
+        = new List<bool>
+        {   false, 
+            false, 
+            false 
+        };
 
 #if UNITY_EDITOR
     //お手伝いを更新したタイミングでログを出す

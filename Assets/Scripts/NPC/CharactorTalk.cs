@@ -95,15 +95,22 @@ public class CharactorTalk : MonoBehaviour
     {
         if ((playSceneDatas.TapType != PlaySceneTapType.Talk
             && playSceneDatas.TapType != PlaySceneTapType.Pose)
-            || helpInfo.isEnd==false)
+            || HelpManager.IsEndBool[(int)helpInfo.kind] == false)
         {
             //NPCタッチ可
             this.GetComponent<BoxCollider2D>().enabled = true;
         }
-        if(helpInfo.isEnd == true)
+        if(HelpManager.IsEndBool[(int)helpInfo.kind] == true)
         {
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
+    }
+
+    public async void QuestText()
+    {
+        SetQuestEnableBox();
+        await Task.Delay((int)0.5f);
+        tmpText.text = "?";
     }
 
     [SerializeField,Button]
@@ -291,7 +298,7 @@ public class CharactorTalk : MonoBehaviour
                 _clearIndex = 0;
 
                 //以降会話不可
-                helpInfo.isEnd = true;
+                HelpManager.IsEndBool[(int)helpInfo.kind] = true;
                 EndText();
             }
             else if (_clearIndex == _clearTxt.Count)
@@ -393,6 +400,31 @@ public class CharactorTalk : MonoBehaviour
             from: 16.5f, to: _afterSize.x, duration: 0.3f,
             //値が変わった時の処理
             onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(tweenValue, _afterSize.y); });
+        tmpText.gameObject.SetActive(true);
+        TxtAnim();
+    }
+
+    [SerializeField, Button]
+    public async void SetQuestEnableBox()
+    {
+        if (_boxSR.size == _afterSize) return;
+        tmpText.gameObject.SetActive(false);
+        await DOVirtual.Float(
+            from: 0, to: 1, duration: 0.2f,
+            //値が変わった時の処理
+            onVirtualUpdate: (tweenValue) => { _boxSR.color = new Color(255, 255, 255, tweenValue); });
+        if (_beforeSize.y != _afterSize.y)
+        {
+            await DOVirtual.Float(
+                from: 5, to: _beforeSize.y, duration: 0.2f,
+                //値が変わった時の処理
+                onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(16.5f, tweenValue); });
+        }
+
+        await DOVirtual.Float(
+            from: 16.5f, to: _beforeSize.x, duration: 0.3f,
+            //値が変わった時の処理
+            onVirtualUpdate: (tweenValue) => { _boxSR.size = new Vector2(tweenValue, _beforeSize.y); });
         tmpText.gameObject.SetActive(true);
         TxtAnim();
     }

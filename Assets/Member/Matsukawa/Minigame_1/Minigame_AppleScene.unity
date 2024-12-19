@@ -1771,6 +1771,7 @@ MonoBehaviour:
   finishClearImage: {fileID: 2009899914}
   finishMissImage: {fileID: 590070512}
   startImageTargetPos: {x: 0, y: 450}
+  _appleController: {fileID: 2025771361}
 --- !u!4 &1174376768
 Transform:
   m_ObjectHideFlags: 0
@@ -3529,6 +3530,7 @@ GameObject:
   - component: {fileID: 2025771363}
   - component: {fileID: 2025771365}
   - component: {fileID: 2025771364}
+  - component: {fileID: 2025771366}
   m_Layer: 0
   m_Name: Scissor_AppleController
   m_TagString: Untagged
@@ -3648,11 +3650,11 @@ MonoBehaviour:
   _appleInbasket4: {fileID: 1267435963}
   _appleInbasket5: {fileID: 200486054}
   clearCutInObj: {fileID: 3418920623581014436, guid: 03f84a72dd7cb624e888cbbd0f376b28, type: 3}
-  _itemData: {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
-  _playerItem: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}
+  _transitonScene: {fileID: 0}
   _appleAnimation: 1
   _waitAppleAnimation: 0.8
   _blClear: 0
+  _isStart: 0
 --- !u!95 &2025771363
 Animator:
   serializedVersion: 5
@@ -3746,6 +3748,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2025771366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025771352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcca94a1c7c0ae947801016f1d4577b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneIndex: 1
 --- !u!1 &2061916921
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,10 @@ public class MinigameManager : MonoBehaviour
 
     [SerializeField] Vector2 startImageTargetPos;
 
+    //mori
+    [SerializeField]
+    private AppleController _appleController;
+
     bool isMiss = false;
     // bool isClear = false;
 
@@ -38,6 +42,8 @@ public class MinigameManager : MonoBehaviour
         // 
         startQ.SetActive(true);
         DOVirtual.DelayedCall(3, () => MoveImage(startImageRect, startImageTargetPos, bg_startImage));
+        //mori
+        Invoke(nameof(StartGame), 3);
     }
 
     void Update()
@@ -57,5 +63,11 @@ public class MinigameManager : MonoBehaviour
         currentPos.DOScale(new Vector3(0.7f, 0.7f, 0.7f), 1);
         // スタートイメージの背景をフェードアウト
         im.DOFade(0, 1);
+    }
+
+    //mori 
+    private void StartGame()
+    {
+        _appleController._isStart=true;
     }
 }

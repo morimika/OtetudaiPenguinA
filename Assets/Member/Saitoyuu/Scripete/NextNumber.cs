@@ -11,19 +11,17 @@ public class NextNumber : MonoBehaviour
     public int _count = 0;
     Grass _grass;
 
-    [SerializeField]
-    private GameObject _clearCutInObj;
-
     //mori
     [SerializeField]
-    private ItemData _itemData;
+    private GameObject _clearCutInObj;
     [SerializeField]
-    private ItemList _playerItem;
+    private TransitonScene _transitonScene;
 
     private void Start()
     {
         GameObject obj = GameObject.Find("Player");
         _grass = obj.GetComponent<Grass>();
+        _transitonScene = GetComponent<TransitonScene>();
 
         Debug.Log(this.gameObject.name);
     }
@@ -37,7 +35,7 @@ public class NextNumber : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //クリアしている、かつ、フェードインされて待機中の場合
-            if (HelpManager.IsClear && CutInFade.IsFadeFin)
+            if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
             {
                 Invoke(nameof(ReturnGameScene), 1);
             }
@@ -71,14 +69,13 @@ public class NextNumber : MonoBehaviour
         Instantiate(_clearCutInObj);
         HelpManager.IsClear = true;
         PlayerSetPos.PlayerPos = new Vector2(7.1f, 7.88f);
-        _playerItem.items.Add(_itemData);
     }
 
     //mori
     //シーン遷移
     public void ReturnGameScene()
     {
-        SceneManager.LoadScene("Mori_MainGameScene");
+        _transitonScene?.LoadScene();
     }
 
 }

@@ -59,9 +59,7 @@ public class AppleController : MonoBehaviour
     [SerializeField]
     private GameObject clearCutInObj;
     [SerializeField]
-    private ItemData _itemData;
-    [SerializeField]
-    private ItemList _playerItem;
+    private TransitonScene _transitonScene;
 
     #endregion
 
@@ -84,6 +82,8 @@ public class AppleController : MonoBehaviour
     // クリア判定
     // クリア判定の関数は OnClickClearButton() 250行
     public bool _blClear = false;
+    //mori
+    public bool _isStart = false;
 
     public void Start()
     {
@@ -91,6 +91,7 @@ public class AppleController : MonoBehaviour
 
         _scissorCuttingAnimation = gameObject.GetComponent<Animator>();
         _scissorCuttingAnimation.GetComponent<Animator>().enabled = false;
+        _transitonScene = GetComponent<TransitonScene>();
 
     }
 
@@ -103,13 +104,13 @@ public class AppleController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //クリアしている、かつ、フェードインされて待機中の場合
-            if (HelpManager.IsClear && CutInFade.IsFadeFin)
+            if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
             {
                 Invoke(nameof(ReturnGameScene), 1);
             }
         }
         //クリア後は動かさない
-        if (HelpManager.IsClear) return;
+        if (HelpManager.IsClear == true) return;
 
         ClearJudge();
 
@@ -124,8 +125,7 @@ public class AppleController : MonoBehaviour
     // はさみが木に触れたときりんごがおちる
     public async void OnCollisionEnter2D(Collision2D collision)
     {
-        //mori
-        if (_blClear) return;
+
         #region apple　GetComponents
         Rigidbody apple1rb = _apple1.GetComponent<Rigidbody>();
         Rigidbody apple2rb = _apple2.GetComponent<Rigidbody>();
@@ -180,6 +180,8 @@ public class AppleController : MonoBehaviour
         Collider _apple12Coll = _apple12.GetComponent<Collider>();
 
         #endregion
+        //mori
+        if (_blClear) return;
 
         if (collision.gameObject.name == "Tree1" &&  _canTouchTree == true)
         {
@@ -292,7 +294,7 @@ public class AppleController : MonoBehaviour
     //シーン遷移
     public void ReturnGameScene()
     {
-        SceneManager.LoadScene("Mori_MainGameScene");
+        _transitonScene?.LoadScene();
     }
 
     public void ClearJudge()
@@ -308,7 +310,6 @@ public class AppleController : MonoBehaviour
             //カットインを呼び、クリアにする
             Instantiate(clearCutInObj);
             HelpManager.IsClear = true;
-            _playerItem.items.Add(_itemData);
             Debug.Log("クリア");
         }
 
@@ -412,11 +413,13 @@ public class AppleController : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (!_isStart) return;
         offset = gameObject.transform.position - GetMouseWorldPos();
     }
 
     void OnMouseDrag()
     {
+        if (!_isStart) return;
         transform.position = GetMouseWorldPos() + offset;
     }
 

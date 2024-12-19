@@ -30,8 +30,9 @@ public class OtetudaiFade : MonoBehaviour
 
     public HelpInfo _helpInfo;
 
-    [SerializeField,Scene]
-    private string Scene;
+    [SerializeField]
+    private TransitonScene _transitonScene;
+    
     #endregion
 
 
@@ -40,6 +41,7 @@ public class OtetudaiFade : MonoBehaviour
         //初期取得
         _player = GameObject.FindGameObjectWithTag("Player");
         _helpInfo= transform.parent.gameObject.transform.GetComponentInChildren<HelpInfo>();
+        _transitonScene=GetComponent<TransitonScene>();
     }
 
     void Update()
@@ -62,7 +64,7 @@ public class OtetudaiFade : MonoBehaviour
                     //debug
                     //シーン遷移、フェード処理による
                     //ChangeScene.Instance.LoadNextScene(_sceneIndex);
-                    SceneManager.LoadScene(Scene);
+                    _transitonScene?.LoadScene();
                 }
             }
             else

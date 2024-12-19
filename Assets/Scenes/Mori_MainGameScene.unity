@@ -3369,6 +3369,14 @@ PrefabInstance:
       propertyPath: _distance
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8762517738252611919, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
+      propertyPath: _itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
+    - target: {fileID: 9005090139117136986, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
+      propertyPath: _sceneIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9196812617060315784, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6214,7 +6222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3453405abe9494492f5d09dde4bedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClear: 0
 --- !u!114 &1302985373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8789,6 +8796,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -13.82
       objectReference: {fileID: 0}
+    - target: {fileID: 2366703729656186148, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2451849041098655768, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -3.5
@@ -8940,6 +8951,14 @@ PrefabInstance:
     - target: {fileID: 8762517738252611919, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: _distance
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762517738252611919, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
+      propertyPath: _itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: e5139d76d5ba54c48bd34c5c3f98ae9d, type: 2}
+    - target: {fileID: 9005090139117136986, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
+      propertyPath: _sceneIndex
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9196812617060315784, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: m_IsActive
