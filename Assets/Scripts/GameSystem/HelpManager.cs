@@ -30,7 +30,6 @@ public class HelpManager : MonoBehaviour
     private string haveTask;
     private void Update()
     {
-        Debug.Log(IsClear);
         if (haveTask != HavingHelpTask)
         {
             Debug.Log("‚¨è“`‚¢ó’F"+HavingHelpTask);

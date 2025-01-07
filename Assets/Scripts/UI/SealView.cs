@@ -28,7 +28,6 @@ public class SealView : MonoBehaviour
     [SerializeField, Label("オブジェクト用：並べるシールの間隔")]
     private float _sealInterval = 2;
 
-    [System.Obsolete]
     void Start()
     {
         SetSealCanvas();
@@ -41,7 +40,6 @@ public class SealView : MonoBehaviour
     }
 
     [SerializeField, Button]
-    [System.Obsolete]
     public void RefreshCanvasData()
     {
         //子オブジェクトを消去
@@ -56,7 +54,6 @@ public class SealView : MonoBehaviour
     }
 
     [SerializeField, Button]
-    [System.Obsolete]
     public void SetSealCanvas()
     {
         if (_enptyImage != null)
@@ -109,14 +106,13 @@ public class SealView : MonoBehaviour
     }
 
     [SerializeField,Button]
-    [System.Obsolete]
     public void SetSealData()
     {
         //持っているシールを反映する
         for (int i = 0; i < _sealList.items.Count; i++)
         {
             //アイテムIDと同じ場所を見つける
-            var tra = gameObject.transform.FindChild(_sealList.items[i].itemId.ToString());
+            var tra = gameObject.transform.Find(_sealList.items[i].itemId.ToString());
             //アイテム情報、Imageコンポーネントを取得してアイコンを反映
             var spr = _sealList.items[i].icon;
             var obj = tra.GetComponent<Image>();

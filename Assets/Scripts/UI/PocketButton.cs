@@ -35,6 +35,9 @@ public class PocketButton : MonoBehaviour
     [SerializeField, Label("自由帳ウィンドウ")]
     private GameObject _freebook;
 
+    [SerializeField, Label("設定画面アイコン")]
+    private GameObject _optionCanvas;
+
     [SerializeField,Label("プレイヤーデータアセット")]
     private PlaySceneDatas _playSceneDatas;
 
@@ -78,6 +81,7 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
         _isPocketOpen = true;
         _closeButton.SetActive(true);
+        _optionCanvas.SetActive(true);
         _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
  
@@ -90,6 +94,7 @@ public class PocketButton : MonoBehaviour
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
+        _optionCanvas.SetActive(false);
         _playSceneDatas.TapType = PlaySceneTapType.Play;
     }
 
@@ -123,6 +128,7 @@ public class PocketButton : MonoBehaviour
         _pocImage.sprite = _closePocSp;
         _freebook.SetActive(false);
         _picturebook.SetActive(false);
+        _optionCanvas.SetActive(false);
         _playSceneDatas.TapType = PlaySceneTapType.Play;
         PanelManager._isPaused = false;
     }
