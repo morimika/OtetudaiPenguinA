@@ -17,10 +17,11 @@ public class MouseClickDetection : MonoBehaviour
             {
                 hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
             }
-            if (hit.collider.gameObject.tag == "NPC")
-            {
-                Debug.Log(hit.collider.gameObject.tag);
-            }
+            Debug.Log(hit.collider.gameObject.name);
+            //if (hit.collider.gameObject.tag == "NPC")
+            //{
+            //    Debug.Log(hit.collider.gameObject.tag);
+            //}
         }
     }
 }
