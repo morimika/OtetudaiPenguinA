@@ -15,6 +15,9 @@ public class TitleManager : MonoBehaviour
         //  メニューボタン押しの処理を関連付ける
         _menuButton ? .onClick.AddListener(OnMenuButtonClicked);
         //_nextSceneButton ? .onClick.AddListener(OnNextSceneButtonClicked);
+        
+        //タイトルBGMを再生
+        BSJSoundManger.Instance.PlayBGM(0);
     }
 
     /// <summary>

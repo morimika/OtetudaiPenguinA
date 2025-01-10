@@ -59,6 +59,7 @@ public class SceneFadeManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            
             //イメージやボタンなどをクリックしても何も反応しないようにする
             if (EventSystem.current.IsPointerOverGameObject()) return;
             else
@@ -66,8 +67,6 @@ public class SceneFadeManager : MonoBehaviour
                 _isTitle = false;
                 //キャンバスがアクティブかどうかをチェック
                 CanvasActiveCheck();
-                //シーンをロード
-                //SceneManager.LoadScene("Yuria_PlayScene");
 
             }
             
@@ -82,6 +81,7 @@ public class SceneFadeManager : MonoBehaviour
         if (_fadeAnimationCanvas == false)
         {
             _fadeAnimationCanvas.gameObject.SetActive(true);
+            
         }
         else
         {
