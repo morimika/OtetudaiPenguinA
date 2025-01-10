@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using System.Runtime.InteropServices;
 using NaughtyAttributes;
 using System;
-using static UnityEngine.InputManagerEntry;
 
 //Mori Script
 
@@ -44,6 +43,7 @@ public class OtetudaiFade : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _helpInfo= transform.parent.gameObject.transform.GetComponentInChildren<HelpInfo>();
         _transitonScene=GetComponent<TransitonScene>();
+        _boxCollider=GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class OtetudaiFade : MonoBehaviour
         //プレイヤーのポジションを更新、取得
         _playerPos = _player.transform.position;
         //対応するお手伝いを受けていたら
-        if(HelpManager.HavingHelpTask == _helpInfo.kind.ToString()&& HelpManager.IsEndBool[(int)_helpInfo.kind])
+        if (HelpManager.HavingHelpTask == _helpInfo.kind.ToString() || HelpManager.IsEndBool[(int)_helpInfo.kind])
         {
             //距離を測ってプレイヤーと近いか確認
             if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
@@ -78,7 +78,6 @@ public class OtetudaiFade : MonoBehaviour
             }
         }
     }
-
     /// <summary>
     /// 押しているか
     /// </summary>

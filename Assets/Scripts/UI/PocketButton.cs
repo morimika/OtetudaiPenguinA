@@ -20,7 +20,7 @@ public class PocketButton : MonoBehaviour
     private GameObject _closeButton;
  
     [SerializeField, Label("ポケットボタン表示bool")]
-    public bool IsHiddenButton = false;
+    public static bool IsHiddenButton = false;
     [SerializeField, Label("ポケット表示ボタン")]
     private GameObject _pocketButton;
     [SerializeField]
@@ -56,7 +56,7 @@ public class PocketButton : MonoBehaviour
  
     private void Update()
     {
-        if (IsHiddenButton || _playSceneDatas.TapType!=PlaySceneTapType.Play)
+        if (IsHiddenButton)
         {
             _pocketButton.SetActive(false);
         }

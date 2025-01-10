@@ -11,10 +11,14 @@ public class CutInSealAnim : MonoBehaviour
 {
     [SerializeField,Label("シールアイコン")]
     private Image _sealImage;
+    private GameObject _sealImageObj;
     [SerializeField, Label("プレイヤーのシール情報")]
     private ItemList _playerSeals;
     [SerializeField, Label("背景画像")]
     private CanvasGroup _bgCanvasG;
+
+    private GameObject _pocketButtonObj;
+    private GameObject _pocketButtonParent;
 
     private bool _isSlideFin = false;
 
@@ -23,6 +27,9 @@ public class CutInSealAnim : MonoBehaviour
 
     void Start()
     {
+        _pocketButtonParent = GameObject.Find("PocketCanvas");
+        _pocketButtonObj = _pocketButtonParent.transform.Find("PocketMenuButton").gameObject;
+        _sealImageObj = _sealImage.gameObject;
         //選択したフェードを呼び出し
         StartCoroutine(nameof(SlideLine));
     }
@@ -42,8 +49,6 @@ public class CutInSealAnim : MonoBehaviour
         RectTransform rectTransform = GetComponent<RectTransform>();
         CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
         RectTransform sealRectTransform = _sealImage.gameObject.GetComponent<RectTransform>();
-
-        Debug.Log(_sealImage);
 
         //初期位置にセット
         rectTransform.localPosition = new Vector3(1690, 1690, 0);
@@ -74,9 +79,11 @@ public class CutInSealAnim : MonoBehaviour
     {
         //取得
         RectTransform rectTransform = GetComponent<RectTransform>();
-        CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
 
-        canvasGroup.DOFade(0f, 0.3f);
+        //CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
+        ////シール画像のフェードアウト
+        //canvasGroup.DOFade(0f, 0.3f);
+
         //待ったのちラインを狭める
         yield return new WaitForSeconds(0.5f);
         rectTransform.DOScaleX(0.01f, 0.5f);
@@ -86,6 +93,15 @@ public class CutInSealAnim : MonoBehaviour
         //BGフェードアウト
         _bgCanvasG.DOFade(0f, 0.5f);
         _isSlideFin = false;
+
+        //シール　ポケットへ
+        _sealImage.rectTransform.DOAnchorPos(new Vector3(_pocketButtonObj.transform.localPosition.x, _pocketButtonObj.transform.localPosition.y, 0), 0.8f).SetEase(Ease.InBack);
+        yield return new WaitForSeconds(0.6f);
+        PocketButton.IsHiddenButton = false;
+        _pocketButtonObj.transform.DOScale(2.5f, 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        _sealImageObj.SetActive(false);
+        _pocketButtonObj.transform.DOScale(2.0f, 0.2f);
 
         yield return new WaitForSeconds(1);
         //お手伝い状況リセット
