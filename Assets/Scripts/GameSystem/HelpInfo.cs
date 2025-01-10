@@ -9,20 +9,40 @@ using UnityEngine.SceneManagement;
 
 public class HelpInfo : HelpManager
 {
+    /// <summary>
+    /// 各お手伝い内容
+    /// </summary>
     [Header("お手伝い内容")]
     public HelpKind kind;
     private Vector3 _playerPos;
     private GameObject _player;
+    private Player _playerScr;
 
     private bool _onMouse = false;
     private bool _isIn = false;
 
     private CharactorTalk charactorTalk;
 
+    [SerializeField]
+    private float _distance = 4;
+    [SerializeField]
+    private PlaySceneDatas _playSceneDatas;
+
+    [SerializeField,Label("取得できるシールを設定")]
+    private ItemData _itemData;
+    [SerializeField]
+    private ItemList _playerItem;
+
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         charactorTalk=GetComponent<CharactorTalk>();
+        _playerScr=_player.GetComponent<Player>();
+        //まだお手伝いが終わっていなければ
+        if(!IsEndBool[(int)kind])
+        {
+            charactorTalk.QuestText();
+        }
     }
 
     void Update()
@@ -31,36 +51,47 @@ public class HelpInfo : HelpManager
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認
         //範囲内に入ったとき
-        if (Vector3.Distance(this.transform.position, _playerPos) <= 3)
+        if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
         {
             //入った1フレームだけテキスト処理呼び
-            if (!_isIn)
+            if (!_isIn && !IsEndBool[(int)kind])
             {
                 charactorTalk.HelloText();
                 _isIn = true;
             }
-            //対象をクリックしたとき
-            if (Input.GetMouseButtonDown(0) && _onMouse)
+            else if(!_isIn && IsEndBool[(int)kind])
             {
+                charactorTalk.EndText();
+                _isIn = true;
+            }
+            //対象をクリックしたとき(話しかけたとき)
+            if (Input.GetMouseButtonDown(0) && _onMouse && _playSceneDatas.TapType==PlaySceneTapType.Play && !IsEndBool[(int)kind])    
+            {
+                _playerScr.Moov_Finish();
                 //既に成功している場合
-                if (IsClear)
+                if (IsClear==true && HavingHelpTask == kind.ToString())
                 {
                     charactorTalk.ClearText();
-                    HavingHelpTask = "";
+                    _playerItem.items.Add(_itemData);
+                    HavingHelpTask = null;
                 }
-                //まだ成功していないしていない
+                //まだ成功していない
                 //受注テキスト処理
-                else
+                else if(IsClear==false)
                 {
                     charactorTalk.OrderText();
-                    HavingHelpTask = kind.ToString();
                 }
             }
         }
         //出るとき1フレームだけ呼び
-        else if (Vector3.Distance(this.transform.position, _playerPos) > 3&&_isIn)
+        else if (Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn && !IsEndBool[(int)kind])
         {
             charactorTalk.ByeText();
+            _isIn = false;
+        }
+        else if(Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn && IsEndBool[(int)kind])
+        {
+            charactorTalk.Stay();
             _isIn = false;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using NaughtyAttributes;
+using UnityEngine.UIElements;
 
 //Mori Script
 
@@ -13,7 +14,14 @@ public class CutInFade : MonoBehaviour
     public string fadeKind;
     public static List<string> fadeKinds => new List<string>() { nameof(Slide), nameof(Line) };
 
-    private bool _isFadeFin = false;
+    public static bool IsFadeFin = false;
+
+    [SerializeField]
+    private PlaySceneDatas _playSceneDatas;
+
+
+    [SerializeField]
+    private bool _isClear = false;
 
     void Start()
     {
@@ -23,7 +31,7 @@ public class CutInFade : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)&&_isFadeFin)
+        if(Input.GetMouseButtonDown(0)&&IsFadeFin)
         {
             StartCoroutine(fadeKind+"Out");
         }
@@ -52,7 +60,7 @@ public class CutInFade : MonoBehaviour
         canvasGroup.DOFade(1, 1f);
 
         yield return new WaitForSeconds(1.2f);
-        _isFadeFin =true;
+        IsFadeFin =true;
 
         yield return null;
     }
@@ -66,9 +74,14 @@ public class CutInFade : MonoBehaviour
         canvasGroup.DOFade(0, 1f);
         //スライドアウト
         rectTransform.DOAnchorPosX(-3470, 1f).SetEase(Ease.InOutQuart);
-        _isFadeFin = false;
+        IsFadeFin = false;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        if(!_isClear)
+        {
+            _playSceneDatas.TapType = PlaySceneTapType.Play;
+        }
+        yield return new WaitForSeconds(0.5f);
         DestroyThis();
     }
     #endregion
@@ -80,6 +93,7 @@ public class CutInFade : MonoBehaviour
         GameObject penguin = GameObject.Find("Penguin");
         CanvasGroup canvasGroup = penguin.GetComponent<CanvasGroup>();
         RectTransform rectTransform = GetComponent<RectTransform>();
+
 
         //初期位置にセット
         rectTransform.localPosition = new Vector3(3470, 0, 0);
@@ -97,7 +111,7 @@ public class CutInFade : MonoBehaviour
         canvasGroup.DOFade(1, 0.7f);
 
         yield return new WaitForSeconds(0.3f);
-        _isFadeFin = true;
+        IsFadeFin = true;
     }
 
     public IEnumerator LineOut()
@@ -114,9 +128,13 @@ public class CutInFade : MonoBehaviour
         rectTransform.DOScaleY(0.025f, 0.5f);
         //スライドアウト
         rectTransform.DOAnchorPosX(-3470, 1f).SetEase(Ease.InOutQuart);
-        _isFadeFin = false;
-
-        yield return new WaitForSeconds(2);
+        IsFadeFin = false;
+        yield return new WaitForSeconds(1);
+        if (!_isClear)
+        {
+            _playSceneDatas.TapType = PlaySceneTapType.Play;
+        }
+        yield return new WaitForSeconds(0.5f);
         DestroyThis();
     }
     #endregion

@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
  
@@ -22,6 +23,11 @@ public class PocketButton : MonoBehaviour
     public bool IsHiddenButton = false;
     [SerializeField, Label("ポケット表示ボタン")]
     private GameObject _pocketButton;
+    [SerializeField]
+    private Sprite _openPocSp;
+    [SerializeField]
+    private Sprite _closePocSp;
+    private Image _pocImage;
 
     [SerializeField, Label("絵本ウィンドウ")]
     private GameObject _picturebook;
@@ -42,11 +48,12 @@ public class PocketButton : MonoBehaviour
         _isPocketOpen = false;
         _closeButton.SetActive(false);
         IsHiddenButton = false;
+        _pocImage=_pocketButton.GetComponent<Image>();
     }
  
     private void Update()
     {
-        if (IsHiddenButton)
+        if (IsHiddenButton || _playSceneDatas.TapType!=PlaySceneTapType.Play)
         {
             _pocketButton.SetActive(false);
         }
@@ -61,10 +68,17 @@ public class PocketButton : MonoBehaviour
     /// </summary>
     public void OpenPocket()
     {
-        _pocketUI.DOAnchorPos(new Vector2(0,0),0.5f);
-        _isPocketOpen=true;
+        StartCoroutine(OpenPoketSp());
+    }
+
+    public IEnumerator OpenPoketSp()
+    {
+        _pocImage.sprite = _openPocSp;
+        yield return new WaitForSeconds(0.5f);
+        _pocketUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
+        _isPocketOpen = true;
         _closeButton.SetActive(true);
-        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
  
     /// <summary>
@@ -72,10 +86,11 @@ public class PocketButton : MonoBehaviour
     /// </summary>
     public void ClosePocket()
     {
+        _pocImage.sprite = _closePocSp;
         _pocketUI.DOAnchorPos(new Vector2(600, 0), 0.5f);
         _isPocketOpen = false;
         _closeButton.SetActive(false);
-        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
     }
 
     /// <summary>
@@ -84,9 +99,9 @@ public class PocketButton : MonoBehaviour
     public void ShowPictureBook()
     {
         _picturebook.SetActive(true);
-        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
         PanelManager._isPaused = true;
         ClosePocket();
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
 
     /// <summary>
@@ -95,9 +110,9 @@ public class PocketButton : MonoBehaviour
     public void ShowFreeBook()
     {
         _freebook.SetActive(true);
-        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
         PanelManager._isPaused = true;
         ClosePocket();
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
 
     /// <summary>
@@ -105,9 +120,10 @@ public class PocketButton : MonoBehaviour
     /// </summary>
     public void CloseWindow()
     {
+        _pocImage.sprite = _closePocSp;
         _freebook.SetActive(false);
         _picturebook.SetActive(false);
-        _playSceneDatas.TapType.HasFlag(PlaySceneTapType.Pose);
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
         PanelManager._isPaused = false;
     }
 

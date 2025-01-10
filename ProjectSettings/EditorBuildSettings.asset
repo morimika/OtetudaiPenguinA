@@ -14,7 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mori_MainGameScene.unity
     guid: 83949cad895b5054d909f11ed5c03972
+  - enabled: 0
+    path: Assets/Member/Watabe/WatanabeTestScene.unity
+    guid: 50eb3d13d8b347e4a9e4bb68ea5c945c
   - enabled: 1
-    path: Assets/Member/Watabe/Scene/WatanabeTestScene.unity
-    guid: af609be3d4317bc458e410be4866dc7a
+    path: Assets/Member/Saitoyuu/minigame1.unity
+    guid: 63d7baa2b0f88e449892e130c3f9e4c1
+  - enabled: 1
+    path: Assets/Member/Matsukawa/Minigame_1/Minigame_AppleScene.unity
+    guid: fea82d494e9e69744b1bfbafec01329e
+  - enabled: 0
+    path: Assets/Taguchi/TaguchiUnityTest.unity
+    guid: a750b0cc2c2138f4faae71143dbfd92e
   m_configObjects: {}

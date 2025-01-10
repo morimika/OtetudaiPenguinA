@@ -16,7 +16,7 @@ public class SealView : MonoBehaviour
     private ItemList _allSealList;
 
     [SerializeField, Label("所持シールリスト")]
-    private ItemList _sealList;
+    public ItemList _sealList;
 
     [SerializeField, Header("空のイメージ")]
     private Image _enptyImage;
@@ -35,7 +35,7 @@ public class SealView : MonoBehaviour
     }
 
     [SerializeField,Button]
-    private void ClearSeals()
+    public void ClearSeals()
     {
         _sealList.items.Clear();
     }

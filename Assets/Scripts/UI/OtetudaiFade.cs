@@ -13,6 +13,7 @@ using System;
 
 public class OtetudaiFade : MonoBehaviour
 {
+    #region 変数作成
     private Vector3 _playerPos;
     private GameObject _player;
 
@@ -25,35 +26,52 @@ public class OtetudaiFade : MonoBehaviour
     private int _sceneIndex;
 
     [SerializeField]
-    private FadeView _fadeView;
+    private float _distance = 4;
+
+    public HelpInfo _helpInfo;
+
+    [SerializeField]
+    private TransitonScene _transitonScene;
+    
+    #endregion
+
 
     void Start()
     {
+        //初期取得
         _player = GameObject.FindGameObjectWithTag("Player");
-        //_fadeView= GameObject.Find("FadeView").GetComponent<FadeView>();
+        _helpInfo= transform.parent.gameObject.transform.GetComponentInChildren<HelpInfo>();
+        _transitonScene=GetComponent<TransitonScene>();
     }
 
     void Update()
     {
-        //プレイヤーのポジションを更新
+        //プレイヤーのポジションを更新、取得
         _playerPos = _player.transform.position;
-        //距離を測って物と近いか確認
-        if (Vector3.Distance(this.transform.position,_playerPos)<=3)
+        //対応するお手伝いを受けていたら
+        if(HelpManager.HavingHelpTask == _helpInfo.kind.ToString())
         {
-            //押せるUI出現
-            _action.SetActive(true);
-            //物をクリックしたとき
-            if (Input.GetMouseButtonDown(0) && _onMouse)
+            //距離を測ってプレイヤーと近いか確認
+            if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
             {
-                //フェードを待ち、遷移する
-                PlayerSetPos.PlayerPos = _playerPos;
-                //ChangeScene.Instance.LoadNextScene(_sceneIndex);
-                SceneManager.LoadScene("WatanabeTestScene");
+                //押せるUI出現
+                _action.SetActive(true);
+                //物をクリックしたとき
+                if (Input.GetMouseButtonDown(0) && _onMouse)
+                {
+                    //フェードを待ち、遷移する
+                    PlayerSetPos.PlayerPos = _playerPos;
+                    //debug
+                    //シーン遷移、フェード処理による
+                    //ChangeScene.Instance.LoadNextScene(_sceneIndex);
+                    _transitonScene?.LoadScene();
+                }
             }
-        }
-        else
-        {
-            _action.SetActive(false);
+            else
+            {
+                //debug
+                _action.SetActive(false);
+            }
         }
     }
 

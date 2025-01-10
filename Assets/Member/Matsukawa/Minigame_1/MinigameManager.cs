@@ -19,11 +19,17 @@ public class MinigameManager : MonoBehaviour
     // ゲームスタート時にゲームスタートイメージを表示
     // ゲーム終了時、失敗したらミスイメージ、成功したらクリアイメージを表示
 
+    [SerializeField] GameObject startQ;
     [SerializeField] Image startImage;
+    [SerializeField] Image bg_startImage;
     [SerializeField] Image finishClearImage;
     [SerializeField] Image finishMissImage;
 
     [SerializeField] Vector2 startImageTargetPos;
+
+    //mori
+    [SerializeField]
+    private AppleController _appleController;
 
     bool isMiss = false;
     // bool isClear = false;
@@ -33,9 +39,11 @@ public class MinigameManager : MonoBehaviour
     {
         // startImageの現在位置を取得
         RectTransform startImageRect = startImage.GetComponent<RectTransform>();
-        // スタートイメージが表示されてから秒後に左上に移動
-        startImage.gameObject.SetActive(true);
-        DOVirtual.DelayedCall(1, () => MoveImage(startImageRect, startImageTargetPos));
+        // 
+        startQ.SetActive(true);
+        DOVirtual.DelayedCall(3, () => MoveImage(startImageRect, startImageTargetPos, bg_startImage));
+        //mori
+        Invoke(nameof(StartGame), 3);
     }
 
     void Update()
@@ -47,9 +55,19 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
-    void MoveImage(RectTransform currentPos, Vector2 targetPos)
+    void MoveImage(RectTransform currentPos, Vector2 targetPos, Image im)
     {
-        // 目的位置(RectTransform)に向かって0.8秒かけて移動させる
-        currentPos.DOAnchorPos(targetPos, 0.5f);
+        // 目的位置(RectTransform)に向かって1.0秒かけて移動させる
+        currentPos.DOAnchorPos(targetPos, 1.0f);
+        // サイズを０．８倍する
+        currentPos.DOScale(new Vector3(0.7f, 0.7f, 0.7f), 1);
+        // スタートイメージの背景をフェードアウト
+        im.DOFade(0, 1);
+    }
+
+    //mori 
+    private void StartGame()
+    {
+        _appleController._isStart=true;
     }
 }
