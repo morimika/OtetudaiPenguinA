@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kind: 0
-  _distance: 6
+  _distance: 4
   _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
   _itemData: {fileID: 0}
   _playerItem: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}

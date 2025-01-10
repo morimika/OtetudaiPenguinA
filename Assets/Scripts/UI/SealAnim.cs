@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 
+
+//Mori Script
+
 [RequireComponent(typeof(Image))]
 public class SealAnim : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {

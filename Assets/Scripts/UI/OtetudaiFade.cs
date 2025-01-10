@@ -22,8 +22,8 @@ public class OtetudaiFade : MonoBehaviour
     [SerializeField]
     private GameObject _action;
 
-    [SerializeField, Scene]
-    private int _sceneIndex;
+    //[SerializeField, Scene]
+    //private int _sceneIndex;
 
     [SerializeField]
     private float _distance = 4;

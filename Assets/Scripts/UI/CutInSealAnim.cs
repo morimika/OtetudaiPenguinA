@@ -95,19 +95,23 @@ public class CutInSealAnim : MonoBehaviour
         _isSlideFin = false;
 
         //シール　ポケットへ
+        //ポケットへ移動
         _sealImage.rectTransform.DOAnchorPos(new Vector3(_pocketButtonObj.transform.localPosition.x, _pocketButtonObj.transform.localPosition.y, 0), 0.8f).SetEase(Ease.InBack);
         yield return new WaitForSeconds(0.6f);
+        //移動中にポケット出現
         PocketButton.IsHiddenButton = false;
+        //触れる瞬間にちょっと大きくなって
         _pocketButtonObj.transform.DOScale(2.5f, 0.2f);
         yield return new WaitForSeconds(0.2f);
+        //戻る　そのときにシールも非表示
         _sealImageObj.SetActive(false);
         _pocketButtonObj.transform.DOScale(2.0f, 0.2f);
+        yield return new WaitForSeconds(0.5f);
+        //ポケットを非表示
+        PocketButton.IsHiddenButton = true;
 
         yield return new WaitForSeconds(1);
-        //お手伝い状況リセット
-        HelpManager.HavingHelpTask = "";
-        HelpManager.IsClear = false;
-        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        //プレハブ削除
         DestroyThis();
     }
     #endregion
