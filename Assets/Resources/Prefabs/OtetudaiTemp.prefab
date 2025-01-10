@@ -447,7 +447,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _action: {fileID: 5833020918408329139}
-  _sceneIndex: 1
   _distance: 4
   _helpInfo: {fileID: 0}
   _transitonScene: {fileID: 0}
@@ -1279,13 +1278,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
-  _helloTxt: "\u3053\u3093\u306B\u3061\u308F"
+  _helloTxt: "\u8FD1\u3065\u3044\u305F\u6642\u306E\u30C6\u30AD\u30B9\u30C8\u3000\u3053\u3093\u306B\u3061\u308F"
   _orderTxt:
+  - "\u4F9D\u983C\u30C6\u30AD\u30B9\u30C8"
   - "\u3046\u3051\u3066\u304F\u308C\u308B\u304B\uFF1F"
   - "\u3084\u3063\u305F\u30FC"
   _clearTxt:
-  - "\u3042\u308A\u304C\u3068\u3046\n\u305F\u3059\u304B\u3063\u305F\u3088"
-  _endTxt: "\u3042\u308A\u304C\u3068\u3046\u306B\u3083"
+  - "\u5B8C\u4E86\u30C6\u30AD\u30B9\u30C8\n\u3042\u308A\u304C\u3068\u3046\n\u305F\u3059\u304B\u3063\u305F\u3088"
+  _endTxt: "\u304A\u624B\u4F1D\u3044\u7D42\u4E86\u5F8C\u8FD1\u3065\u3044\u305F\u3068\u304D\u306E\u30C6\u30AD\u30B9\u30C8\u3000\u3042\u308A\u304C\u3068\u3046\u306B\u3083"
   tmpText: {fileID: 8397198804910425671}
   _txtSpeed: 0.05
   _beforeSize: {x: 25, y: 12}
