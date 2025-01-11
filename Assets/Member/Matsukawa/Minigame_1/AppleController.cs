@@ -9,14 +9,12 @@ using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using UnityEditor.SearchService;
+using System.ComponentModel;
 
 // Matsukawa
 
 public class AppleController : MonoBehaviour
 {
-    // 消えたAppleの数を数える
-    // 取ったAppleの数が15個だったら達成それ以外の数字なら失敗をgameManagerに伝える
-
     #region インスペクター上
     public static AppleController instance;
     public        TextMeshProUGUI textBasketNum;
@@ -35,6 +33,11 @@ public class AppleController : MonoBehaviour
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple11;
     [Foldout("りんごのrb"), SerializeField] protected GameObject _apple12;
 
+    // 取得するりんごの数を減らすための施策
+    [SerializeField] protected GameObject _ap1;
+    [SerializeField] protected GameObject _ap2;
+    [SerializeField] protected GameObject _ap3;
+
     [Foldout("木のpos"), SerializeField] protected Transform _tree1pos;
     [Foldout("木のpos"), SerializeField] protected Transform _tree2pos;
     [Foldout("木のpos"), SerializeField] protected Transform _tree3pos;
@@ -48,7 +51,7 @@ public class AppleController : MonoBehaviour
     [SerializeField] private Vector3 _basketPos;
     [SerializeField] private Vector3 _basketPos2;   // 上から入っているように見せるためのpos2
 
-    // かごの中にあるリンゴ
+    // かごにあるリンゴの数によってイラストを変える
     [Foldout("かごの中にあるりんご"), SerializeField] private GameObject _appleInbasket1; // かごのリンゴ 10 以上で表示　リンゴは１つ
     [Foldout("かごの中にあるりんご"), SerializeField] private GameObject _appleInbasket2; // かごのリンゴ 13 以上で表示　リンゴは２つ
     [Foldout("かごの中にあるりんご"), SerializeField] private GameObject _appleInbasket3; // かごのリンゴ 15 以上で表示　リンゴは３つ
@@ -76,7 +79,11 @@ public class AppleController : MonoBehaviour
 
     public void Start()
     {
+        // かご内のりんごの数を確認
         CountBasketAppleNum();
+
+        // りんごをインスタンス化
+        GenerateApple();
 
         _scissorCuttingAnimation = gameObject.GetComponent<Animator>();
         _scissorCuttingAnimation.GetComponent<Animator>().enabled = false;
@@ -85,12 +92,36 @@ public class AppleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 成功判定
         ClearJudge();
 
         // かごの中にある数を更新する
         CountBasketAppleNum();
         // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
         ShowInBasketApples();
+
+    }
+
+    // りんごをインスタンス化
+    public void GenerateApple()
+    {
+        // 木１のりんご
+        Instantiate(_ap1, new Vector3(-5.7f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        Instantiate(_ap1, new Vector3(-3.3f, 0.6f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        Instantiate(_ap1, new Vector3(-5.1f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+        Instantiate(_ap1, new Vector3(-3.9f, 2f, 0), Quaternion.identity, _tree1pos).SetActive(true);
+
+        // 木２のりんご
+        Instantiate(_ap2, new Vector3(-0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+        Instantiate(_ap2, new Vector3(0.8f, -1.1f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+        Instantiate(_ap2, new Vector3(0, 0.5f, 0), Quaternion.identity, _tree2pos).SetActive(true);
+
+        // 木３のりんご
+        Instantiate(_apple8, new Vector3(3.3f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        Instantiate(_apple9, new Vector3(5.7f, 0.6f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        Instantiate(_apple10, new Vector3(3.9f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        Instantiate(_apple11, new Vector3(5.1f, 2f, 0), Quaternion.identity, _tree3pos).SetActive(true);
+        Instantiate(_apple12, new Vector3(4.5f, 0.4f, 0), Quaternion.identity, _tree3pos).SetActive(true);
 
     }
 
