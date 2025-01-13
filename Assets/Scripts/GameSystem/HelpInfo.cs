@@ -25,6 +25,7 @@ public class HelpInfo : HelpManager
 
     [SerializeField]
     private float _distance = 4;
+    private BoxCollider2D _boxCollider;
     [SerializeField]
     private PlaySceneDatas _playSceneDatas;
 
@@ -38,8 +39,10 @@ public class HelpInfo : HelpManager
         _player = GameObject.FindGameObjectWithTag("Player");
         charactorTalk=GetComponent<CharactorTalk>();
         _playerScr=_player.GetComponent<Player>();
+        _boxCollider=GetComponent<BoxCollider2D>();
+        _boxCollider.enabled = false;
         //まだお手伝いが終わっていなければ
-        if(!IsEndBool[(int)kind])
+        if (!IsEndBool[(int)kind])
         {
             charactorTalk.QuestText();
         }
@@ -56,6 +59,7 @@ public class HelpInfo : HelpManager
             //入った1フレームだけテキスト処理呼び
             if (!_isIn && !IsEndBool[(int)kind])
             {
+                _boxCollider.enabled = true;
                 charactorTalk.HelloText();
                 _isIn = true;
             }
@@ -86,13 +90,19 @@ public class HelpInfo : HelpManager
         //出るとき1フレームだけ呼び
         else if (Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn && !IsEndBool[(int)kind])
         {
+            _boxCollider.enabled = false;
             charactorTalk.ByeText();
             _isIn = false;
         }
         else if(Vector3.Distance(this.transform.position, _playerPos) > _distance && _isIn && IsEndBool[(int)kind])
         {
+            _boxCollider.enabled = false;
             charactorTalk.Stay();
             _isIn = false;
+        }
+        else
+        {
+            _boxCollider.enabled = false;
         }
     }
 

@@ -8,7 +8,7 @@ using UnityEngine;
 public class HelpManager : MonoBehaviour
 {
     /// <summary>
-    /// ï¿½ó’’ï¿½ï¿½Ìƒ^ï¿½Xï¿½N
+    /// ó’’†‚Ìƒ^ƒXƒN
     /// </summary>
     public static string HavingHelpTask;
     public enum HelpKind
@@ -26,14 +26,13 @@ public class HelpManager : MonoBehaviour
         };
 
 #if UNITY_EDITOR
-    //ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½Åƒï¿½ï¿½Oï¿½ï¿½ï¿½oï¿½ï¿½
+    //‚¨è“`‚¢‚ğXV‚µ‚½ƒ^ƒCƒ~ƒ“ƒO‚ÅƒƒO‚ğo‚·
     private string haveTask;
     private void Update()
     {
-        //Debug.Log(IsClear);
         if (haveTask != HavingHelpTask)
         {
-            Debug.Log("ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ó’F"+HavingHelpTask);
+            Debug.Log("‚¨è“`‚¢ó’F"+HavingHelpTask);
         }
         haveTask = HavingHelpTask;
     }
