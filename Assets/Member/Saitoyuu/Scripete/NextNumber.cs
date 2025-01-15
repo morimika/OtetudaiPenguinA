@@ -46,11 +46,11 @@ public class NextNumber : MonoBehaviour
     {
         Debug.Log("óvëfêî");
         Debug.Log(_count);
-        if ((_count == 10) || (_count == 29) || (_count == 59))
+        if ((_count == 10) || (_count == 29) || (_count == 58))
             Invoke(("NextActive"), 2.0f);
 
         //mori
-        if (_count == 108)
+        if (_count == 107)
         {
             Invoke(nameof(Clear), 1);
         }

@@ -8,7 +8,6 @@ public class Follow : MonoBehaviour
 {
     private Vector3 mousePos;
     private Vector3 pos;
-
     [SerializeField,Range(0f,0.1f)] float _followStrength ;
     void Update()
     {
