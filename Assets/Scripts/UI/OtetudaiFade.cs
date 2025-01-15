@@ -22,11 +22,12 @@ public class OtetudaiFade : MonoBehaviour
     [SerializeField]
     private GameObject _action;
 
-    [SerializeField, Scene]
-    private int _sceneIndex;
+    //[SerializeField, Scene]
+    //private int _sceneIndex;
 
     [SerializeField]
     private float _distance = 4;
+    private BoxCollider2D _boxCollider;
 
     public HelpInfo _helpInfo;
 
@@ -42,6 +43,7 @@ public class OtetudaiFade : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _helpInfo= transform.parent.gameObject.transform.GetComponentInChildren<HelpInfo>();
         _transitonScene=GetComponent<TransitonScene>();
+        _boxCollider=GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -49,13 +51,14 @@ public class OtetudaiFade : MonoBehaviour
         //プレイヤーのポジションを更新、取得
         _playerPos = _player.transform.position;
         //対応するお手伝いを受けていたら
-        if(HelpManager.HavingHelpTask == _helpInfo.kind.ToString())
+        if (HelpManager.HavingHelpTask == _helpInfo.kind.ToString() || HelpManager.IsEndBool[(int)_helpInfo.kind])
         {
             //距離を測ってプレイヤーと近いか確認
             if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)
             {
                 //押せるUI出現
                 _action.SetActive(true);
+                _boxCollider.enabled = true;
                 //物をクリックしたとき
                 if (Input.GetMouseButtonDown(0) && _onMouse)
                 {
@@ -71,10 +74,10 @@ public class OtetudaiFade : MonoBehaviour
             {
                 //debug
                 _action.SetActive(false);
+                _boxCollider.enabled = false;
             }
         }
     }
-
     /// <summary>
     /// 押しているか
     /// </summary>

@@ -13,6 +13,11 @@ public class LoadNextScene : MonoBehaviour
     /// </summary>
     public void LoadScene()
     {
+        
         ChangeScene.Instance.LoadNextScene(_sceneIndex);
+        
+        
+        //=============テスト
+        //BSJSoundManger.Instance.PlayBGM(1);
     }
 }

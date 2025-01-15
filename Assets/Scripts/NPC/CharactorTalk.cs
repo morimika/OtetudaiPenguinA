@@ -280,17 +280,35 @@ public class CharactorTalk : MonoBehaviour
                 //ボタンを非表示
                 _clearButton.gameObject.SetActive(false);
                 await Task.Delay(2000);
-                //完了かっといん
+                //シール獲得カットイン
                 cutInManager.SealCutIn();
 
+                //自由帳処理(自動)
+                //自由帳出現
+
+                //指定の物を大きくフェードインして　指定のものとは？
+
+                //縮小しながら位置へ
+
+                //少し見せてから自由帳フェードアウト
+
+
+                //終わったら
                 //プレイヤーにフォーカスを戻す
                 _virtualCamera.Follow = _player.transform;
-
+                //カメラズームアウト
                 await DOVirtual.Float(
                     from: 4, to: 5, duration: 1,
                     //値が変わった時の処理
                     onVirtualUpdate: (tweenValue)
                     => { _virtualCamera.m_Lens.OrthographicSize = tweenValue; });
+
+                //お手伝い状況リセット
+                HelpManager.HavingHelpTask = null;
+                HelpManager.IsClear = false;
+                //ポーチ出現
+                PocketButton.IsHiddenButton = false;
+                playSceneDatas.TapType = PlaySceneTapType.Play;
 
                 //カメラ制御のゲームオブジェクトを削除
                 Destroy(gameObj.gameObject);

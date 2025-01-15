@@ -62,7 +62,8 @@ public class Player : MonoBehaviour
             //押したとき
             if (Input.GetMouseButtonDown(0))
             {
-                //SoundManager.Instance.PlaySE(SESoundData.SE.Click);
+                //クリックSEを鳴らす
+                BSJSoundManger.Instance.PlaySE(0);
                 //ボタン系を押さないときは全て処理しない
                 if(EventSystem.current.IsPointerOverGameObject()) return;
                 
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour
                     //タップを加算
                     tap++;
                     move = true;
+                   
                     Debug.Log($"tap Count:{tap}");
                     //タップした間隔を見る
                     Invoke("Tap", _tapInterval);
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
                     //走る時にコライダーを再設定する
                     boxCol2D.size = new Vector2(1, 1.4f);
                 }
+                
             }
             //走っている時
             else
@@ -141,25 +144,36 @@ public class Player : MonoBehaviour
         if (tap == 1)
         {
             tap = 0;
+            //歩く足音
+            BSJSoundManger.Instance.PlaySE(1);
             return;
         }
 
         //ダッシュ状態にするかどうか
-        //else
         if(tap == 2)
         {
             run = true;
             sprite_C = false;
             tap = 0;
+            //走るSE
+            BSJSoundManger.Instance.PlaySE(2);
             return;
         }
+        //連打したら無視する
+        if(tap <= 3)
+        {
+            run = false;
+            tap = 0;
+            return;
+        }
+        
     }
 
     //アニメーションの管理用
     void Move_Direction(bool flag)
     {
        
-           sprite_C = true;
+        sprite_C = true;
         //どの方向に進んでいるか
         Vector3 dis = transform.position - target_Point;
         //絶対値を計算
