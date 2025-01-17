@@ -35,9 +35,8 @@ public class ChangeScene : SingletonMonoBehaviour<ChangeScene>
         //  シーン呼び出しを行う
         SceneManager.LoadSceneAsync(sceneIndex);
         
-        BSJSoundManger.Instance.PlayBGM(1);
-        
         yield return new WaitForSeconds(1);
+        
         Debug.Log("call fade in");
         //  フェードイン（画面内のパネルが外に出る）
         yield return StartCoroutine(_fadeAnimation.FadeInASync());
