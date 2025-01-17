@@ -153,6 +153,7 @@ public class CharactorTalk : MonoBehaviour
     {
         //_boxSR.sprite = _txtboxSp;
         _orderButton.interactable = false;
+        PocketButton.IsHiddenButton = true;
         //最初に話しかけた
         if (_orderIndex == 0)
         {
@@ -209,6 +210,7 @@ public class CharactorTalk : MonoBehaviour
             Destroy(gameObj.gameObject);
 
             //タスク受注
+            PocketButton.IsHiddenButton = false;
             HelpManager.HavingHelpTask = helpInfo.kind.ToString();
             HelpManager.IsClear = false;
 
@@ -235,6 +237,7 @@ public class CharactorTalk : MonoBehaviour
     {
         //_boxSR.sprite = _txtboxSp;
         _clearButton.interactable = false;
+        PocketButton.IsHiddenButton = true;
 
         if (_clearIndex == 0)
         {
@@ -304,6 +307,7 @@ public class CharactorTalk : MonoBehaviour
                 Destroy(gameObj.gameObject);
 
                 _clearIndex = 0;
+                PocketButton.IsHiddenButton = false;
 
                 //以降会話不可
                 HelpManager.IsEndBool[(int)helpInfo.kind] = true;

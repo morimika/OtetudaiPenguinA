@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using NaughtyAttributes;
+using UnityEditor;
 
 //Mori Script
 
@@ -17,7 +18,7 @@ public class CutInSealAnim : MonoBehaviour
     [SerializeField, Label("背景画像")]
     private CanvasGroup _bgCanvasG;
 
-    private GameObject _pocketButtonObj;
+    public static GameObject _pocketButtonObj;
     private GameObject _pocketButtonParent;
 
     private bool _isSlideFin = false;
@@ -101,6 +102,7 @@ public class CutInSealAnim : MonoBehaviour
     public IEnumerator SlideLineOut()
     {
         _isSlideFin = false;
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
         //取得
         RectTransform rectTransform = GetComponent<RectTransform>();
 
@@ -123,6 +125,7 @@ public class CutInSealAnim : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         //移動中にポケット出現
         PocketButton.IsHiddenButton = false;
+        _pocketButtonObj.GetComponent<Button>().enabled = false;
         //触れる瞬間にちょっと大きくなって
         _pocketButtonObj.transform.DOScale(2.5f, 0.2f);
         yield return new WaitForSeconds(0.2f);
@@ -131,16 +134,17 @@ public class CutInSealAnim : MonoBehaviour
         _pocketButtonObj.transform.DOScale(2.0f, 0.2f);
         yield return new WaitForSeconds(0.5f);
         //ポケットを非表示
+        _pocketButtonObj.GetComponent<Button>().enabled = true;
         PocketButton.IsHiddenButton = true;
 
         //自由帳処理(自動)
         //自由帳出現
-        var obj = Instantiate(_freeBookObj) as GameObject;
+        var obj = Instantiate(_freeBookObj,new Vector2(Camera.main.transform.position.x+16,Camera.main.transform.position.y),Quaternion.identity) as GameObject;
         var _lastObjCan = obj.GetComponent<CanvasGroup>();
         _freeBookPicCanList.Add(_lastObjCan);
         for (int i = 0; i < _playerSeals.items.Count; i++)
         {
-            _lastObj = Instantiate(_freeBookPicList[_playerSeals.items[i].itemId]) as GameObject;
+            _lastObj = Instantiate(_freeBookPicList[_playerSeals.items[i].itemId], new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y), Quaternion.identity) as GameObject;
             _lastObjCan =_lastObj.GetComponent<CanvasGroup>();
             _freeBookPicCanList.Add(_lastObjCan);
             if (_playerSeals.items.Count==4)
@@ -154,7 +158,7 @@ public class CutInSealAnim : MonoBehaviour
         canvasG.alpha = 0;
         _lastObj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         //移動
-        obj.transform.DOMoveX(0, 0.5f);
+        obj.transform.DOMoveX(Camera.main.transform.position.x, 0.5f);
         yield return new WaitForSeconds(1);
         //指定の物を大きくフェードインして縮小しながら位置へ　指定のものとは？ 0.02-0.008
         canvasG.DOFade(1, 0.3f);
@@ -178,6 +182,8 @@ public class CutInSealAnim : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1);
+        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        PocketButton.IsHiddenButton = false;
         for (int i=0;i< _freeBookPicCanList.Count;i++)
         {
             Destroy(_freeBookPicCanList[i].gameObject);

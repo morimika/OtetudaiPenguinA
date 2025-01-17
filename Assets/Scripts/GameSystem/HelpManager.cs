@@ -14,13 +14,15 @@ public class HelpManager : MonoBehaviour
     public enum HelpKind
     {
         AppleCut,
-        WaterCar,
         KanjiHarvest,
+        ClockRepair,
+        CakeMake,
     }
     public static bool IsClear = false;
     public static List<bool> IsEndBool 
         = new List<bool>
         {   false, 
+            false, 
             false, 
             false 
         };
