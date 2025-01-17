@@ -1326,14 +1326,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgmClips:
-  - {fileID: 8300000, guid: 629554e89b51946c5bf5759e6b6e1be7, type: 3}
-  - {fileID: 8300000, guid: b08de89bb8e1f4a69975b6462a707dcc, type: 3}
+  - {fileID: 8300000, guid: d00222ebafa964688802d6d0b8e96065, type: 3}
+  - {fileID: 8300000, guid: 890e91ece99a24bd489092ea0573e2db, type: 3}
+  - {fileID: 8300000, guid: cb900ca5869694493aef2828d2d899d6, type: 3}
+  - {fileID: 8300000, guid: b279b032879fc4baeba2adc18bed013c, type: 3}
   _seClips:
-  - {fileID: 8300000, guid: 257e5f5fef2e74431a1ed7e16bed7f90, type: 3}
-  - {fileID: 8300000, guid: afd87962f319b4b92a23518fee339719, type: 3}
-  - {fileID: 8300000, guid: b8ea26414452649d9ae9c88d857e1d67, type: 3}
+  - {fileID: 8300000, guid: a03d61e84618d4eeb8d102a7e225d6d4, type: 3}
+  - {fileID: 8300000, guid: af8b1d6de51774b409f9ee93a952a699, type: 3}
+  - {fileID: 8300000, guid: 9c0b52dff067c461280d96a65328d9cd, type: 3}
   _jingleClips:
-  - {fileID: 8300000, guid: 43ee9147d0a2d486d88f5e8f7a883c47, type: 3}
+  - {fileID: 8300000, guid: afd5fd20c8c154fc180c8ad5d00e4256, type: 3}
+  - {fileID: 8300000, guid: 576d16908d92740cfa11923576e27f11, type: 3}
+  - {fileID: 8300000, guid: db3ba0d0262df4acea80ace88d51de03, type: 3}
+  - {fileID: 8300000, guid: e4f473c7626594cf0bd055ed10996fc0, type: 3}
   _bgmSorce: {fileID: 1178553509}
   _seSorce: {fileID: 1178553508}
   _jingleSorce: {fileID: 1178553507}

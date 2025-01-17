@@ -14,5 +14,6 @@ public class TransitonScene : MonoBehaviour
     {
         BSJSoundManger.Instance.PlayBGM(1);
         FadeSceneView.Instance.LoadNextScene(_sceneIndex);
+        BSJSoundManger.Instance.PlayJingleAsync(0);
     }
 }
