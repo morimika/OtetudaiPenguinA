@@ -31,8 +31,8 @@ RectTransform:
   m_GameObject: {fileID: 1331118604638972987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6492541794377629392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -370,6 +370,20 @@ MonoBehaviour:
   _playerSeals: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}
   _bgCanvasG: {fileID: 6661590230358022374}
   _playSceneDatas: {fileID: 11400000, guid: 81296a8bf950e446dbd97f80b9f3a959, type: 2}
+  _freeBookObj: {fileID: 8964886963627232096, guid: 60e862cd0cb9e3040a40239e532468a2, type: 3}
+  _freeBookPicList:
+  - {fileID: 259927950049261575, guid: bbcb751cf5392a94b8efd111ba1b3ad2, type: 3}
+  - {fileID: 259927950049261575, guid: bbcb751cf5392a94b8efd111ba1b3ad2, type: 3}
+  - {fileID: 1333098681498174452, guid: 8eb4c07e4ba7c104a95de8ccd69ccb13, type: 3}
+  - {fileID: 3742517475854170203, guid: 38c1760156707164588f46692704df51, type: 3}
+  - {fileID: 2049288373988499021, guid: 0154b4e4a0050f84d94ecbad78bde0d5, type: 3}
+  _freeBookPicCanList:
+  - {fileID: 6809555588937548845, guid: 60e862cd0cb9e3040a40239e532468a2, type: 3}
+  - {fileID: 9217012438402151615, guid: bbcb751cf5392a94b8efd111ba1b3ad2, type: 3}
+  - {fileID: 7881253061379063236, guid: 8eb4c07e4ba7c104a95de8ccd69ccb13, type: 3}
+  - {fileID: 6558992876198817816, guid: 38c1760156707164588f46692704df51, type: 3}
+  - {fileID: 1114371027808738907, guid: 0154b4e4a0050f84d94ecbad78bde0d5, type: 3}
+  _finalObj: {fileID: 6932110250398819280, guid: c96cde1ae257e494ea630b66502870f7, type: 3}
 --- !u!1 &8808437841461552725
 GameObject:
   m_ObjectHideFlags: 0

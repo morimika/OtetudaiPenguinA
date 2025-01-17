@@ -18,6 +18,9 @@ TagManager:
   - Apple1
   - Apple2
   - Clear
+  - Friend
+  - RedApple
+  - GreenApple
   layers:
   - Default
   - TransparentFX

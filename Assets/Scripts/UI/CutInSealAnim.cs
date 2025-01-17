@@ -11,18 +11,44 @@ public class CutInSealAnim : MonoBehaviour
 {
     [SerializeField,Label("シールアイコン")]
     private Image _sealImage;
+    private GameObject _sealImageObj;
     [SerializeField, Label("プレイヤーのシール情報")]
     private ItemList _playerSeals;
     [SerializeField, Label("背景画像")]
     private CanvasGroup _bgCanvasG;
+
+    private GameObject _pocketButtonObj;
+    private GameObject _pocketButtonParent;
 
     private bool _isSlideFin = false;
 
     [SerializeField]
     private PlaySceneDatas _playSceneDatas;
 
+    private bool _isFreeMode = false;
+    private bool _isFreeModeFin = false;
+
+    [SerializeField]
+    private GameObject _freeBookObj;
+
+    [SerializeField]
+    private List<GameObject> _freeBookPicList;
+
+    public List<CanvasGroup> _freeBookPicCanList;
+
+    private GameObject _lastObj;
+
+    private bool _isAll = false;
+
+    [SerializeField]
+    private GameObject _finalObj;
+    private CanvasGroup _finalObjCanG => _finalObj.GetComponent<CanvasGroup>();
+
     void Start()
     {
+        _pocketButtonParent = GameObject.Find("PocketCanvas");
+        _pocketButtonObj = _pocketButtonParent.transform.Find("PocketMenuButton").gameObject;
+        _sealImageObj = _sealImage.gameObject;
         //選択したフェードを呼び出し
         StartCoroutine(nameof(SlideLine));
     }
@@ -30,6 +56,10 @@ public class CutInSealAnim : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && _isSlideFin)
+        {
+            StartCoroutine(nameof(SlideLineOut));
+        }
+        if (Input.GetMouseButtonDown(0) && _isFreeMode && _isFreeModeFin)
         {
             StartCoroutine(nameof(SlideLineOut));
         }
@@ -42,8 +72,6 @@ public class CutInSealAnim : MonoBehaviour
         RectTransform rectTransform = GetComponent<RectTransform>();
         CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
         RectTransform sealRectTransform = _sealImage.gameObject.GetComponent<RectTransform>();
-
-        Debug.Log(_sealImage);
 
         //初期位置にセット
         rectTransform.localPosition = new Vector3(1690, 1690, 0);
@@ -72,11 +100,14 @@ public class CutInSealAnim : MonoBehaviour
 
     public IEnumerator SlideLineOut()
     {
+        _isSlideFin = false;
         //取得
         RectTransform rectTransform = GetComponent<RectTransform>();
-        CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
 
-        canvasGroup.DOFade(0f, 0.3f);
+        //CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
+        ////シール画像のフェードアウト
+        //canvasGroup.DOFade(0f, 0.3f);
+
         //待ったのちラインを狭める
         yield return new WaitForSeconds(0.5f);
         rectTransform.DOScaleX(0.01f, 0.5f);
@@ -85,13 +116,72 @@ public class CutInSealAnim : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         //BGフェードアウト
         _bgCanvasG.DOFade(0f, 0.5f);
-        _isSlideFin = false;
+
+        //シール　ポケットへ
+        //ポケットへ移動
+        _sealImage.rectTransform.DOAnchorPos(new Vector3(_pocketButtonObj.transform.localPosition.x, _pocketButtonObj.transform.localPosition.y, 0), 0.8f).SetEase(Ease.InBack);
+        yield return new WaitForSeconds(0.6f);
+        //移動中にポケット出現
+        PocketButton.IsHiddenButton = false;
+        //触れる瞬間にちょっと大きくなって
+        _pocketButtonObj.transform.DOScale(2.5f, 0.2f);
+        yield return new WaitForSeconds(0.2f);
+        //戻る　そのときにシールも非表示
+        _sealImageObj.SetActive(false);
+        _pocketButtonObj.transform.DOScale(2.0f, 0.2f);
+        yield return new WaitForSeconds(0.5f);
+        //ポケットを非表示
+        PocketButton.IsHiddenButton = true;
+
+        //自由帳処理(自動)
+        //自由帳出現
+        var obj = Instantiate(_freeBookObj) as GameObject;
+        var _lastObjCan = obj.GetComponent<CanvasGroup>();
+        _freeBookPicCanList.Add(_lastObjCan);
+        for (int i = 0; i < _playerSeals.items.Count; i++)
+        {
+            _lastObj = Instantiate(_freeBookPicList[_playerSeals.items[i].itemId]) as GameObject;
+            _lastObjCan =_lastObj.GetComponent<CanvasGroup>();
+            _freeBookPicCanList.Add(_lastObjCan);
+            if (_playerSeals.items.Count==4)
+            {
+                _isAll = true;
+            }
+        }
+        _isFreeMode = true;
+        //取得、初期設定　透明化巨大化
+        var canvasG = _lastObj.GetComponent<CanvasGroup>();
+        canvasG.alpha = 0;
+        _lastObj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+        //移動
+        obj.transform.DOMoveX(0, 0.5f);
+        yield return new WaitForSeconds(1);
+        //指定の物を大きくフェードインして縮小しながら位置へ　指定のものとは？ 0.02-0.008
+        canvasG.DOFade(1, 0.3f);
+        _lastObj.transform.DOScale(new Vector3(0.008f, 0.008f, 0.008f), 0.5f).SetEase(Ease.InCirc);
+
+        if (_isAll)
+        {
+            Instantiate(_finalObjCanG);
+            _finalObjCanG.alpha = 0;
+            _finalObj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+            yield return new WaitForSeconds(1);
+            _finalObjCanG.DOFade(1, 0.3f);
+            _finalObj.transform.DOScale(new Vector3(0.008f, 0.008f, 0.008f), 0.5f).SetEase(Ease.InCirc);
+        }
+
+        //少し見せてから自由帳フェードアウト
+        yield return new WaitForSeconds(2);
+        for(int i =0;i< _freeBookPicCanList.Count;i++)
+        {
+            _freeBookPicCanList[i].DOFade(0, 0.5f);
+        }
 
         yield return new WaitForSeconds(1);
-        //お手伝い状況リセット
-        HelpManager.HavingHelpTask = "";
-        HelpManager.IsClear = false;
-        _playSceneDatas.TapType = PlaySceneTapType.Play;
+        for (int i=0;i< _freeBookPicCanList.Count;i++)
+        {
+            Destroy(_freeBookPicCanList[i].gameObject);
+        }
         DestroyThis();
     }
     #endregion
