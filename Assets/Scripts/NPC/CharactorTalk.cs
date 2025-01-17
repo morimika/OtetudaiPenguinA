@@ -283,16 +283,6 @@ public class CharactorTalk : MonoBehaviour
                 //シール獲得カットイン
                 cutInManager.SealCutIn();
 
-                //自由帳処理(自動)
-                //自由帳出現
-
-                //指定の物を大きくフェードインして　指定のものとは？
-
-                //縮小しながら位置へ
-
-                //少し見せてから自由帳フェードアウト
-
-
                 //終わったら
                 //プレイヤーにフォーカスを戻す
                 _virtualCamera.Follow = _player.transform;

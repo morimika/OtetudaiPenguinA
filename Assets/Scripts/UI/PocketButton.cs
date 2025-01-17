@@ -72,6 +72,7 @@ public class PocketButton : MonoBehaviour
     public void OpenPocket()
     {
         StartCoroutine(OpenPoketSp());
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
 
     public IEnumerator OpenPoketSp()
@@ -82,7 +83,6 @@ public class PocketButton : MonoBehaviour
         _isPocketOpen = true;
         _closeButton.SetActive(true);
         _optionCanvas.SetActive(true);
-        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
  
     /// <summary>
