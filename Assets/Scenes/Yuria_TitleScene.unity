@@ -351,17 +351,12 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &103243486 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9176367181081528804, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
-  m_PrefabInstance: {fileID: 253016037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &103243487 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 113984207961212132, guid: 76f05f8f3f7bf4b8ea545ba7283cb447, type: 3}
   m_PrefabInstance: {fileID: 253016037}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103243486}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8498d674f2e2849ea94f9ed27bbc33d8, type: 3}
@@ -1047,25 +1042,45 @@ PrefabInstance:
     m_TransformParent: {fileID: 395730053}
     m_Modifications:
     - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 103243487}
-    - target: {fileID: 1008438939002696571, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnTap
-      objectReference: {fileID: 0}
-    - target: {fileID: 4022773793923008853, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: _pauseMenuUI
-      value: 
-      objectReference: {fileID: 103243486}
-    - target: {fileID: 4739706438860687050, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739706438860687050, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 9136cc1bc34ee044088323379debece9, type: 3}
     - target: {fileID: 5594404088908188845, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
       propertyPath: m_Name
       value: MenuButton
@@ -1150,33 +1165,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7460296131369285145, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_text
-      value: "\u305B\u3063\u3066\u3044"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460296131369285145, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_fontSize
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460296131369285145, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 765ff8aed7595ca43ab4a99dfdc86faf, type: 2}
-    - target: {fileID: 7460296131369285145, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7460296131369285145, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 7431833504239414923, guid: 765ff8aed7595ca43ab4a99dfdc86faf, type: 2}
-    - target: {fileID: 7460296131369285145, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5529414846451812322, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 358ed86090af643b389f0a64c59ca878, type: 3}
