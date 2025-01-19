@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Matsukawa
-public class MinigameManager : MonoBehaviour
+public class StartMinigame : MonoBehaviour
 {
     // 遷移のアニメーション後ゲームが始まる
     // クリアしていたら、動物に話しかけていい
@@ -60,7 +60,7 @@ public class MinigameManager : MonoBehaviour
         // 目的位置(RectTransform)に向かって1.0秒かけて移動させる
         currentPos.DOAnchorPos(targetPos, 1.0f);
         // サイズを０．８倍する
-        currentPos.DOScale(new Vector3(0.7f, 0.7f, 0.7f), 1);
+        currentPos.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1);
         // スタートイメージの背景をフェードアウト
         im.DOFade(0, 1);
     }
