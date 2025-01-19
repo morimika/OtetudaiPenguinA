@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1861811255281832707}
   - component: {fileID: 1947124719313207782}
   - component: {fileID: 480867720042304697}
+  - component: {fileID: 1465612625797846162}
   m_Layer: 5
   m_Name: FreeBook
   m_TagString: Untagged
@@ -79,6 +80,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1465612625797846162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165390746486468851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301008ad87c6c3a419567812dd1999f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _freeBookPicList:
+  - {fileID: 259927950049261575, guid: bbcb751cf5392a94b8efd111ba1b3ad2, type: 3}
+  - {fileID: 1333098681498174452, guid: 8eb4c07e4ba7c104a95de8ccd69ccb13, type: 3}
+  - {fileID: 2049288373988499021, guid: 0154b4e4a0050f84d94ecbad78bde0d5, type: 3}
+  - {fileID: 3742517475854170203, guid: 38c1760156707164588f46692704df51, type: 3}
 --- !u!1 &5177966606451620685
 GameObject:
   m_ObjectHideFlags: 0
