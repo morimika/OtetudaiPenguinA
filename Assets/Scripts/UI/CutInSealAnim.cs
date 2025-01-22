@@ -167,7 +167,7 @@ public class CutInSealAnim : MonoBehaviour
         canvasG.DOFade(1, 0.3f);
         _lastObj.transform.DOScale(new Vector3(0.008f, 0.008f, 0.008f), 0.5f).SetEase(Ease.InCirc);
 
-        if (_isAll)
+        if (false/*IsAll*/)
         {
             Instantiate(_finalObjCanG);
             _finalObjCanG.alpha = 0;
