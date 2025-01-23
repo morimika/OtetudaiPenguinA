@@ -3696,7 +3696,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: c1be34946fd2c1e40a0aa5d970011bef, type: 2}
     - target: {fileID: 9005090139117136986, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: _sceneIndex
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9196812617060315784, guid: 683cf0156534ee346a753d4b5519d3ae, type: 3}
       propertyPath: m_IsActive
@@ -4876,8 +4876,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d851fd14545b2444b77d8229f127db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parSpr: {fileID: 0}
-  spr: {fileID: 0}
 --- !u!1 &985592331
 GameObject:
   m_ObjectHideFlags: 0
@@ -7002,8 +7000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d851fd14545b2444b77d8229f127db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parSpr: {fileID: 0}
-  spr: {fileID: 0}
 --- !u!1001 &1343485412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7392,8 +7388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d851fd14545b2444b77d8229f127db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parSpr: {fileID: 0}
-  spr: {fileID: 0}
 --- !u!1 &1505869922
 GameObject:
   m_ObjectHideFlags: 0
