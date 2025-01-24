@@ -187,10 +187,11 @@ public class CutInSealAnim : MonoBehaviour
             _freeBookPicCanList[i].DOFade(0, 0.5f);
         }
 
-        yield return new WaitForSeconds(1);
         _playSceneDatas.TapType = PlaySceneTapType.Play;
         PocketButton.IsHiddenButton = false;
         PocketButton.IsTatchAbleButton = true;
+
+        yield return new WaitForSeconds(1);
         for (int i=0;i< _freeBookPicCanList.Count;i++)
         {
             Destroy(_freeBookPicCanList[i].gameObject);

@@ -41,7 +41,7 @@ public class HelpInfo : HelpManager
         _playerScr=_player.GetComponent<Player>();
         _boxCollider=GetComponent<BoxCollider2D>();
         _boxCollider.enabled = false;
-        //‚Ü‚¾‚¨è“`‚¢‚ªI‚í‚Á‚Ä‚¢‚È‚¯‚ê‚Î
+        //‚¨è“`‚¢‚ªI‚í‚Á‚Ä‚¢‚È‚¯‚ê‚Î
         if (!IsEndBool[(int)kind])
         {
             charactorTalk.QuestText();

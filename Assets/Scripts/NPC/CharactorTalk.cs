@@ -40,6 +40,17 @@ public class CharactorTalk : MonoBehaviour
     private Vector2 _afterSize;
 
     [SerializeField]
+    private GameObject _npcSprObj;
+    [SerializeField, Label("アニメーション速度")]
+    private float _npcObjAnimSpeed = 0.1f;
+
+    public Animator npcSpeekAnim => _npcSprObj.GetComponent<Animator>();
+    [AnimatorParam("npcSpeekAnim")]
+    public int paramHash;
+    [AnimatorParam("npcSpeekAnim")]
+    public string paramName; 
+
+    [SerializeField]
     private SpriteRenderer _boxSR;
     [SerializeField]
     private Sprite _txtboxSp;
@@ -225,7 +236,15 @@ public class CharactorTalk : MonoBehaviour
             tmpText.text = _orderTxt[_orderIndex];
             //テキストアニメーション
             TxtAnim();
+            //口パクアニメーション開始
+            npcSpeekAnim.SetBool(paramName.ToString(), true);
+            //NPCアニメーション
+            await _npcSprObj.transform.DOMoveY(_npcSprObj.transform.position.y + 0.6f, _npcObjAnimSpeed)
+                                        .SetEase(Ease.OutCirc).SetLoops(4, LoopType.Yoyo);
             await Task.Delay(tmpText.text.Length * 50);
+            //口パクアニメーション停止
+            npcSpeekAnim.SetBool(paramName.ToString(), false);
+            Debug.Log(paramName.ToString());
             //次のテキストへ
             _orderIndex++;
         }
@@ -325,6 +344,8 @@ public class CharactorTalk : MonoBehaviour
         {
             tmpText.text = _clearTxt[_clearIndex];
             TxtAnim();
+            //NPCアニメーション
+
             await Task.Delay(tmpText.text.Length * 50);
             _clearIndex++;
         }
