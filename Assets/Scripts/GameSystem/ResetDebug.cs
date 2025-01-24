@@ -32,6 +32,7 @@ public class ResetDebug : MonoBehaviour
         //‚¨è“`‚¢ó’ó‹µ‚ÌƒŠƒZƒbƒg
         HelpManager.HavingHelpTask = null;
         HelpManager.IsClear = false;
+        PocketButton.IsHiddenButton = false;
 
         //for (int i = 0; i < HelpManager.IsClear.Count; i++)
         //{
