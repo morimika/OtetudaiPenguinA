@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6, y: -6.308365, z: 0}
-  m_LocalScale: {x: 2.4813, y: 2.4813, z: 2.4813}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,7 +103,7 @@ MonoBehaviour:
   Speed: 2
   stop: 0
   LaneNumber: 0
-  lane: 0
+  lane: 2
 --- !u!114 &6990559899812603563
 MonoBehaviour:
   m_ObjectHideFlags: 0
