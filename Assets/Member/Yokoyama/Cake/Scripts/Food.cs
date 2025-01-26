@@ -8,7 +8,7 @@ public class Food : MonoBehaviour
     public bool stop = false;
     public int LaneNumber;
 
-    private DragObj drag;
+    private Drag2 drag2;
 
     public enum Lane
     {
@@ -22,7 +22,7 @@ public class Food : MonoBehaviour
 
     private void Start()
     {
-        drag = GetComponent<DragObj>();
+        drag2 = GetComponent<Drag2>();
 
         switch (lane)
         {
@@ -55,25 +55,25 @@ public class Food : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!drag.DragOn && stop)
+        if(!drag2.DragOn && stop)
         {
             //マウスが離れた時に戻るポジション(レーン事違う)
             switch (lane)
             {
                 case Lane.Lane1:
-                    transform.position = new Vector3(-6, -2, 0);
+                    transform.position = new Vector3(-6, -3.05f, 0);
                     break;
                 case Lane.Lane2:
-                    transform.position = new Vector3(-3, -2, 0);
+                    transform.position = new Vector3(-3, -3.05f, 0);
                     break;
                 case Lane.Lane3:
-                    transform.position = new Vector3(0, -2, 0);
+                    transform.position = new Vector3(0, -3.05f, 0);
                     break;
                 case Lane.Lane4:
-                    transform.position = new Vector3(3, -2, 0);
+                    transform.position = new Vector3(3, -3.05f, 0);
                     break;
                 case Lane.Lane5:
-                    transform.position = new Vector3(6, -2, 0);
+                    transform.position = new Vector3(6, -3.05f, 0);
                     break;
             }
         }
