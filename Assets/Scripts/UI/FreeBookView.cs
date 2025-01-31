@@ -9,17 +9,23 @@ public class FreeBookView : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < _freeBookPicList.Count; i++)
-        {
-            if (HelpManager.IsEndBool[i] == true)
-            {
-                var obj = Instantiate(_freeBookPicList[i],transform);
-            }
-        }
+        FreeBookImageView();
     }
 
     void Update()
     {
         
     }
+
+    public void FreeBookImageView()
+    {
+        for (int i = 0; i < _freeBookPicList.Count; i++)
+        {
+            if (HelpManager.IsEndBool[i] == true)
+            {
+                _freeBookPicList[i].SetActive(true);
+            }
+        }
+    }
+    
 }

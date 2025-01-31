@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63878e24d5bc0154d82c5b11bde0a52c, type: 3}
-  m_Name: 02Seal
+  m_Name: 03Seal
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: d6424ef7cf342cd408a1240efd95af5c, type: 3}
+  icon: {fileID: 21300000, guid: b41c1dea3a279ba45b53260190d68329, type: 3}
   itemType: 1
-  itemName: "\u304F\u3055\u306E\u3057\u30FC\u308B"
-  itemId: 2
-  description: "\u8349\u306E\u30B7\u30FC\u30EB\u3001\u7551\u306E\u624B\u4F1D\u3044\u3001\u4EEE"
+  itemName: "\u30B1\u30FC\u30AD\u306E\u3057\u30FC\u308B"
+  itemId: 3
+  description: "\u30B1\u30FC\u30AD\u306E\u304A\u624B\u4F1D\u3044\u3067\u7372\u5F97\u3067\u304D\u308B\u30B7\u30FC\u30EB\u3001\u4EEE"
