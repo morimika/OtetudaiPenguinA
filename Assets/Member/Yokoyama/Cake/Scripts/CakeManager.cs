@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CakeManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class CakeManager : MonoBehaviour
     //[初回]遅らせて、生成
     IEnumerator First_FoodMake()
     {
+        yield return new WaitForSeconds(2.6f);
+
         int dice = Random.Range(0, Fruits.Count);
 
         //1レーン目
@@ -73,8 +76,10 @@ public class CakeManager : MonoBehaviour
     //次に生成しなきゃいけないレーン番号を貰って生成
     public void FoodMake(int i)
     {
+        //全てのフラグがTrueだったら
         if(applepie && blueberrytart && shortcake)
         {
+            //ゲームクリアにする
             Debug.Log("クリア");
             return;
         }
@@ -163,5 +168,10 @@ public class CakeManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

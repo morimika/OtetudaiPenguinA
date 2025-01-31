@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragObj : MonoBehaviour
+public class Drag2 : MonoBehaviour
 {
     //ドラック開始フラグ
     public bool DragOn;

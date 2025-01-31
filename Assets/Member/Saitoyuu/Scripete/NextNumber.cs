@@ -31,10 +31,10 @@ public class NextNumber : MonoBehaviour
         _count = _grass._targetNumbers.Count;
 
         //mori
-        //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«
+        //ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
         if (Input.GetMouseButtonDown(0))
         {
-            //ƒNƒŠƒA‚µ‚Ä‚¢‚éA‚©‚ÂAƒtƒF[ƒhƒCƒ“‚³‚ê‚Ä‘Ò‹@’†‚Ìê‡
+            //ï¿½Nï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ÂAï¿½tï¿½Fï¿½[ï¿½hï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‘Ò‹@ï¿½ï¿½ï¿½Ìê‡
             if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
             {
                 Invoke(nameof(ReturnGameScene), 1);
@@ -44,7 +44,7 @@ public class NextNumber : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("—v‘f”");
+        Debug.Log("ï¿½vï¿½fï¿½ï¿½");
         Debug.Log(_count);
         if ((_count == 10) || (_count == 29) || (_count == 58))
             Invoke(("NextActive"), 2.0f);
@@ -60,7 +60,7 @@ public class NextNumber : MonoBehaviour
     {
         _endNumberGameObject.SetActive(false);
         _nextNumberGameObject.SetActive(true);
-        Debug.Log("Ÿ‚Ì”š");
+        Debug.Log("ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½");
     }
 
     //mori
@@ -72,7 +72,7 @@ public class NextNumber : MonoBehaviour
     }
 
     //mori
-    //ƒV[ƒ“‘JˆÚ
+    //ï¿½Vï¿½[ï¿½ï¿½ï¿½Jï¿½ï¿½
     public void ReturnGameScene()
     {
         _transitonScene?.LoadScene();
