@@ -5,10 +5,13 @@ using UnityEngine;
 public class Cake : MonoBehaviour
 {
     [SerializeField] GameObject Food_On;
+    [SerializeField] GameObject ApplePie;
     //次のオブジェクトのコライダー
     [SerializeField] BoxCollider2D Box2D;
     //ゲームマネージャー
     [SerializeField] CakeManager CKMA;
+
+    public SpriteRenderer CakeSprite;
 
     private Food food;
     //自分のコライダー
@@ -28,6 +31,7 @@ public class Cake : MonoBehaviour
         {
             if (collision.gameObject.tag == "Apple")
             {
+                CakeSprite.enabled = false;
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Applepie");
                 Food_RMake();
@@ -43,6 +47,11 @@ public class Cake : MonoBehaviour
                 {
                     Box2D.enabled = true;
                 }
+                if(ApplePie != null)
+                {
+                    ApplePie.SetActive(false);
+                }
+
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Applepie");
                 Food_RMake();
@@ -54,6 +63,7 @@ public class Cake : MonoBehaviour
         {
             if (collision.gameObject.tag == "Blueberry")
             {
+                CakeSprite.enabled = false;
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Blueberrytart");
                 Food_RMake();
@@ -80,6 +90,7 @@ public class Cake : MonoBehaviour
         {
             if (collision.gameObject.tag == "Strawberry")
             {
+                CakeSprite.enabled = false;
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Shortcake");
                 Food_RMake();

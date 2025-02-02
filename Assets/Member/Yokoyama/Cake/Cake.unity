@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5556754, g: 0.6289307, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -229,7 +229,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1562704894}
@@ -275,7 +275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e849eed9015bfb47afbfba8135a19bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc680ec82f615bb46a1b9c8263d42d73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -456,7 +456,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 886148331}
@@ -502,7 +502,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e849eed9015bfb47afbfba8135a19bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc680ec82f615bb46a1b9c8263d42d73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -606,8 +606,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1341565024}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1516378046}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &197725262
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -837,8 +839,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1921034042}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 0}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &300575348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -879,7 +883,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: a0f44a8bb0763c84a8d6210a3b260dbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1217,6 +1221,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &432044484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 432044485}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &432044485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432044484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1342712361}
+  - {fileID: 1355814431}
+  - {fileID: 886148331}
+  - {fileID: 1562704894}
+  m_Father: {fileID: 1973491513}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &516642322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,8 +1349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1911328181}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1960837644}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &516642326
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1400,7 +1441,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 991.15, y: 80.54999}
-  m_SizeDelta: {x: 1882.54, y: 161.1}
+  m_SizeDelta: {x: 2007.24, y: 201}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528315618
 MonoBehaviour:
@@ -1422,7 +1463,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 32f371d0ba694164096f339011ba2648, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8761618cf93f37c49810989df5d17184, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1785,8 +1826,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1774257707}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1054157666}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &649616836
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1973,7 +2016,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1355814431}
@@ -2019,7 +2062,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e849eed9015bfb47afbfba8135a19bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc680ec82f615bb46a1b9c8263d42d73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2394,12 +2437,12 @@ Transform:
   m_GameObject: {fileID: 886148330}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09000018, y: 2.2125008, z: 0}
-  m_LocalScale: {x: 2.3185837, y: 2.3185837, z: 2.3185837}
+  m_LocalPosition: {x: -0.09000018, y: 2.212501, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 81237814}
-  m_Father: {fileID: 1973491513}
+  m_Father: {fileID: 432044485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &886148332
 BoxCollider2D:
@@ -2437,8 +2480,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.92963755, y: 1}
-    newSize: {x: 4.36, y: 4.69}
+    oldSize: {x: 5.34, y: 4.39}
+    newSize: {x: 5.34, y: 4.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -2459,8 +2502,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 81237813}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1562704895}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &886148334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2507,7 +2552,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.36, y: 4.69}
+  m_Size: {x: 5.34, y: 4.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2606,8 +2651,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1746518013}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1358166197}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1054157668
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2676,7 +2723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1154882676
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2814,8 +2861,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2051655036}
-  - {fileID: 1379927090}
   - {fileID: 528315617}
+  - {fileID: 1379927090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2948,7 +2995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6047945, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2956,7 +3003,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: fa6bb5a5b3e0f9e4f8a05d19cd1010f9, type: 3}
     m_FontSize: 250
     m_FontStyle: 1
     m_BestFit: 0
@@ -3089,12 +3136,12 @@ Transform:
   m_GameObject: {fileID: 1342712360}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.102500536, y: -1.0200001, z: 0}
-  m_LocalScale: {x: 2.3185837, y: 2.3185837, z: 2.3185837}
+  m_LocalPosition: {x: -0.102500536, y: -1.168, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1753632015}
-  m_Father: {fileID: 1973491513}
+  m_Father: {fileID: 432044485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1342712362
 BoxCollider2D:
@@ -3132,8 +3179,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.92963755, y: 1}
-    newSize: {x: 4.36, y: 4.69}
+    oldSize: {x: 5.34, y: 4.39}
+    newSize: {x: 5.34, y: 4.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3154,8 +3201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1753632014}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1355814432}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1342712364
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3202,7 +3251,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.36, y: 4.69}
+  m_Size: {x: 5.34, y: 4.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3236,12 +3285,12 @@ Transform:
   m_GameObject: {fileID: 1355814430}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1425, y: 0.55500007, z: 0}
-  m_LocalScale: {x: 2.3185837, y: 2.3185837, z: 2.3185837}
+  m_LocalPosition: {x: 2.2000003, y: 0.55500007, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 718400427}
-  m_Father: {fileID: 1973491513}
+  m_Father: {fileID: 432044485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1355814432
 BoxCollider2D:
@@ -3279,8 +3328,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.92963755, y: 1}
-    newSize: {x: 4.36, y: 4.69}
+    oldSize: {x: 5.34, y: 4.39}
+    newSize: {x: 5.34, y: 4.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -3301,8 +3350,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 718400426}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 886148332}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1355814434
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3349,7 +3400,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.36, y: 4.69}
+  m_Size: {x: 5.34, y: 4.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3448,8 +3499,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 302561640}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1699117967}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1358166199
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3926,8 +3979,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 786866232}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 516642324}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1516378048
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4073,8 +4128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 280337003}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 197725260}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1520480314
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4239,12 +4296,12 @@ Transform:
   m_GameObject: {fileID: 1562704893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.0399992, y: 0.6075, z: 0}
-  m_LocalScale: {x: 2.3185837, y: 2.3185837, z: 2.3185837}
+  m_LocalPosition: {x: -2.2599998, y: 0.6075, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2344886}
-  m_Father: {fileID: 1973491513}
+  m_Father: {fileID: 432044485}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1562704895
 BoxCollider2D:
@@ -4282,8 +4339,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.92963755, y: 1}
-    newSize: {x: 4.36, y: 4.69}
+    oldSize: {x: 5.34, y: 4.39}
+    newSize: {x: 5.34, y: 4.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -4304,8 +4361,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 2344885}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 1608383866}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1562704897
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4352,7 +4411,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.36, y: 4.69}
+  m_Size: {x: 5.34, y: 4.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4387,7 +4446,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.09750068, y: 0.62750006, z: 0}
-  m_LocalScale: {x: 2.3185837, y: 2.3185837, z: 2.3185837}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1661425074}
@@ -4429,8 +4488,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.92963755, y: 1}
-    newSize: {x: 4.36, y: 4.69}
+    oldSize: {x: 5.34, y: 4.39}
+    newSize: {x: 5.34, y: 4.39}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -4451,8 +4510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1661425073}
+  ApplePie: {fileID: 432044484}
   Box2D: {fileID: 0}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1608383868
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4499,7 +4560,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.36, y: 4.69}
+  m_Size: {x: 5.34, y: 4.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4606,8 +4667,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 544192170}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 0}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 1793209283}
 --- !u!61 &1656739039
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4754,8 +4817,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1435333420}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 0}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 856367810}
 --- !u!61 &1656949174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4827,8 +4892,8 @@ Transform:
   m_GameObject: {fileID: 1661425073}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.19, y: 0, z: 0}
+  m_LocalScale: {x: 1.137, y: 1.137, z: 1.137}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1608383865}
@@ -4874,7 +4939,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e849eed9015bfb47afbfba8135a19bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc680ec82f615bb46a1b9c8263d42d73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5053,8 +5118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1533835231}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 300575346}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1699117969
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5218,7 +5285,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.43, y: 0.43, z: 0.43}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1342712361}
@@ -5264,7 +5331,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e849eed9015bfb47afbfba8135a19bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc680ec82f615bb46a1b9c8263d42d73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5652,8 +5719,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 1973491512}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 0}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 323589930}
 --- !u!61 &1901584285
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5855,7 +5924,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b41c1dea3a279ba45b53260190d68329, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6035,8 +6104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Food_On: {fileID: 2098835611}
+  ApplePie: {fileID: 0}
   Box2D: {fileID: 0}
   CKMA: {fileID: 1868827974}
+  CakeSprite: {fileID: 0}
 --- !u!212 &1960837646
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6077,7 +6148,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: f326dc934bd3cb44ca015a82bcd8a712, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6119,10 +6190,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1342712361}
-  - {fileID: 1355814431}
-  - {fileID: 886148331}
-  - {fileID: 1562704894}
+  - {fileID: 432044485}
   - {fileID: 1608383865}
   m_Father: {fileID: 1901584283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6475,7 +6543,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9da6493630ce20540a26648766c99934, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
