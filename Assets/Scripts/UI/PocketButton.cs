@@ -23,6 +23,7 @@ public class PocketButton : MonoBehaviour
     public static bool IsHiddenButton = false;
     [SerializeField, Label("ポケット表示ボタン")]
     private GameObject _pocketButton;
+    private Button button;
     [SerializeField]
     private Sprite _openPocSp;
     [SerializeField]
@@ -43,7 +44,9 @@ public class PocketButton : MonoBehaviour
 
     [SerializeField,ReadOnly]
     private bool _isPocketOpen = false;
- 
+
+    public static bool IsTatchAbleButton = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +56,7 @@ public class PocketButton : MonoBehaviour
         IsHiddenButton = false;
         _pocImage=_pocketButton.GetComponent<Image>();
         _optionCanvas.SetActive(false);
+        button = _pocketButton.GetComponent<Button>();
     }
  
     private void Update()
@@ -65,6 +69,15 @@ public class PocketButton : MonoBehaviour
         {
             _pocketButton.SetActive(true);
         }
+
+        if (IsTatchAbleButton)
+        {
+            button.enabled = true;
+        }
+        else
+        {
+            button.enabled = false;
+        }
     }
  
     /// <summary>
@@ -72,8 +85,8 @@ public class PocketButton : MonoBehaviour
     /// </summary>
     public void OpenPocket()
     {
-        StartCoroutine(OpenPoketSp());
         _playSceneDatas.TapType = PlaySceneTapType.Pose;
+        StartCoroutine(OpenPoketSp());
     }
 
     public IEnumerator OpenPoketSp()

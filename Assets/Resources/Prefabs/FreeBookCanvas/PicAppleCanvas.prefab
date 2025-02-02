@@ -87,7 +87,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7249884340616261968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,7 +302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -141, y: -97}
+  m_AnchoredPosition: {x: -188.7, y: -97}
   m_SizeDelta: {x: 472, y: 609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9077690322236043567
@@ -379,7 +379,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -372, y: -122}
+  m_AnchoredPosition: {x: -392, y: -122}
   m_SizeDelta: {x: 472, y: 609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4381714732414762166
@@ -530,8 +530,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -269, y: -223}
-  m_SizeDelta: {x: 1086, y: 1560}
+  m_AnchoredPosition: {x: -316.7, y: -223}
+  m_SizeDelta: {x: 1393, y: 1560}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6895881856209362640
 CanvasRenderer:
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6214ecdd890c7684abb843e87896c27d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 867b661b4f146194eaeb2cb8f5cf137c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
