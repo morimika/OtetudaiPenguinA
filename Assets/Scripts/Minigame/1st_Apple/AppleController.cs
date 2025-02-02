@@ -67,10 +67,10 @@ public class AppleController : MonoBehaviour
     // インスタンシエイトしたりんごプレファブのCollider
     private Collider[] _arrayAppleCol = new Collider[12];
 
-    // リンゴがおちた木を触れないようにする
-    private bool _canTouchTree = true;
-    private bool _canTouchTree2 = true;
-    private bool _canTouchTree3 = true;
+    // はさみが木に触れていいかどうか
+    private bool _blCanTouchTree = true;
+    private bool _blCanTouchTree2 = true;
+    private bool _blCanTouchTree3 = true;
 
     // リンゴがかごに移動する速さ
     //mori
@@ -102,7 +102,8 @@ public class AppleController : MonoBehaviour
         _transitonScene = GetComponent<TransitonScene>();
     }
 
-    // りんごをインスタンス化
+    #region    りんごをインスタンス化
+
     public void GenerateApple()
     {
         // 木１のりんごを生成
@@ -182,11 +183,12 @@ public class AppleController : MonoBehaviour
 
         _treeNullTag[2].SetActive(true);
     }
+    #endregion
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(HelpManager.IsClear);
+        // Debug.Log(HelpManager.IsClear);
         //mori
         //ボタンを押したとき
         if (Input.GetMouseButtonDown(0))
@@ -217,7 +219,7 @@ public class AppleController : MonoBehaviour
         //mori
         if (_blClear) return;
 
-        if (collision.gameObject.name == "Tree1" &&  _canTouchTree == true)
+        if (collision.gameObject.name == "Tree1" &&  _blCanTouchTree == true)
         {
             // はさみがチョキチョキするアニメーション開始
             _scissorCuttingAnimation.enabled = true;
@@ -234,7 +236,7 @@ public class AppleController : MonoBehaviour
             _arrayAppleRb[3].isKinematic = false;
 
             // 一度リンゴが落ちた木はもう一度触れない
-            _canTouchTree = false;
+            _blCanTouchTree = false;
             _treeNullTag[0].SetActive(false);
 
             //// かごに入るアニメーション
@@ -249,7 +251,7 @@ public class AppleController : MonoBehaviour
             // またはさみのアニメーションが呼び出せるように _isCutting を falseにする
             _scissorCuttingAnimation.SetBool("_isCutting", false);
         }
-        else if (collision.gameObject.tag == "Tree2" && _canTouchTree2)
+        else if (collision.gameObject.tag == "Tree2" && _blCanTouchTree2 == true)
         {
             _scissorCuttingAnimation.enabled = true;
             _scissorCuttingAnimation.SetBool("_isCutting", true);
@@ -260,7 +262,7 @@ public class AppleController : MonoBehaviour
             _arrayAppleRb[5].isKinematic = false;
             _arrayAppleRb[6].isKinematic = false;
 
-            _canTouchTree2 = false;
+            _blCanTouchTree2 = false;
             _treeNullTag[1].SetActive(false);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_waitAppleAnimation));
@@ -271,7 +273,7 @@ public class AppleController : MonoBehaviour
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
             _scissorCuttingAnimation.SetBool("_isCutting", false);
         }
-        else if (collision.gameObject.tag == "Tree3" && _canTouchTree3)
+        else if (collision.gameObject.tag == "Tree3" && _blCanTouchTree3 == true)
         {
             _scissorCuttingAnimation.enabled = true;
             _scissorCuttingAnimation.SetBool("_isCutting", true);
@@ -284,7 +286,7 @@ public class AppleController : MonoBehaviour
             _arrayAppleRb[10].isKinematic = false;
             _arrayAppleRb[11].isKinematic = false;
 
-            _canTouchTree3 = false;
+            _blCanTouchTree3 = false;
             _treeNullTag[2].SetActive(false);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_waitAppleAnimation));
@@ -306,7 +308,6 @@ public class AppleController : MonoBehaviour
         rb.isKinematic = true;
 
         // 目的位置(currentPos)に向かって 目的秒(_appleAnimation) かけて移動させる
-
         await (currentPos.DOMove(targetPos, _appleAnimation));
 
         if(obj  != null)
@@ -356,32 +357,66 @@ public class AppleController : MonoBehaviour
     public void OnClickResetButton()
     {
 
-        if (_canTouchTree == false)
-        {
-            // 木をまた触れるようにする
-            _canTouchTree = true;
-            //// リンゴの数をリセット
-            Count = 7;
+        // はさみを初期位置に戻す
+        ScissorToInitialPos();
+        //// リンゴの数をリセット
+        Count = 7;
 
-            GenerateApple();
+        if (_blCanTouchTree == false)
+        {
+            if (Tree1._blcanGenerateApple == true)
+            {
+                //// 木をまた触れるようにする
+                _blCanTouchTree = true;
+                GenerateApple();
+            }
         }
-        if (_canTouchTree2 == false)
-        {
-            // 木をまた触れるようにする
-            _canTouchTree2 = true;
-            //// リンゴの数をリセット
-            Count = 7;
 
-            GenerateApple2();
+        if (_blCanTouchTree2 == false)
+        {
+            if (Tree2._blcanGenerateApple2 == true)
+            {
+                //// 木をまた触れるようにする
+                _blCanTouchTree2 = true;
+                GenerateApple2();
+            }
         }
-        if (_canTouchTree3 == false)
+        if (_blCanTouchTree3 == false)
         {
-            // 木をまた触れるようにする
-            _canTouchTree3 = true;
-            //// リンゴの数をリセット
-            Count = 7;
+            if(Tree3._blcanGenerateApple3 == true)
+            {
+                //// 木をまた触れるようにする
+                _blCanTouchTree3 = true;
+                GenerateApple3();
+            }
+        }
+    }
 
-            GenerateApple3();
+    /// <summary>
+    /// はさみを初期位置に戻すアニメーション
+    /// </summary>
+    public Vector3 ScissorToInitialPos()
+    {
+        // はさみのアニメーションをストップ
+        _scissorCuttingAnimation.SetBool("_isCutting", false);
+
+        Vector3 _scissorInitialPos = new Vector3(3f, -3.5f, 0f);
+
+        Vector3 recentPos = this.transform.position;
+        if (recentPos != _scissorInitialPos)
+        {
+            // this.transform.DOMove(_scissorInitialPos, 0.2f); 
+            this.transform.position = _scissorInitialPos;
+            return _scissorInitialPos;
+        }
+        else if(recentPos ==  _scissorInitialPos)
+        {
+            this.transform.position = _scissorInitialPos;
+            return _scissorInitialPos;
+        }
+        else
+        {
+            return Vector3.zero;
         }
     }
 
@@ -462,5 +497,6 @@ public class AppleController : MonoBehaviour
         mousePos.z = -Camera.main.transform.position.z;
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
+
     #endregion
 }

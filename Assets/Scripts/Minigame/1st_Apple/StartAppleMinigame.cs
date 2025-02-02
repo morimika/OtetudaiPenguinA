@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Matsukawa
-public class StartMinigame : MonoBehaviour
+public class StartAppleMinigame : MonoBehaviour
 {
     // 遷移のアニメーション後ゲームが始まる
     // クリアしていたら、動物に話しかけていい
