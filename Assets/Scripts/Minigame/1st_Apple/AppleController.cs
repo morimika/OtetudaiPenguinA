@@ -54,6 +54,8 @@ public class AppleController : MonoBehaviour
     [SerializeField]
     private GameObject clearCutInObj;
     [SerializeField]
+    private GameObject retryCutInObj;
+    [SerializeField]
     private TransitonScene _transitonScene;
 
     #endregion
@@ -86,8 +88,12 @@ public class AppleController : MonoBehaviour
     // クリア判定
     // クリア判定の関数は OnClickClearButton() 250行
     public bool _blClear = false;
+
     //mori
     public bool _isStart = false;
+    public bool _isRestart = false;
+    private GameObject _go;
+    private bool _doOnce = false;
 
     public void Start()
     {
@@ -188,8 +194,15 @@ public class AppleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(HelpManager.IsClear);
         //mori
+        //失敗
+        if (Count > 15 && _isRestart==false)
+        {
+            _isRestart = true;
+            _go=Instantiate(retryCutInObj);
+            return;
+        }
+        // Debug.Log(HelpManager.IsClear);
         //ボタンを押したとき
         if (Input.GetMouseButtonDown(0))
         {
@@ -208,8 +221,6 @@ public class AppleController : MonoBehaviour
         CountBasketAppleNum();
         // 取得しているりんごの数によってかごの中にあるリンゴの画像が変わる
         ShowInBasketApples();
-
-
     }
 
     // はさみが木に触れたときりんごがおちる
@@ -323,7 +334,7 @@ public class AppleController : MonoBehaviour
         {
             _blClear = true;
             //マップに戻ったときNPCの前にプレイヤーを配置する
-            PlayerSetPos.PlayerPos = new Vector2(0.1f, 1.12f);
+            PlayerSetPos.PlayerPos = new Vector2(1.3f, 3.7f);
         }
     }
 
@@ -342,11 +353,15 @@ public class AppleController : MonoBehaviour
 
         //mori
         //クリアしているなら
-        if (_blClear == true)
+        if (_blClear == true && !_doOnce)
         {
+            _doOnce = true;
             //カットインを呼び、クリアにする
             Instantiate(clearCutInObj);
-            HelpManager.IsClear = true;
+            if(HelpManager.HavingHelpTask== "AppleCut")
+            {
+                HelpManager.IsClear = true;
+            }
             Debug.Log("クリア");
         }
 
@@ -356,7 +371,8 @@ public class AppleController : MonoBehaviour
     // リセットボタンを押されたとき
     public void OnClickResetButton()
     {
-
+        _isRestart = false;
+        Destroy(_go.gameObject);
         // はさみを初期位置に戻す
         ScissorToInitialPos();
         //// リンゴの数をリセット

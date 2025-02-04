@@ -5412,6 +5412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1868827975}
   - component: {fileID: 1868827974}
+  - component: {fileID: 1868827976}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5436,6 +5437,8 @@ MonoBehaviour:
   - {fileID: 2112579953564306251, guid: 4240f9d86b5209b469927c14f538ad7e, type: 3}
   - {fileID: 1236794713420820815, guid: 09df15057b84f5943ba6cdf891f7f992, type: 3}
   Max_Count: 6
+  clearCutInObj: {fileID: 3418920623581014436, guid: 03f84a72dd7cb624e888cbbd0f376b28, type: 3}
+  _transitonScene: {fileID: 1868827976}
 --- !u!4 &1868827975
 Transform:
   m_ObjectHideFlags: 0
@@ -5451,6 +5454,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1868827976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868827973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcca94a1c7c0ae947801016f1d4577b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneIndex: 1
 --- !u!1 &1877925857
 GameObject:
   m_ObjectHideFlags: 0

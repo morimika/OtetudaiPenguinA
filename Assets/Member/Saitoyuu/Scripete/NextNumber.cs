@@ -67,8 +67,11 @@ public class NextNumber : MonoBehaviour
     private void Clear()
     {
         Instantiate(_clearCutInObj);
-        HelpManager.IsClear = true;
-        PlayerSetPos.PlayerPos = new Vector2(7.1f, 7.88f);
+        if(HelpManager.HavingHelpTask== "KanjiHarvest")
+        {
+            HelpManager.IsClear = true;
+        }
+        PlayerSetPos.PlayerPos = new Vector2(6.5f, 9f);
     }
 
     //mori

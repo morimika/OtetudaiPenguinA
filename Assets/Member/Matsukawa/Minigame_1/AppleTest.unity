@@ -3886,11 +3886,13 @@ MonoBehaviour:
   - {fileID: 8096996680698056884, guid: d3297f27a43ffdb49a2d0b2fe39a4440, type: 3}
   - {fileID: 9071711221112738909, guid: d3515ac261110a34c9b9f07bc28fc10e, type: 3}
   clearCutInObj: {fileID: 3418920623581014436, guid: 03f84a72dd7cb624e888cbbd0f376b28, type: 3}
+  retryCutInObj: {fileID: 3418920623581014436, guid: 711d2e794763adf41bef0976dda6fda6, type: 3}
   _transitonScene: {fileID: 2025771366}
   _appleAnimation: 1
   _waitAppleAnimation: 0.8
   _blClear: 0
   _isStart: 0
+  _isRestart: 0
 --- !u!95 &2025771363
 Animator:
   serializedVersion: 5

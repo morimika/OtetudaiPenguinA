@@ -18,6 +18,24 @@ public class CakeManager : MonoBehaviour
     private bool blueberrytart = false;
     private bool shortcake = false;
 
+    //mori
+    [SerializeField]
+    private GameObject clearCutInObj;
+    [SerializeField]
+    private TransitonScene _transitonScene;
+
+    private void Update()
+    {
+        if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
+        {
+            //クリアしている、かつ、フェードインされて待機中の場合
+            if (Input.GetMouseButtonDown(0))
+            {
+                Invoke(nameof(ReturnGameScene), 1);
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +98,13 @@ public class CakeManager : MonoBehaviour
         if(applepie && blueberrytart && shortcake)
         {
             //ゲームクリアにする
+            //mori
+            Instantiate(clearCutInObj);
+            PlayerSetPos.PlayerPos = new Vector3(10.5f, -6, 0);
+            if (HelpManager.HavingHelpTask == "CakeMake")
+            {
+                HelpManager.IsClear = true;
+            }
             Debug.Log("クリア");
             return;
         }
@@ -173,5 +198,12 @@ public class CakeManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //mori
+    //シーン遷移
+    public void ReturnGameScene()
+    {
+        _transitonScene?.LoadScene();
     }
 }
