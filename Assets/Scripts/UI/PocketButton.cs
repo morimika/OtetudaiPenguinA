@@ -52,6 +52,7 @@ public class PocketButton : MonoBehaviour
         _closeButton.SetActive(false);
         IsHiddenButton = false;
         _pocImage=_pocketButton.GetComponent<Image>();
+        _optionCanvas.SetActive(false);
     }
  
     private void Update()
@@ -72,17 +73,17 @@ public class PocketButton : MonoBehaviour
     public void OpenPocket()
     {
         StartCoroutine(OpenPoketSp());
+        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
 
     public IEnumerator OpenPoketSp()
     {
         _pocImage.sprite = _openPocSp;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         _pocketUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
         _isPocketOpen = true;
         _closeButton.SetActive(true);
         _optionCanvas.SetActive(true);
-        _playSceneDatas.TapType = PlaySceneTapType.Pose;
     }
  
     /// <summary>

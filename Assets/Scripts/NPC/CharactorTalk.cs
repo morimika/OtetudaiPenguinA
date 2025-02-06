@@ -153,6 +153,7 @@ public class CharactorTalk : MonoBehaviour
     {
         //_boxSR.sprite = _txtboxSp;
         _orderButton.interactable = false;
+        PocketButton.IsHiddenButton = true;
         //最初に話しかけた
         if (_orderIndex == 0)
         {
@@ -209,6 +210,7 @@ public class CharactorTalk : MonoBehaviour
             Destroy(gameObj.gameObject);
 
             //タスク受注
+            PocketButton.IsHiddenButton = false;
             HelpManager.HavingHelpTask = helpInfo.kind.ToString();
             HelpManager.IsClear = false;
 
@@ -235,6 +237,7 @@ public class CharactorTalk : MonoBehaviour
     {
         //_boxSR.sprite = _txtboxSp;
         _clearButton.interactable = false;
+        PocketButton.IsHiddenButton = true;
 
         if (_clearIndex == 0)
         {
@@ -283,16 +286,6 @@ public class CharactorTalk : MonoBehaviour
                 //シール獲得カットイン
                 cutInManager.SealCutIn();
 
-                //自由帳処理(自動)
-                //自由帳出現
-
-                //指定の物を大きくフェードインして　指定のものとは？
-
-                //縮小しながら位置へ
-
-                //少し見せてから自由帳フェードアウト
-
-
                 //終わったら
                 //プレイヤーにフォーカスを戻す
                 _virtualCamera.Follow = _player.transform;
@@ -314,6 +307,7 @@ public class CharactorTalk : MonoBehaviour
                 Destroy(gameObj.gameObject);
 
                 _clearIndex = 0;
+                PocketButton.IsHiddenButton = false;
 
                 //以降会話不可
                 HelpManager.IsEndBool[(int)helpInfo.kind] = true;
