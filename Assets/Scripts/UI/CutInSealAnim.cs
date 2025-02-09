@@ -64,6 +64,7 @@ public class CutInSealAnim : MonoBehaviour
         {
             StartCoroutine(nameof(SlideLineOut));
         }
+        Debug.Log(_playSceneDatas.TapType);
     }
 
     #region
@@ -73,6 +74,8 @@ public class CutInSealAnim : MonoBehaviour
         RectTransform rectTransform = GetComponent<RectTransform>();
         CanvasGroup canvasGroup = _sealImage.GetComponent<CanvasGroup>();
         RectTransform sealRectTransform = _sealImage.gameObject.GetComponent<RectTransform>();
+
+        PocketButton.IsTatchAbleButton = false;
 
         //初期位置にセット
         rectTransform.localPosition = new Vector3(1690, 1690, 0);
@@ -167,7 +170,7 @@ public class CutInSealAnim : MonoBehaviour
         canvasG.DOFade(1, 0.3f);
         _lastObj.transform.DOScale(new Vector3(0.008f, 0.008f, 0.008f), 0.5f).SetEase(Ease.InCirc);
 
-        if (_isAll)
+        if (false/*IsAll*/)
         {
             Instantiate(_finalObjCanG);
             _finalObjCanG.alpha = 0;
@@ -184,9 +187,11 @@ public class CutInSealAnim : MonoBehaviour
             _freeBookPicCanList[i].DOFade(0, 0.5f);
         }
 
-        yield return new WaitForSeconds(1);
         _playSceneDatas.TapType = PlaySceneTapType.Play;
         PocketButton.IsHiddenButton = false;
+        PocketButton.IsTatchAbleButton = true;
+
+        yield return new WaitForSeconds(1);
         for (int i=0;i< _freeBookPicCanList.Count;i++)
         {
             Destroy(_freeBookPicCanList[i].gameObject);
