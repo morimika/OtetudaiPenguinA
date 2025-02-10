@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 //クリックSEを鳴らす
-                BSJSoundManger.Instance.PlaySE(0);
+                BSJSoundManger.Instance.PlaySEAsync(0);
                 //ボタン系を押さないときは全て処理しない
                 if(EventSystem.current.IsPointerOverGameObject()) return;
                 
@@ -138,14 +138,14 @@ public class Player : MonoBehaviour
     }
 
     //ダブルタップの処理
-    void Tap()
+    private async void Tap()
     {
         //ダブルタッチされているか
         if (tap == 1)
         {
             tap = 0;
             //歩く足音
-            BSJSoundManger.Instance.PlaySE(1);
+            await BSJSoundManger.Instance.PlaySEAsync(1);
             return;
         }
 
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
             sprite_C = false;
             tap = 0;
             //走るSE
-            BSJSoundManger.Instance.PlaySE(2);
+            await BSJSoundManger.Instance.PlaySEAsync(2);
             return;
         }
         //連打したら無視する

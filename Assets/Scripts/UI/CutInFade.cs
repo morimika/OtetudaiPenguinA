@@ -23,6 +23,9 @@ public class CutInFade : MonoBehaviour
     [SerializeField]
     private bool _isClear = false;
 
+    [SerializeField]
+    private bool _IsStop = false;
+
     void Start()
     {
         //選択したフェードを呼び出し
@@ -31,7 +34,7 @@ public class CutInFade : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0)&&IsFadeFin)
+        if(Input.GetMouseButtonDown(0)&&IsFadeFin &&_IsStop==false)
         {
             StartCoroutine(fadeKind+"Out");
         }

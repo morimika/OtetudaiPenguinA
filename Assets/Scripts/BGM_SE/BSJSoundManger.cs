@@ -86,7 +86,9 @@ public class BSJSoundManger : MonoBehaviour
     /// SEを流す関数
     /// </summary>
     /// <param name="index"></param>
-    public void PlaySE(int index)
+    
+    private Dictionary<int,AudioSource> _activeSE = new Dictionary<int,AudioSource>();
+    public async UniTask PlaySEAsync(int index)
     {
         //指定されたインデックスより少ない値や大きい値が指定された時はワーニングを出す
         if (index < 0 || index >= _seClips.Length)
@@ -96,7 +98,43 @@ public class BSJSoundManger : MonoBehaviour
         }
         
         //SEは一度だけ再生する
-        _seSorce.PlayOneShot(_seClips[index]);
+        //_seSorce.PlayOneShot(_seClips[index]);
+        
+        //すでに再生中ならSEをチェックして、同じインデックスの時は上書き
+        if (_activeSE.ContainsKey(index))
+        {
+            //前のSEを停止
+            _activeSE[index].Stop();
+        }
+        else
+        {
+             //新しいAUdioSorceを作成
+            AudioSource _newSource = gameObject.AddComponent<AudioSource>();
+            _newSource.playOnAwake = false;
+            _activeSE[index] = _newSource;
+        }
+        
+        //新しいSE再生
+        AudioSource _source = _activeSE[index];
+        _source.clip = _seClips[index];
+        _source.Play();
+        
+        
+        //SEの再生終了を非同期で待機
+        await UniTask.WaitUntil(() =>  _source != null && !_source.isPlaying);
+        
+        _activeSE.Remove(index);
+        
+        // nullチェック後に削除
+        if (_source != null)
+        {
+            Destroy(_source);
+        }
+        
+        Debug.Log($"SE{index}の再生は終了");
+       
+        
+        
     }
 
 

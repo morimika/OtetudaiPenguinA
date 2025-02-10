@@ -40,6 +40,17 @@ public class CharactorTalk : MonoBehaviour
     private Vector2 _afterSize;
 
     [SerializeField]
+    private GameObject _npcSprObj;
+    [SerializeField, Label("アニメーション速度")]
+    private float _npcObjAnimSpeed = 0.1f;
+
+    public Animator npcSpeekAnim => _npcSprObj.GetComponent<Animator>();
+    [AnimatorParam("npcSpeekAnim")]
+    public int paramHash;
+    [AnimatorParam("npcSpeekAnim")]
+    public string paramName; 
+
+    [SerializeField]
     private SpriteRenderer _boxSR;
     [SerializeField]
     private Sprite _txtboxSp;
@@ -153,6 +164,7 @@ public class CharactorTalk : MonoBehaviour
     {
         //_boxSR.sprite = _txtboxSp;
         _orderButton.interactable = false;
+        PocketButton.IsHiddenButton = true;
         //最初に話しかけた
         if (_orderIndex == 0)
         {
@@ -209,6 +221,7 @@ public class CharactorTalk : MonoBehaviour
             Destroy(gameObj.gameObject);
 
             //タスク受注
+            PocketButton.IsHiddenButton = false;
             HelpManager.HavingHelpTask = helpInfo.kind.ToString();
             HelpManager.IsClear = false;
 
@@ -223,7 +236,15 @@ public class CharactorTalk : MonoBehaviour
             tmpText.text = _orderTxt[_orderIndex];
             //テキストアニメーション
             TxtAnim();
+            //口パクアニメーション開始
+            npcSpeekAnim.SetBool(paramName.ToString(), true);
+            //NPCアニメーション
+            await _npcSprObj.transform.DOMoveY(_npcSprObj.transform.position.y + 0.6f, _npcObjAnimSpeed)
+                                        .SetEase(Ease.OutCirc).SetLoops(4, LoopType.Yoyo);
             await Task.Delay(tmpText.text.Length * 50);
+            //口パクアニメーション停止
+            npcSpeekAnim.SetBool(paramName.ToString(), false);
+            Debug.Log(paramName.ToString());
             //次のテキストへ
             _orderIndex++;
         }
@@ -235,6 +256,7 @@ public class CharactorTalk : MonoBehaviour
     {
         //_boxSR.sprite = _txtboxSp;
         _clearButton.interactable = false;
+        PocketButton.IsHiddenButton = true;
 
         if (_clearIndex == 0)
         {
@@ -283,16 +305,6 @@ public class CharactorTalk : MonoBehaviour
                 //シール獲得カットイン
                 cutInManager.SealCutIn();
 
-                //自由帳処理(自動)
-                //自由帳出現
-
-                //指定の物を大きくフェードインして　指定のものとは？
-
-                //縮小しながら位置へ
-
-                //少し見せてから自由帳フェードアウト
-
-
                 //終わったら
                 //プレイヤーにフォーカスを戻す
                 _virtualCamera.Follow = _player.transform;
@@ -314,6 +326,7 @@ public class CharactorTalk : MonoBehaviour
                 Destroy(gameObj.gameObject);
 
                 _clearIndex = 0;
+                PocketButton.IsHiddenButton = false;
 
                 //以降会話不可
                 HelpManager.IsEndBool[(int)helpInfo.kind] = true;
@@ -331,6 +344,8 @@ public class CharactorTalk : MonoBehaviour
         {
             tmpText.text = _clearTxt[_clearIndex];
             TxtAnim();
+            //NPCアニメーション
+
             await Task.Delay(tmpText.text.Length * 50);
             _clearIndex++;
         }
