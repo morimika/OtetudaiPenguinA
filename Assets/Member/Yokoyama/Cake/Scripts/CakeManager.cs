@@ -23,10 +23,11 @@ public class CakeManager : MonoBehaviour
     private GameObject clearCutInObj;
     [SerializeField]
     private TransitonScene _transitonScene;
+    private bool priClear = false;
 
     private void Update()
     {
-        if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
+        if (priClear == true && CutInFade.IsFadeFin)
         {
             //クリアしている、かつ、フェードインされて待機中の場合
             if (Input.GetMouseButtonDown(0))
@@ -101,6 +102,7 @@ public class CakeManager : MonoBehaviour
             //mori
             Instantiate(clearCutInObj);
             PlayerSetPos.PlayerPos = new Vector3(10.5f, -6, 0);
+            priClear = true;
             if (HelpManager.HavingHelpTask == "CakeMake")
             {
                 HelpManager.IsClear = true;

@@ -18,6 +18,7 @@ public class NextNumber : MonoBehaviour
     private GameObject _clearCutInObj;
     [SerializeField]
     private TransitonScene _transitonScene;
+    private bool priClear = false;
 
     private void Start()
     {
@@ -37,7 +38,7 @@ public class NextNumber : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //�N���A���Ă���A���A�t�F�[�h�C������đҋ@���̏ꍇ
-            if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
+            if (priClear == true && CutInFade.IsFadeFin)
             {
                 Invoke(nameof(ReturnGameScene), 1);
             }
@@ -71,7 +72,8 @@ public class NextNumber : MonoBehaviour
     private void Clear()
     {
         Instantiate(_clearCutInObj);
-        if(HelpManager.HavingHelpTask== "KanjiHarvest")
+        priClear = true;
+        if (HelpManager.HavingHelpTask== "KanjiHarvest")
         {
             HelpManager.IsClear = true;
         }

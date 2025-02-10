@@ -94,6 +94,7 @@ public class AppleController : MonoBehaviour
     public bool _isRestart = false;
     private GameObject _go;
     private bool _doOnce = false;
+    private bool priClear = false;
 
     public void Start()
     {
@@ -207,7 +208,7 @@ public class AppleController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //クリアしている、かつ、フェードインされて待機中の場合
-            if (HelpManager.IsClear == true && CutInFade.IsFadeFin)
+            if (priClear == true && CutInFade.IsFadeFin)
             {
                 Invoke(nameof(ReturnGameScene), 1);
             }
@@ -358,7 +359,8 @@ public class AppleController : MonoBehaviour
             _doOnce = true;
             //カットインを呼び、クリアにする
             Instantiate(clearCutInObj);
-            if(HelpManager.HavingHelpTask== "AppleCut")
+            priClear = true;
+            if (HelpManager.HavingHelpTask== "AppleCut")
             {
                 HelpManager.IsClear = true;
             }

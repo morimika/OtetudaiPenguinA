@@ -143,14 +143,15 @@ public class CutInSealAnim : MonoBehaviour
         //自由帳処理(自動)
         //自由帳出現
         var obj = Instantiate(_freeBookObj,new Vector2(Camera.main.transform.position.x+16,Camera.main.transform.position.y),Quaternion.identity) as GameObject;
-        var _lastObjCan = obj.GetComponent<CanvasGroup>();
-        _freeBookPicCanList.Add(_lastObjCan);
+        var objCan = obj.GetComponent<CanvasGroup>();
+        objCan.alpha = 1;
+        _freeBookPicCanList.Add(objCan);
         //所持シールに基づき絵を生成
         for (int i = 0; i < _playerSeals.items.Count; i++)
         {
             //生成した最新のオブジェクトを記憶
             _lastObj = Instantiate(_freeBookPicList[_playerSeals.items[i].itemId], new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y), Quaternion.identity) as GameObject;
-            _lastObjCan =_lastObj.GetComponent<CanvasGroup>();
+            var _lastObjCan =_lastObj.GetComponent<CanvasGroup>();
             _lastObjCan.alpha = 1;
             _freeBookPicCanList.Add(_lastObjCan);
             if (_playerSeals.items.Count==4)
