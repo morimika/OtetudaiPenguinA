@@ -10,7 +10,7 @@ public class Grass : MonoBehaviour
     private void Start()
     {
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if(other.tag is "Target")
         {

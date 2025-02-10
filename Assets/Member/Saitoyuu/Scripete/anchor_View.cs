@@ -25,7 +25,7 @@ public class anchor_View : MonoBehaviour
     {
         Debug.Log("óvëfêî");
         Debug.Log(_count);
-        if ((_count == 18) || (_count == 39) || (_count == 65) || (_count == 77) ||(_count == 79)|| (_count == 82)|| (_count == 97)|| (_count == 90))
+        if ((_count == 18) || (_count == 39) || (_count == 47) || (_count == 65) || (_count == 77) ||(_count == 79)|| (_count == 82)|| (_count == 97)|| (_count == 90))
             Invoke(("NextAnchor"), 0.5f);
 
     }

@@ -8,8 +8,8 @@ public class Follow : MonoBehaviour
 {
     private Vector3 mousePos;
     private Vector3 pos;
-    [SerializeField,Range(0f,0.1f)] float _followStrength ;
-    void Update()
+    [SerializeField,Range(0f,1f)] float _followStrength ;
+    void FixedUpdate()
     {
         mousePos = Input.mousePosition;
         if (Input.GetMouseButton(0))
@@ -20,5 +20,5 @@ public class Follow : MonoBehaviour
 
         }
     }
-  
+
 }
