@@ -21,7 +21,7 @@ public class Tree3 : MonoBehaviour
         {
             _blcanGenerateApple3 = true;
         }
-        if (collision.gameObject.tag == "Apple3")
+        else if (collision.gameObject.tag == "Apple3")
         {
             _blcanGenerateApple3 = false;
         }
@@ -33,7 +33,7 @@ public class Tree3 : MonoBehaviour
         {
             _blcanGenerateApple3 = true;
         }
-        if (collision.gameObject.tag == "Apple3")
+        else if (collision.gameObject.tag == "Apple3")
         {
             _blcanGenerateApple3 = false;
         }
