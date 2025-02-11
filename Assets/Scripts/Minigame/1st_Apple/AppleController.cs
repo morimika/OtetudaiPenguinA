@@ -244,12 +244,14 @@ public class AppleController : MonoBehaviour
             Count = Count + _tree1;
 
             // りんごを落とす
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             _arrayAppleRb[0].isKinematic = false;
             _arrayAppleRb[1].isKinematic = false;
             _arrayAppleRb[2].isKinematic = false;
             _arrayAppleRb[3].isKinematic = false;
 
-            // 一度リンゴが落ちた木はもう一度触れない
+            // 一度リンゴが落ちた木はもう一度触っても
+            // 数が増えない
             _blCanTouchTree = false;
             _treeNullTag[0].SetActive(false);
 
@@ -264,6 +266,9 @@ public class AppleController : MonoBehaviour
             await UniTask.Delay(TimeSpan.FromSeconds(_scissorAnimWait));
             // またはさみのアニメーションが呼び出せるように _isCutting を falseにする
             _scissorCuttingAnimation.SetBool("_isCutting", false);
+            // はさみのアニメーションが終わった時まだ木のところにある場合
+            // 鋏を初期位置に戻す
+            ScissorToInitialPos();
         }
         else if (collision.gameObject.tag == "Tree2" && _blCanTouchTree2 == true)
         {
@@ -272,6 +277,7 @@ public class AppleController : MonoBehaviour
 
             Count = Count + _tree2;
 
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             _arrayAppleRb[4].isKinematic = false;
             _arrayAppleRb[5].isKinematic = false;
             _arrayAppleRb[6].isKinematic = false;
@@ -294,6 +300,7 @@ public class AppleController : MonoBehaviour
 
             Count = Count + _tree3;
 
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
             _arrayAppleRb[7].isKinematic = false;
             _arrayAppleRb[8].isKinematic = false;
             _arrayAppleRb[9].isKinematic = false;
@@ -317,6 +324,10 @@ public class AppleController : MonoBehaviour
 
     public async void ApplesGoInBascket(Transform currentPos, Vector3 targetPos, Vector3 targetPos2, Collider coll, Rigidbody rb, GameObject obj)
     {
+        // リンゴのアニメーションが始まる前に
+        // 鋏を初期位置に戻す
+        ScissorToInitialPos();
+
         // りんご同士で衝突させない（爆発しちゃうから）
         coll.isTrigger = true;
         rb.isKinematic = true;
@@ -327,7 +338,7 @@ public class AppleController : MonoBehaviour
         if(obj  != null)
         {
            obj.SetActive(false);
-            Destroy(obj);
+           Destroy(obj);
         }
 
         //mori
@@ -381,9 +392,15 @@ public class AppleController : MonoBehaviour
         ScissorToInitialPos();
         //// リンゴの数をリセット
         Count = 7;
+        // 木１にNullTagのobj
+        // _blcanGenerateAppleがtrueになる
+        _treeNullTag[0].SetActive(true);
+        _treeNullTag[1].SetActive(true);
+        _treeNullTag[2].SetActive(true);
 
         if (_blCanTouchTree == false)
         {
+            // 木１にりんごがついていないか確認（ついていたらfalse）
             if (Tree1._blcanGenerateApple == true)
             {
                 //// 木をまた触れるようにする
@@ -391,7 +408,6 @@ public class AppleController : MonoBehaviour
                 GenerateApple();
             }
         }
-
         if (_blCanTouchTree2 == false)
         {
             if (Tree2._blcanGenerateApple2 == true)
