@@ -8,8 +8,8 @@ public class NextNumber : MonoBehaviour
 {
     [SerializeField] GameObject _nextNumberGameObject;
     [SerializeField] GameObject _endNumberGameObject;
-    [SerializeField] GameObject _nextUINumberGameObject;
-    [SerializeField] GameObject _endUINumberGameObject;
+   // [SerializeField] GameObject _nextUINumberGameObject;
+   // [SerializeField] GameObject _endUINumberGameObject;
     public int _count = 0;
     Grass _grass;
 
@@ -45,7 +45,7 @@ public class NextNumber : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("�v�f��");
         Debug.Log(_count);
@@ -62,9 +62,9 @@ public class NextNumber : MonoBehaviour
     private void NextActive()
     {
         _endNumberGameObject.SetActive(false);
-        _endUINumberGameObject.SetActive(false);
+        //_endUINumberGameObject.SetActive(false);
         _nextNumberGameObject.SetActive(true);
-        _nextUINumberGameObject.SetActive(true);
+        //_nextUINumberGameObject.SetActive(true);
         Debug.Log("���̐���");
     }
 
