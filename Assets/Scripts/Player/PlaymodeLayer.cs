@@ -19,7 +19,7 @@ public class PlaymodeLayer : MonoBehaviour
     {
         Vector3 vec
             = _camera.WorldToScreenPoint(new Vector3(0,this.transform.position.y - sprBounds, 0));
-        _spriteLayer.sortingOrder = (int)vec.y*-1;
+        _spriteLayer.sortingOrder = ((int)vec.y*-1)-500;
     }
 
 }

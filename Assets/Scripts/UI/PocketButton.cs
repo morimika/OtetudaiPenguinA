@@ -61,6 +61,7 @@ public class PocketButton : MonoBehaviour
  
     private void Update()
     {
+        Debug.Log(_playSceneDatas.TapType.ToString());
         if (IsHiddenButton)
         {
             _pocketButton.SetActive(false);
@@ -92,7 +93,7 @@ public class PocketButton : MonoBehaviour
     public IEnumerator OpenPoketSp()
     {
         _pocImage.sprite = _openPocSp;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         _pocketUI.DOAnchorPos(new Vector2(0, 0), 0.5f);
         _isPocketOpen = true;
         _closeButton.SetActive(true);

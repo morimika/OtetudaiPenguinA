@@ -3771,6 +3771,7 @@ GameObject:
   - component: {fileID: 2025771365}
   - component: {fileID: 2025771364}
   - component: {fileID: 2025771366}
+  - component: {fileID: 2025771367}
   m_Layer: 0
   m_Name: Scissor_AppleController
   m_TagString: Untagged
@@ -3999,6 +4000,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneIndex: 1
+--- !u!114 &2025771367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025771352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b989e3cf724ceb3419a2b087c45db5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerItem: {fileID: 11400000, guid: 7902409c652b34448890055ac37999b6, type: 2}
 --- !u!1 &2061916921
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,8 +2,8 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 //Mori sprict
 
@@ -50,6 +50,7 @@ public class HelpInfo : HelpManager
 
     void Update()
     {
+        Debug.Log("アイテム量："+_playerItem.items.Count);
         //プレイヤーのポジションを更新
         _playerPos = _player.transform.position;
         //距離を測って物と近いか確認

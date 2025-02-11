@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEditor;
+using System.Linq;
 
 //Mori Script
 
@@ -17,6 +18,8 @@ public class CutInSealAnim : MonoBehaviour
     private ItemList _playerSeals;
     [SerializeField, Label("背景画像")]
     private CanvasGroup _bgCanvasG;
+    [SerializeField,Label("しーるげっと")]
+    private CanvasGroup _txtCanvas;
 
     public static GameObject _pocketButtonObj;
     private GameObject _pocketButtonParent;
@@ -94,6 +97,7 @@ public class CutInSealAnim : MonoBehaviour
         //待ったのちシールを表示する
         yield return new WaitForSeconds(0.5f);
         canvasGroup.DOFade(1f, 0.3f);
+        _txtCanvas.DOFade(1f, 0.3f);
         //シールを拡大縮小で強調表示したい
         //yield return new WaitForSeconds(0.5f);
         //sealRectTransform.DOScale(new Vector3(6, 6, 6), 1f);/*.SetLoops(1, LoopType.Yoyo);*/
@@ -113,8 +117,10 @@ public class CutInSealAnim : MonoBehaviour
         ////シール画像のフェードアウト
         //canvasGroup.DOFade(0f, 0.3f);
 
-        //待ったのちラインを狭める
         yield return new WaitForSeconds(0.5f);
+        _txtCanvas.DOFade(0f, 0.3f);
+        //待ったのちラインを狭める
+        yield return new WaitForSeconds(0.3f);
         rectTransform.DOScaleX(0.01f, 0.5f);
         //スライドアウト
         rectTransform.DOAnchorPos(new Vector3(-1690, -1690, 0), 1f).SetEase(Ease.InOutQuart);
@@ -150,7 +156,7 @@ public class CutInSealAnim : MonoBehaviour
         for (int i = 0; i < _playerSeals.items.Count; i++)
         {
             //生成した最新のオブジェクトを記憶
-            _lastObj = Instantiate(_freeBookPicList[_playerSeals.items[i].itemId], new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y), Quaternion.identity) as GameObject;
+            _lastObj = Instantiate(_freeBookPicList[_playerSeals.items[i].itemId], obj.transform.position, Quaternion.identity) as GameObject;
             var _lastObjCan =_lastObj.GetComponent<CanvasGroup>();
             _lastObjCan.alpha = 1;
             _freeBookPicCanList.Add(_lastObjCan);
@@ -165,7 +171,11 @@ public class CutInSealAnim : MonoBehaviour
         canvasG.alpha = 0;
         _lastObj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         //移動
-        obj.transform.DOMoveX(Camera.main.transform.position.x, 0.5f);
+        for(int i=0;i<_freeBookPicCanList.Count;i++)
+        {
+            _freeBookPicCanList[i].transform.DOMoveX(Camera.main.transform.position.x, 0.5f);
+        }
+
         yield return new WaitForSeconds(1);
         //指定の物を大きくフェードインして縮小しながら位置へ　指定のものとは？ 0.02-0.008
         canvasG.DOFade(1, 0.3f);
@@ -196,6 +206,8 @@ public class CutInSealAnim : MonoBehaviour
         for (int i=0;i< _freeBookPicCanList.Count;i++)
         {
             Destroy(_freeBookPicCanList[i].gameObject);
+            Destroy(obj.gameObject);
+            Destroy(_lastObj.gameObject);
         }
         DestroyThis();
     }

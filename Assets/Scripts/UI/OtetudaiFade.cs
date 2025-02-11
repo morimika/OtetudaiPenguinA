@@ -48,10 +48,12 @@ public class OtetudaiFade : MonoBehaviour
 
     void Update()
     {
+        //お手伝いを終えていたら何もしない
+        if (HelpManager.IsEndBool[(int)_helpInfo.kind]) return;
         //プレイヤーのポジションを更新、取得
         _playerPos = _player.transform.position;
         //対応するお手伝いを受けていたら
-        if (HelpManager.HavingHelpTask == _helpInfo.kind.ToString() || HelpManager.IsEndBool[(int)_helpInfo.kind])
+        if (HelpManager.HavingHelpTask == _helpInfo.kind.ToString())
         {
             //距離を測ってプレイヤーと近いか確認
             if (Vector3.Distance(this.transform.position, _playerPos) <= _distance)

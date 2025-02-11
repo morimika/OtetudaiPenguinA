@@ -33,12 +33,6 @@ public class SealView : MonoBehaviour
         SetSealCanvas();
     }
 
-    [SerializeField,Button]
-    public void ClearSeals()
-    {
-        _sealList.items.Clear();
-    }
-
     [SerializeField, Button]
     public void RefreshCanvasData()
     {

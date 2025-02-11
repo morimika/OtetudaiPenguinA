@@ -96,8 +96,10 @@ public class AppleController : MonoBehaviour
     private bool _doOnce = false;
     private bool priClear = false;
 
+
     public void Start()
     {
+
         CountBasketAppleNum();
 
         GenerateApple();
