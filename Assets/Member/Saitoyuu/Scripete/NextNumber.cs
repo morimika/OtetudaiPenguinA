@@ -44,7 +44,7 @@ public class NextNumber : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("�v�f��");
         Debug.Log(_count);
