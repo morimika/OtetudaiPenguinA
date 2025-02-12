@@ -28,6 +28,10 @@ public class GearController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     [SerializeField] public GameObject NextButton;
 
     public GameObject Porti;//ポーチを入れるよう
+    //public AudioClip sound1;//針の音
+   
+    //public AudioClip sound4;
+AudioSource audioSource;
     private void Start()
     {
         GearPointTr = TargetPoint.transform;
@@ -47,7 +51,7 @@ public class GearController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             GetComponent<Renderer>().material.color = Color.red;
         }
         */
-
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -98,11 +102,15 @@ public class GearController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     {
         if (other.gameObject.CompareTag("TargetCenter") && _isDragging == false && _isAttach == false)
         {
+
+            GetComponent<AudioSource>().Play();
+            //今時計についていると判定
             _isAttach = true;
             NowSet = true;
+
             transform.DOMove(other.transform.position, 0.2f).OnComplete(() => _callback?.Invoke(_index));
             Set = true;
-            NextButton.SetActive(true);//判定をするための次に移動するボタンを表示する 
+            Invoke("GetNextButton", 1f);//判定をするための次に移動するボタンを表示する
             this.gameObject.transform.parent = null;//親子解除
             _hitCallback?.Invoke(_gireIndex);
 
@@ -117,7 +125,7 @@ public class GearController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         else
         {
             NowSet = false;
-            
+            Invoke("CloseNextButton", 0.0f);
         }
 
     }
@@ -157,4 +165,13 @@ public class GearController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         _gireIndex = gireIndex;
         _hitCallback = hitCallback;
     }
+    private void GetNextButton()
+    {
+        NextButton.SetActive(true);
+    }
+    private void CloseNextButton()
+    {
+        NextButton.SetActive(false);
+    }
+  
 }

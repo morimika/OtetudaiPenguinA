@@ -14,6 +14,6 @@ public class ClereUIMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.DOMove(new Vector3(900, 550, 0f), 1f);
+        transform.DOMove(new Vector3(1000, 550, 0f), 1f);
     }
 }

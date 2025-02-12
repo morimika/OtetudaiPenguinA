@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class LongClock : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public int LoMeter = -15;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            transform.Rotate(0f, 0f, LoMeter);  // Zé≤Ç10ÅãâÒì]
+
+
+        }
     }
     private void Lotate()
     {
-        transform.Rotate(new Vector3(0, 0, -10) * Time.deltaTime);
+        //transform.Rotate(new Vector3(0, 0, -10) * Time.deltaTime);
     }
 }

@@ -12,75 +12,84 @@ public class MoveQuest : MonoBehaviour
     [SerializeField]
     private Text _textCountdown;
 
-   
+
     private Vector3 scale;
 
     [SerializeField]
     private GameObject _imageMask;
 
-    public float maxDistanceDelta = 2.0f;
+    public float maxDistanceDelta = 1.0f;
 
     private bool Swich = false;
 
+    public int XPosition = 700;
+    public int YPosition = 780;
+
+    //public GameObject QuestPanel;
+  
+
+    public bool ThisQuestTitle = true;
+
     public float MoveSpeed = 10;
+
+    //4びょう
+    public GameObject BG;
+    public GameObject Mondai;
     void Start()
     {
-        Invoke("Wait",WaitTime);
+        Invoke("Wait", WaitTime);
         _textCountdown.text = "";
         Swich = false;
+
+        Invoke("MoveMondaiBun", 4f);
     }
 
     void Update()
     {
         Move();
+       
     }
 
     private void Wait()
     {
         Swich = true;
- 
-       
+        StartCoroutine("ScaleDown");//問題の大きさをだんだん小さくするコルーチンを呼ぶ
+        Invoke("UnLock", 1f);
 
-        // this.transform.position = new Vector3(-490, 380, 0);
-        Invoke("StartCount", 1.5f);
+
     }
 
     private void Move()
     {
-        if(Swich == true)
+        if (Swich == true)
         {
             Vector3 current = transform.position;
-            Vector3 target = new Vector3(750, 720, 0);//問題文の移動先の座標指定
-            float step = 2.0f * Time.deltaTime;
+            Vector3 target = new Vector3(330, 930, 0);//問題文の移動先の座標指定
+            float step = MoveSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(current, target, maxDistanceDelta);
         }
-    }
-	 
-    public void StartCount()
-    {
-        StartCoroutine(CountdownCoroutine());
+
     }
 
-    IEnumerator CountdownCoroutine()
+    IEnumerator ScaleDown()
     {
-        _imageMask.gameObject.SetActive(true);
-        _textCountdown.gameObject.SetActive(true);
+        for (float i = 2.5f; i > 0.75; i -= 0.01f)
+        {
+            this.transform.localScale = new Vector3(i, (i+0.1f), i);
+            yield return null;new WaitForSeconds(0.1f);
+        }
+    }
 
-        _textCountdown.text = "3";
-        yield return new WaitForSeconds(1.0f);
-
-        _textCountdown.text = "2";
-        yield return new WaitForSeconds(1.0f);
-
-        _textCountdown.text = "1";
-        yield return new WaitForSeconds(1.0f);
-
-        _textCountdown.text = "すたーと！";
-        yield return new WaitForSeconds(1.0f);
-
-        _textCountdown.text = "";
-        _textCountdown.gameObject.SetActive(false);
+    //最初のギアを触れないようにする制限を解除する
+    private void UnLock()
+    {
+       // QuestPanel.SetActive(true);
         _imageMask.gameObject.SetActive(false);
     }
-   
+    private void MoveMondaiBun()
+    {
+        Mondai.SetActive(true);
+        BG.SetActive(true);
+        
+    }
 }

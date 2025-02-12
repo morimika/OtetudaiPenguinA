@@ -13,11 +13,11 @@ public class MovePorti : MonoBehaviour
     Vector3 DownTransform;//â∫Ç…âBÇÍÇÈÇ∆Ç´ÇÃç¿ïWÇ‹Ç≈çsÇ≠Ç©ÇÃêîílÇì¸ÇÍÇÈÇÊÇ§
 
     public float MoveSpeed = 5.0f;
-
+    
     private void Start()
     {
-        UpTransform = new Vector3(-0.3f, 0, -9);
-        DownTransform = new Vector3(-0.3f,-7, -9);
+        UpTransform = new Vector3(13.5f, -2.7f, -9);
+        DownTransform = new Vector3(13.5f,-7.7f, -9);
     }
     private void Update()
     {
@@ -40,19 +40,12 @@ public class MovePorti : MonoBehaviour
     }
     void ExecuteAction()
     {
-        /* Vector3 current = transform.position;
-         Vector3 target = new Vector3(0, -4, -9);
-         float step = MoveActionSpeed; //* Time.deltaTime;
-         transform.position = Vector3.MoveTowards(current, target, maxDistanceDelta);*/
         transform.position =
        Vector3.MoveTowards(transform.position, DownTransform, MoveSpeed);
     }
     void BackPosition()
     {
-        /* Vector3 current = transform.position;
-         Vector3 target = new Vector3(0, 0, -9);
-         float step = MoveActionSpeed;// * Time.deltaTime;
-         transform.position = Vector3.MoveTowards(current, target, maxDistanceDelta);*/
+      
         transform.position =
        Vector3.MoveTowards(transform.position, UpTransform, MoveSpeed);
     }
