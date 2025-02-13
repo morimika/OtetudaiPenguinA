@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class color_Change : MonoBehaviour
 {
-    public int _count = 0;
+    private int _count = 0;
     private int _myNamber;
+    private SpriteRenderer _spriteRenderer;
+
     Grass _grass;
     // Start is called before the first frame update
     void Start()
@@ -14,6 +16,7 @@ public class color_Change : MonoBehaviour
         Debug.Log(_myNamber);
         GameObject obj = GameObject.Find("Player");
         _grass = obj.GetComponent<Grass>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -27,7 +30,7 @@ public class color_Change : MonoBehaviour
     {
         if(_myNamber == _count)
         {
-            GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            _spriteRenderer.color = new Color32(255, 255, 255, 255);
         }
     }
 }

@@ -16,9 +16,4 @@ public class GrassView : MonoBehaviour
         _spriteRenderer.sprite = _newSprite;
         _spriteRenderer.color = Color.yellow;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
 }
