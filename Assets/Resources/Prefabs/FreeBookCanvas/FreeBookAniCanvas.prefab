@@ -97,6 +97,7 @@ MonoBehaviour:
   - {fileID: 1333098681498174452, guid: 8eb4c07e4ba7c104a95de8ccd69ccb13, type: 3}
   - {fileID: 2049288373988499021, guid: 0154b4e4a0050f84d94ecbad78bde0d5, type: 3}
   - {fileID: 3742517475854170203, guid: 38c1760156707164588f46692704df51, type: 3}
+  _freeBookPicPen: {fileID: 0}
 --- !u!1 &5177966606451620685
 GameObject:
   m_ObjectHideFlags: 0

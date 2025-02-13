@@ -54,8 +54,11 @@ public class CenterCirclController : MonoBehaviour
 
     [SerializeField] private string _loadScene; //シーン名を記述
 
-   
-   
+    //mori
+    [SerializeField]
+    private TransitonScene _transitonScene;
+    private bool priClear = false;
+
     private void Start()
     {
         _gearControllers.ForEach(gear => gear.Setup(AttachGearObject));
@@ -85,7 +88,9 @@ public class CenterCirclController : MonoBehaviour
                 }
                 
                 Close = true;
+                isCalledOnce = true;
                 Invoke("Finish", 3f);
+
             }
         }
         else
@@ -99,7 +104,6 @@ public class CenterCirclController : MonoBehaviour
     //答えがあってるかないかでそれぞれを呼び出すための分岐
     private void Finish()
     {
-        isCalledOnce = true;
         Debug.Log("答え合わせが呼び出された");
 
         if (AnswerCheck == true)
@@ -262,8 +266,15 @@ public class CenterCirclController : MonoBehaviour
 
     private void Clere()
     {
+        //mori
         ClereUI.SetActive(true);
-        Invoke("BackStage",1.3f);
+        PlayerSetPos.PlayerPos = new Vector3(-5.9f, -3, 0);
+        priClear = true;
+        if (HelpManager.HavingHelpTask == "ClockRepair")
+        {
+            HelpManager.IsClear = true;
+        }
+        Invoke(nameof(ReturnGameScene), 1.3f);
     }
     private void GameOver()
     {
@@ -299,5 +310,12 @@ public class CenterCirclController : MonoBehaviour
             CloseSECheck = true;
             Invoke("CloseSE", 2f);
         }
+    }
+
+    //mori
+    //シーン遷移
+    public void ReturnGameScene()
+    {
+        _transitonScene?.LoadScene();
     }
 }

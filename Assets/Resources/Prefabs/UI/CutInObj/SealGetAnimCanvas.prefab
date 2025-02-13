@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 102, y: 88}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4345325745005071288
 CanvasRenderer:
@@ -527,7 +527,7 @@ MonoBehaviour:
   - {fileID: 3742517475854170203, guid: 38c1760156707164588f46692704df51, type: 3}
   - {fileID: 2049288373988499021, guid: 0154b4e4a0050f84d94ecbad78bde0d5, type: 3}
   _freeBookPicCanList: []
-  _finalObj: {fileID: 6932110250398819280, guid: c96cde1ae257e494ea630b66502870f7, type: 3}
+  _finalObj: {fileID: 8040962482637639921, guid: 95d9338e57b1b684cab54a943e5cc654, type: 3}
 --- !u!1 &8808437841461552725
 GameObject:
   m_ObjectHideFlags: 0

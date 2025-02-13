@@ -64,7 +64,7 @@ public class MoveQuest : MonoBehaviour
         if (Swich == true)
         {
             Vector3 current = transform.position;
-            Vector3 target = new Vector3(330, 930, 0);//問題文の移動先の座標指定
+            Vector3 target = new Vector3(600, 930, 0);//問題文の移動先の座標指定
             float step = MoveSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(current, target, maxDistanceDelta);
         }
@@ -73,9 +73,9 @@ public class MoveQuest : MonoBehaviour
 
     IEnumerator ScaleDown()
     {
-        for (float i = 2.5f; i > 0.75; i -= 0.01f)
+        for (float i = 2.5f; i > 1.3; i -= 0.01f)
         {
-            this.transform.localScale = new Vector3(i, (i+0.1f), i);
+            this.transform.localScale = new Vector3(i, i, i);
             yield return null;new WaitForSeconds(0.1f);
         }
     }

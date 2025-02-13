@@ -181,10 +181,14 @@ public class CutInSealAnim : MonoBehaviour
         canvasG.DOFade(1, 0.3f);
         _lastObj.transform.DOScale(new Vector3(0.008f, 0.008f, 0.008f), 0.5f).SetEase(Ease.InCirc);
 
-        if (false/*IsAll*/)
+
+
+        if (_isAll)
         {
-            Instantiate(_finalObjCanG);
+            yield return new WaitForSeconds(1);
+            var pen = Instantiate(_finalObjCanG);
             _finalObjCanG.alpha = 0;
+            _freeBookPicCanList.Add(pen);
             _finalObj.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
             yield return new WaitForSeconds(1);
             _finalObjCanG.DOFade(1, 0.3f);

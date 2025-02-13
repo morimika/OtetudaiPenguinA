@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63878e24d5bc0154d82c5b11bde0a52c, type: 3}
   m_Name: 02Seal
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: d6424ef7cf342cd408a1240efd95af5c, type: 3}
+  icon: {fileID: 21300000, guid: f45a5dd0ad6ddb14da3b4cee18d0c2f6, type: 3}
   itemType: 1
   itemName: "\u304F\u3055\u306E\u3057\u30FC\u308B"
   itemId: 2

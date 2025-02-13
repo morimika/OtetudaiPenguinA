@@ -7,6 +7,11 @@ public class FreeBookView : MonoBehaviour
     [SerializeField]
     private List<GameObject> _freeBookPicList;
 
+    [SerializeField]
+    private GameObject _freeBookPicPen;
+
+    private int count = 0;
+
     void Start()
     {
         FreeBookImageView();
@@ -24,7 +29,12 @@ public class FreeBookView : MonoBehaviour
             if (HelpManager.IsEndBool[i] == true)
             {
                 _freeBookPicList[i].SetActive(true);
+                count++;
             }
+        }
+        if (count == 4)
+        {
+            _freeBookPicPen.SetActive(true);
         }
     }
     

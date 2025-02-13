@@ -8,7 +8,7 @@ public class HavingItem : MonoBehaviour
     private ItemList _playerItem;
     void Start()
     {
-
+        BSJSoundManger.Instance.PlayBGM(3);
     }
 
     // Update is called once per frame

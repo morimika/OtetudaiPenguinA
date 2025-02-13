@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Member/Yokoyama/Cake/Cake.unity
     guid: 6176055c1de4aa7419aa873128de26f7
+  - enabled: 1
+    path: Assets/Member/Taguchi/Scene/ClockTest.unity
+    guid: 0cb8a89bb91c427408a4b9ebd46f3057
   m_configObjects: {}

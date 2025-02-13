@@ -64,6 +64,7 @@ public class CutInFade : MonoBehaviour
 
         yield return new WaitForSeconds(1.2f);
         IsFadeFin =true;
+        //SlideOut();
 
         yield return null;
     }
@@ -113,8 +114,9 @@ public class CutInFade : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         canvasGroup.DOFade(1, 0.7f);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1.0f);
         IsFadeFin = true;
+        //LineOut();
     }
 
     public IEnumerator LineOut()
