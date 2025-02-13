@@ -1,4 +1,6 @@
 using System;
+using DG.Tweening;	//DOTween‚ðŽg‚¤‚Æ‚«‚Í‚±‚Ìusing‚ð“ü‚ê‚é
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
