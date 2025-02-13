@@ -44,7 +44,7 @@ public class NextButton : MonoBehaviour
         if (OnryCheck == false)
         {
             Debug.Log("BBBBBB");
-            if (this.transform.localScale.x >= 0.8f || transform.localScale.y >= 0.8f || transform.localScale.z >= 0.8f)
+            if (this.transform.localScale.x >= 0.8f )//|| transform.localScale.y >= 0.8f || transform.localScale.z >= 0.8f)
             {
                 Debug.Log("aaaa");
                 CStartSin = false;
@@ -63,15 +63,10 @@ public class NextButton : MonoBehaviour
     }
     public void Anser()
     {
-        /* ActionCamera.transform.position =
-         Vector3.MoveTowards(transform.position, CameraTransform, MoveSpeed);*/
+        
         GoCamera = true;//別スクリプトで使う
         CheckStart = true;
-       // Destroy(MondaiPanel);//問題文を消す
-       // Destroy(MondaiBun);//問題文を消す
-       // BG.SetActive(false);
-      //  MondaiPanel.SetActive(false);
-       // MondaiBun.SetActive(false);
+       
 
        
         // Destroy(this.gameObject,DeleteTime);//指定した時間後にこのオブジェクトを削除する

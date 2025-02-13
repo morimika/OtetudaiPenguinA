@@ -54,6 +54,8 @@ public class CenterCirclController : MonoBehaviour
 
     [SerializeField] private string _loadScene; //シーン名を記述
 
+   
+   
     private void Start()
     {
         _gearControllers.ForEach(gear => gear.Setup(AttachGearObject));
@@ -66,11 +68,12 @@ public class CenterCirclController : MonoBehaviour
 
     private void Update()
     {
+       
         //答え合わせを一回だけ呼ぶ
         if (!isCalledOnce)
         {
-          
-           if(NextButton.CheckStart)
+           
+            if (NextButton.CheckStart)
             {
                 if (Rot == true)
                 {
@@ -85,6 +88,10 @@ public class CenterCirclController : MonoBehaviour
                 Invoke("Finish", 3f);
             }
         }
+        else
+        {
+        }
+           
 
         Lid();
     }
@@ -119,6 +126,7 @@ public class CenterCirclController : MonoBehaviour
 
     private void AttachGearObject(int index)
     {
+        
         //今ついているギアのインデックスを拾う
         _answer = index;
  　　   //今拾っているインデックスの数値をログに表示
@@ -128,12 +136,13 @@ public class CenterCirclController : MonoBehaviour
         {
             AnswerCheck = true;
             Debug.Log("OK");
+           
         }
         else
         {
             AnswerCheck = false;
             Debug.Log("No");
-           
+            
         }
     }
     
@@ -154,7 +163,7 @@ public class CenterCirclController : MonoBehaviour
         }
         else
         {
-            FlontClock.transform.DOMove(new Vector3(-1.3f, -3.3f, -3f), 3f);
+            FlontClock.transform.DOMove(new Vector3(-1.3f, -3.3f, -5f), 3f);
             FlontClock.transform.DORotate(Vector3.up * 0f, 3f);
         }
     }
@@ -195,6 +204,7 @@ public class CenterCirclController : MonoBehaviour
     //木のギアを入れたとき
     private void LotateWood()
     {
+       
         //回転処理
         if (true)
         {
@@ -215,6 +225,7 @@ public class CenterCirclController : MonoBehaviour
     //プラスチックのギアを入れたとき
     private void LotatePura()
     {
+       
         //回転処理
         if (true)
         {
@@ -233,6 +244,7 @@ public class CenterCirclController : MonoBehaviour
     //鉄のギアを入れたとき
     private void Metal()
     {
+        
         //回転処理
         if (true)
         {
@@ -251,7 +263,7 @@ public class CenterCirclController : MonoBehaviour
     private void Clere()
     {
         ClereUI.SetActive(true);
-        Invoke("BackStage",0f);
+        Invoke("BackStage",1.3f);
     }
     private void GameOver()
     {
@@ -280,7 +292,9 @@ public class CenterCirclController : MonoBehaviour
     }
     private void ComSE()
     {
-       if( CloseSECheck == false)
+     
+
+        if ( CloseSECheck == false)
         {
             CloseSECheck = true;
             Invoke("CloseSE", 2f);

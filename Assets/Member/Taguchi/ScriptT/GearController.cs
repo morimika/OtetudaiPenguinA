@@ -27,11 +27,16 @@ public class GearController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     [SerializeField] public GameObject MoveCamera;//カメラを移動させる時に使うよう
     [SerializeField] public GameObject NextButton;
 
+
+    public GameObject OutLine;//ギアのアウトライン
+    private bool OutLineCheck = true;
     public GameObject Porti;//ポーチを入れるよう
-    //public AudioClip sound1;//針の音
-   
+                            //public AudioClip sound1;//針の音
+
+
+
     //public AudioClip sound4;
-AudioSource audioSource;
+    AudioSource audioSource;
     private void Start()
     {
         GearPointTr = TargetPoint.transform;
@@ -54,6 +59,7 @@ AudioSource audioSource;
         audioSource = GetComponent<AudioSource>();
 
     }
+
 
     #region ドラッグ処理
 
@@ -102,7 +108,8 @@ AudioSource audioSource;
     {
         if (other.gameObject.CompareTag("TargetCenter") && _isDragging == false && _isAttach == false)
         {
-
+            NextButton.SetActive(true);
+            OutLine.SetActive(false);
             GetComponent<AudioSource>().Play();
             //今時計についていると判定
             _isAttach = true;
@@ -120,7 +127,7 @@ AudioSource audioSource;
                 new Vector2(GearPointTr.position.x, GearPointTr.position.y),
                 speed * Time.deltaTime);
             //接触している間回転する
-            transform.Rotate(new Vector3(0, 0, 5));
+            transform.Rotate(new Vector3(0, 0, 0));
         }
         else
         {
@@ -136,8 +143,10 @@ AudioSource audioSource;
 
         if (other.gameObject.CompareTag("TargetCenter"))//歯車を時計から外したときに呼び出される
         {
-            Set = false;
+            OutLine.SetActive(true);
             NextButton.SetActive(false);
+            Set = false;
+            
             this.gameObject.transform.parent = Porti.gameObject.transform;//GameObject.Find("Porti").transform;
         }
         
@@ -145,6 +154,7 @@ AudioSource audioSource;
 
     private void Update()
     {
+     
         if (Set == false)
         {
             speed = SetSpeed;
@@ -153,10 +163,12 @@ AudioSource audioSource;
                 transform.position,
                 new Vector2(GearPointTr.position.x, GearPointTr.position.y),
                 speed * Time.deltaTime);
+         
         }
         else if (Set == true)
         {
             speed = 0;
+           
         }
     }
     public void Setup(int gireIndex, int answerNum, System.Action<int> hitCallback)
@@ -167,11 +179,14 @@ AudioSource audioSource;
     }
     private void GetNextButton()
     {
-        NextButton.SetActive(true);
+       /* foreach (Vector3 position in spawnPositions)
+        {
+            Instantiate(NextButton, position, Quaternion.identity);
+        }*/
     }
     private void CloseNextButton()
     {
-        NextButton.SetActive(false);
+       //NextButton.SetActive(false);
     }
   
 }
