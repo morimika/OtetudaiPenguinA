@@ -21,6 +21,9 @@ TagManager:
   - Friend
   - RedApple
   - GreenApple
+  - Strawberry
+  - Blueberry
+  - CakeMa
   layers:
   - Default
   - TransparentFX

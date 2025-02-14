@@ -7,26 +7,46 @@ public class Drag2 : MonoBehaviour
     //ドラック開始フラグ
     public bool DragOn;
 
+    private bool start = false;
+
     private Food food;
+    private GameObject Manager;
+    private CakeManager cakeMa;
 
     private void Start()
     {
         food = GetComponent<Food>();
+        Manager = GameObject.FindGameObjectWithTag("CakeMa");
+        cakeMa = Manager.GetComponent<CakeManager>();
+    }
+
+    private void Update()
+    {
+        if(cakeMa.mode == CakeManager.Mode.Game)
+        {
+            start = true;
+        }
     }
 
     //オブジェクトをクリックしてドラッグ状態にある間呼び出される関数（Unityのマウスイベント）
     void OnMouseDrag()
     {
-        DragOn = true;
-        food.stop = true;
+        if(start)
+        {
+            DragOn = true;
+            food.stop = true;
 
-        MoucePos();
+            MoucePos();
+        }
     }
 
     //マウスを離した時
     void OnMouseUp()
     {
-        DragOn = false;
+        if(start)
+        {
+            DragOn = false;
+        }
     }
 
     //マウスのポジション取得
