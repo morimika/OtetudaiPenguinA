@@ -15,6 +15,10 @@ public class GrassView : MonoBehaviour
     public void SetCheckColor()
     {
         _spriteRenderer.sprite = _newSprite;
-        this.gameObject.SetActive(false);
+        if(this.gameObject.name!="107")
+        {
+            this.gameObject.SetActive(false);
+        }
+
     }
 }
