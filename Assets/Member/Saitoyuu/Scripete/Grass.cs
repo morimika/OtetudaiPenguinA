@@ -7,9 +7,6 @@ public class Grass : MonoBehaviour
    [SerializeField] public List<int> _targetNumbers = new List<int>();
     [SerializeField]private int Counter = 0;
 
-    private void Start()
-    {
-    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if(other.tag is "Target")

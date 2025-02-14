@@ -9,11 +9,12 @@ public class GrassView : MonoBehaviour
      void Start()
     {
            _spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     public void SetCheckColor()
     {
         _spriteRenderer.sprite = _newSprite;
-        _spriteRenderer.color = Color.yellow;
+        this.gameObject.SetActive(false);
     }
 }

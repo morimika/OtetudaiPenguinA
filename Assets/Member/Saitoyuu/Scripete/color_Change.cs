@@ -23,14 +23,17 @@ public class color_Change : MonoBehaviour
     void Update()
     {
         _count = _grass._targetNumbers.Count;
-        colorChange();
+        if(_myNamber == _count)
+        {
+            colorChange();
+        }
+
     }
 
     private void colorChange()
     {
-        if(_myNamber == _count)
-        {
+       
             _spriteRenderer.color = new Color32(255, 255, 255, 255);
-        }
+        
     }
 }
