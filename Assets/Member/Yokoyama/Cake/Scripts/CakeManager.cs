@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CakeManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> Fruits;
+    [SerializeField] GameObject Tutorial;
 
     //最大回数
     public int Max_Count;
@@ -17,6 +18,13 @@ public class CakeManager : MonoBehaviour
     private bool applepie = false;
     private bool blueberrytart = false;
     private bool shortcake = false;
+
+    public enum Mode
+    {
+        Anime,
+        Game,
+    }
+    public Mode mode = Mode.Anime;
 
     //mori
     [SerializeField]
@@ -43,9 +51,13 @@ public class CakeManager : MonoBehaviour
     }
 
     //[初回]遅らせて、生成
+    //※3レーン目だけは、アニメーションの為無し
     IEnumerator First_FoodMake()
     {
         yield return new WaitForSeconds(2.6f);
+
+        Tutorial.SetActive(true);
+        Invoke(nameof(GameStart), 8.1f);
 
         int dice = Random.Range(0, Fruits.Count);
 
@@ -53,15 +65,6 @@ public class CakeManager : MonoBehaviour
         food = Fruits[dice].GetComponent<Food>();
         food.lane = Food.Lane.Lane1;
         Instantiate(Fruits[dice], new Vector3(-6f, -6.25f, 0), Quaternion.identity);
-
-        yield return new WaitForSeconds(0.2f);
-
-        dice = Random.Range(0, Fruits.Count);
-
-        //3レーン目
-        food = Fruits[dice].GetComponent<Food>();
-        food.lane = Food.Lane.Lane3;
-        Instantiate(Fruits[dice], new Vector3(0f, -6.25f, 0), Quaternion.identity);
 
         yield return new WaitForSeconds(0.2f);
 
@@ -89,6 +92,12 @@ public class CakeManager : MonoBehaviour
         food = Fruits[dice].GetComponent<Food>();
         food.lane = Food.Lane.Lane4;
         Instantiate(Fruits[dice], new Vector3(3f, -6.25f, 0), Quaternion.identity);
+    }
+
+    private void GameStart()
+    {
+        Tutorial.SetActive(false);
+        mode = Mode.Game;
     }
 
     //次に生成しなきゃいけないレーン番号を貰って生成

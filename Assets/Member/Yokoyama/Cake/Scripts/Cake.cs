@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cake : MonoBehaviour
 {
-    [SerializeField] GameObject Food_On;
-    [SerializeField] GameObject ApplePie;
-    //次のオブジェクトのコライダー
-    [SerializeField] BoxCollider2D Box2D;
     //ゲームマネージャー
     [SerializeField] CakeManager CKMA;
 
-    public SpriteRenderer CakeSprite;
+    [SerializeField] List<GameObject> CakeLine;
+    [SerializeField] List<Image> CakeImage;
+
+    private int count;
 
     private Food food;
     //自分のコライダー
     private BoxCollider2D box2D;
-    private SpriteRenderer sR;
 
     void Start()
     {
         box2D = GetComponent<BoxCollider2D>();
-        sR = GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,27 +29,34 @@ public class Cake : MonoBehaviour
         {
             if (collision.gameObject.tag == "Apple")
             {
-                CakeSprite.enabled = false;
-                food = collision.gameObject.GetComponent<Food>();
-                CKMA.PlasCount("Applepie");
-                Food_RMake();
-            }
-        }
-        //アップルパイのデコレーション
-        if (gameObject.name == "ApplePie_Decoration")
-        {
-            if (collision.gameObject.tag == "Apple")
-            {
-                sR.enabled = false;
-                if(Box2D != null)
+                switch(count)
                 {
-                    Box2D.enabled = true;
+                    case 0:
+                        CakeImage[0].fillAmount += 0.5f;
+                        break;
+                    case 1:
+                        CakeImage[0].fillAmount += 0.5f;
+                        CakeLine[0].SetActive(false);
+                        CakeLine[1].SetActive(true);
+                        break;
+                    case 2:
+                        CakeImage[1].fillAmount += 0.5f;
+                        break;
+                    case 3:
+                        CakeImage[1].fillAmount += 0.5f;
+                        CakeLine[1].SetActive(false);
+                        CakeLine[2].SetActive(true);
+                        break;
+                    case 4:
+                        CakeImage[2].fillAmount += 0.5f;
+                        break;
+                    case 5:
+                        CakeImage[2].fillAmount += 0.5f;
+                        CakeLine[2].SetActive(false);
+                        box2D.enabled = false;
+                        break;
                 }
-                if(ApplePie != null)
-                {
-                    ApplePie.SetActive(false);
-                }
-
+                count++;
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Applepie");
                 Food_RMake();
@@ -63,22 +68,34 @@ public class Cake : MonoBehaviour
         {
             if (collision.gameObject.tag == "Blueberry")
             {
-                CakeSprite.enabled = false;
-                food = collision.gameObject.GetComponent<Food>();
-                CKMA.PlasCount("Blueberrytart");
-                Food_RMake();
-            }
-        }
-        //ブルーベリーパイのデコレーション
-        if(gameObject.name == "BlueberryPie_Decoration")
-        {
-            if (collision.gameObject.tag == "Blueberry")
-            {
-                sR.enabled = false;
-                if (Box2D != null)
+                switch (count)
                 {
-                    Box2D.enabled = true;
+                    case 0:
+                        CakeImage[0].fillAmount += 0.5f;
+                        break;
+                    case 1:
+                        CakeImage[0].fillAmount += 0.5f;
+                        CakeLine[0].SetActive(false);
+                        CakeLine[1].SetActive(true);
+                        break;
+                    case 2:
+                        CakeImage[1].fillAmount += 0.5f;
+                        break;
+                    case 3:
+                        CakeImage[1].fillAmount += 0.5f;
+                        CakeLine[1].SetActive(false);
+                        CakeLine[2].SetActive(true);
+                        break;
+                    case 4:
+                        CakeImage[2].fillAmount += 0.5f;
+                        break;
+                    case 5:
+                        CakeImage[2].fillAmount += 0.5f;
+                        CakeLine[2].SetActive(false);
+                        box2D.enabled = false;
+                        break;
                 }
+                count++;
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Blueberrytart");
                 Food_RMake();
@@ -90,22 +107,34 @@ public class Cake : MonoBehaviour
         {
             if (collision.gameObject.tag == "Strawberry")
             {
-                CakeSprite.enabled = false;
-                food = collision.gameObject.GetComponent<Food>();
-                CKMA.PlasCount("Shortcake");
-                Food_RMake();
-            }
-        }
-        //ストロベリーケーキのデコレーション
-        if (gameObject.name == "StrawberryCake_Decoration")
-        {
-            if (collision.gameObject.tag == "Strawberry")
-            {
-                sR.enabled = false;
-                if (Box2D != null)
+                switch (count)
                 {
-                    Box2D.enabled = true;
+                    case 0:
+                        CakeImage[0].fillAmount += 0.5f;
+                        break;
+                    case 1:
+                        CakeImage[0].fillAmount += 0.5f;
+                        CakeLine[0].SetActive(false);
+                        CakeLine[1].SetActive(true);
+                        break;
+                    case 2:
+                        CakeImage[1].fillAmount += 0.5f;
+                        break;
+                    case 3:
+                        CakeImage[1].fillAmount += 0.5f;
+                        CakeLine[1].SetActive(false);
+                        CakeLine[2].SetActive(true);
+                        break;
+                    case 4:
+                        CakeImage[2].fillAmount += 0.5f;
+                        break;
+                    case 5:
+                        CakeImage[2].fillAmount += 0.5f;
+                        CakeLine[2].SetActive(false);
+                        box2D.enabled = false;
+                        break;
                 }
+                count++;
                 food = collision.gameObject.GetComponent<Food>();
                 CKMA.PlasCount("Shortcake");
                 Food_RMake();
@@ -116,9 +145,6 @@ public class Cake : MonoBehaviour
     //消えた食べ物を情報を渡す
     private void Food_RMake()
     {
-        Food_On.SetActive(true);
-        box2D.enabled = false;
-
         //前いたレーン番号取得
         int count = food.LaneNumber;
         CKMA.FoodMake(count);
